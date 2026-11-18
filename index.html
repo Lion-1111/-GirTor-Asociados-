@@ -1,0 +1,3188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GirTor & Asociados — Despacho Jurídico</title>
+  <meta name="description" content="GirTor & Asociados, despacho jurídico especializado en Penal, Fiscal, Mercantil, Familiar, Civil y Laboral. Lomas de Santa Fe, Ciudad de México." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =====================================================
+       RESET & ROOT TOKENS
+    ===================================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold-light:   #f0d898;
+      --gold-mid:     #c9a84c;
+      --gold-dark:    #8a5e1e;
+      --gold-deepest: #4a2f0a;
+      --stone-bg:     #f4f1ec;
+      --stone-mid:    #e8e2d8;
+      --stone-dark:   #d1c9b8;
+      --ink-deep:     #0e0e0f;
+      --ink-mid:      #1a1a1d;
+      --ink-soft:     #2e2d31;
+      --text-dark:    #2a2420;
+      --text-mid:     #5a5047;
+      --text-light:   #7d7267;
+      --radius-sm:    4px;
+      --radius-md:    8px;
+      --transition:   0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Montserrat', 'Segoe UI', sans-serif;
+      background: var(--stone-bg);
+      color: var(--text-dark);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* =====================================================
+       ░░░ SPLASH INTRO SCREEN ░░░
+    ===================================================== */
+    #splash {
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
+      background-color: #24282c;
+      background-image: url('assets/slate_texture.jpg');
+      background-repeat: repeat;
+      background-size: 150px 150px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    #splash.hide { opacity: 0; visibility: hidden; pointer-events: none; }
+
+    /* Vignette sutil de piedra pizarra oscura (cero tonos amarillos o esferas de luz) */
+    #splash::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, rgba(24, 28, 31, 0.45) 0%, rgba(10, 12, 14, 0.88) 100%);
+      pointer-events: none;
+    }
+
+    #logo-stage {
+      position: relative;
+      width: min(86vw, 520px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    #logo-svg { width: 100%; height: auto; display: block; filter: drop-shadow(0 20px 45px rgba(0,0,0,0.9)); }
+
+    @keyframes girtor-draw-in {
+      from { stroke-dashoffset: 1; }
+      to   { stroke-dashoffset: 0; }
+    }
+
+    .g-draw {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      animation: girtor-draw-in 1.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    }
+
+    #logo-relief { display: none; }
+    #logo-sheen   { display: none; }
+
+    #glow-burst { display: none !important; }
+    
+
+    .skip-hint {
+      position: absolute;
+      bottom: 22px;
+      opacity: 0.22 !important;
+      margin-top: 2.5rem;
+      color: rgba(255,255,255,0.22);
+      font-size: 10.5px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: hint-appear 0.7s ease 4s forwards;
+      z-index: 1;
+    }
+    @keyframes hint-appear {
+      to { opacity: 1; }
+    }
+
+    /* =====================================================
+       ░░░ MARBLE CRYSTAL TEXTURE PATTERN ░░░
+    ===================================================== */
+
+    /* SVG-based marble inline background */
+    .marble-bg {
+      background-color: #f2eeea;
+      background-image:
+        /* Veins layer 1 — main diagonal streaks */
+        repeating-linear-gradient(
+          -62deg,
+          transparent 0px,
+          transparent 48px,
+          rgba(180,167,148,0.13) 50px,
+          transparent 52px,
+          transparent 110px,
+          rgba(195,180,160,0.1) 112px,
+          transparent 114px
+        ),
+        /* Veins layer 2 — counter angle */
+        repeating-linear-gradient(
+          28deg,
+          transparent 0px,
+          transparent 72px,
+          rgba(160,148,132,0.08) 73px,
+          transparent 75px,
+          transparent 160px,
+          rgba(175,162,142,0.07) 161px,
+          transparent 163px
+        ),
+        /* Base warm stone gradient */
+        radial-gradient(ellipse at 15% 25%, #f8f5f1 0%, #ede8e0 40%, #e5dfd5 70%, #ddd7cb 100%);
+    }
+
+    .marble-dark {
+      background-color: #161718;
+      background-image:
+        repeating-linear-gradient(
+          -58deg,
+          transparent 0px,
+          transparent 55px,
+          rgba(255,255,255,0.025) 57px,
+          transparent 59px,
+          transparent 125px,
+          rgba(255,255,255,0.018) 127px,
+          transparent 129px
+        ),
+        repeating-linear-gradient(
+          32deg,
+          transparent 0px,
+          transparent 80px,
+          rgba(255,255,255,0.015) 81px,
+          transparent 83px
+        ),
+        radial-gradient(ellipse at 20% 30%, #1e2026 0%, #111214 60%, #090a0c 100%);
+    }
+
+    /* =====================================================
+       ░░░ NAVIGATION ░░░
+    ===================================================== */
+    #nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 800;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5vw;
+      height: 72px;
+      background: rgba(14, 12, 10, 0.0);
+      backdrop-filter: blur(0px);
+      border-bottom: 1px solid transparent;
+      transition: all 0.5s ease;
+    }
+    #nav.scrolled {
+      background: rgba(14, 12, 10, 0.92);
+      backdrop-filter: blur(18px) saturate(140%);
+      border-bottom-color: rgba(201,168,76,0.18);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo img {
+      height: 42px;
+      width: 42px;
+      object-fit: contain;
+      opacity: 0.92;
+    }
+    .nav-brand {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+    .nav-brand .firm { color: var(--gold-light); font-size: 15px; font-weight: 500; letter-spacing: 0.08em; }
+    .nav-brand .tagline { color: rgba(255,255,255,0.4); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; margin-top: 3px; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 400;
+      transition: color var(--transition);
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold-mid);
+      transition: width var(--transition);
+    }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      background: transparent;
+      border: 1px solid rgba(201,168,76,0.55);
+      color: var(--gold-light) !important;
+      padding: 8px 20px;
+      border-radius: 2px;
+      font-size: 10px !important;
+      letter-spacing: 0.22em !important;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease !important;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover {
+      background: rgba(201,168,76,0.12) !important;
+      border-color: var(--gold-mid) !important;
+      color: #fff !important;
+    }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 5px;
+      background: none;
+      border: none;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: rgba(255,255,255,0.7);
+      transition: all 0.3s;
+    }
+
+        /* =====================================================
+       ░░░ HERO SECTION — VIDEO-CAROUSEL CINEMÁTICO ░░░
+    ===================================================== */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background-color: #0b0c0e;
+    }
+
+    /* Contenedor del Carrusel / Video-Slider */
+    .hero-slider {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 1.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-slide.active {
+      opacity: 1;
+      visibility: visible;
+      z-index: 2;
+      pointer-events: auto;
+    }
+
+    /* Imagen con movimiento suave estilo Ken Burns / Video Loop */
+    .hero-slide-img {
+      position: absolute;
+      inset: -5%;
+      width: 110%;
+      height: 110%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transform: scale(1.0);
+      will-change: transform;
+    }
+
+    .hero-slide.active .hero-slide-img {
+      animation: kenBurnsZoom 8.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    @keyframes kenBurnsZoom {
+      0% {
+        transform: scale(1.0) translate(0, 0);
+      }
+      100% {
+        transform: scale(1.08) translate(-1.2%, -0.8%);
+      }
+    }
+
+    /* Posicionamiento específico por slide para encuadre impecable */
+    .slide-themis .hero-slide-img {
+      background-position: 28% center;
+    }
+    .slide-towers .hero-slide-img {
+      background-position: center center;
+    }
+    .slide-boardroom .hero-slide-img {
+      background-position: 60% center;
+    }
+    .slide-pillars .hero-slide-img {
+      background-position: center center;
+    }
+
+    /* Filtro / Overlay cinemático de pizarra oscura y oro */
+    .hero-vignette {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(
+        90deg,
+        rgba(11, 13, 16, 0.38) 0%,
+        rgba(11, 13, 16, 0.65) 42%,
+        rgba(9, 11, 14, 0.94) 75%,
+        rgba(7, 8, 10, 0.98) 100%
+      );
+    }
+
+    /* Textura sutil de piedra pizarra sobre el slider */
+    .hero-vignette::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/slate_texture.jpg');
+      background-repeat: repeat;
+      background-size: 160px 160px;
+      opacity: 0.12;
+      mix-blend-mode: overlay;
+    }
+
+    @media (max-width: 900px) {
+      .hero-vignette {
+        background: radial-gradient(
+          circle at 50% 20%,
+          rgba(11, 13, 16, 0.55) 0%,
+          rgba(9, 11, 14, 0.88) 60%,
+          rgba(6, 7, 9, 0.98) 100%
+        );
+      }
+      .slide-themis .hero-slide-img {
+        background-position: 35% center;
+      }
+    }
+
+    /* Contenedor del contenido del Hero alineado a la derecha en escritorio */
+    .hero-container {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 110px 6vw 90px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .hero-content {
+      width: 100%;
+      max-width: 620px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    /* Logo / Marca pequeña en el Hero */
+    .hero-brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.1rem;
+      opacity: 0;
+      animation: fade-up 0.85s ease 0.2s forwards;
+    }
+    .hero-brand-badge img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.7));
+    }
+    .hero-brand-text {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+    .hero-brand-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #ffffff;
+      text-transform: uppercase;
+      line-height: 1.15;
+    }
+    .hero-brand-sub {
+      font-size: 9.5px;
+      letter-spacing: 0.32em;
+      color: var(--gold-mid);
+      text-transform: uppercase;
+      margin-top: 3px;
+      font-weight: 500;
+    }
+
+    @keyframes fade-up {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Titular imponente, bold y nítido */
+    .hero-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(2rem, 4.2vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      color: #ffffff;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      margin-bottom: 1.1rem;
+      opacity: 0;
+      animation: fade-up 0.9s ease 0.4s forwards;
+    }
+    .hero-title .highlight-gold {
+      color: var(--gold-light);
+      display: block;
+      background: linear-gradient(135deg, #fff3d1 0%, #dfba6a 50%, #f5d57f 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Línea divisoria limpia horizontal idéntica a LITEM */
+    .hero-divider-bar {
+      width: 100%;
+      max-width: 440px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold-mid) 0%, rgba(201, 168, 76, 0.4) 60%, transparent 100%);
+      margin-bottom: 1.2rem;
+      opacity: 0;
+      animation: fade-up 0.9s ease 0.6s forwards;
+    }
+
+    /* Párrafo descriptivo con tipografía limpia y legible */
+    .hero-desc {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: clamp(13px, 1.3vw, 15px);
+      line-height: 1.8;
+      font-weight: 400;
+      max-width: 520px;
+      margin-bottom: 1.8rem;
+      opacity: 0;
+      animation: fade-up 0.9s ease 0.8s forwards;
+    }
+
+    /* Botonera compacta estilo CCA Abogados */
+    .hero-cta-compact-group {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fade-up 0.9s ease 1s forwards;
+    }
+
+    .btn-gold-compact {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      background: #c9a84c !important;
+      color: #121315 !important;
+      padding: 12px 24px !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.16em !important;
+      text-transform: uppercase !important;
+      text-decoration: none !important;
+      border-radius: 3px !important;
+      transition: all 0.3s ease !important;
+      box-shadow: 0 4px 16px rgba(201, 168, 76, 0.4) !important;
+      font-family: 'Montserrat', sans-serif !important;
+      line-height: 1 !important;
+    }
+    .btn-gold-compact:hover {
+      background: #dfba6a !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 6px 22px rgba(201, 168, 76, 0.6) !important;
+      color: #000000 !important;
+    }
+    .btn-gold-compact svg {
+      width: 15px !important;
+      height: 15px !important;
+      min-width: 15px !important;
+      max-width: 15px !important;
+      display: inline-block !important;
+      fill: currentColor !important;
+      flex-shrink: 0 !important;
+    }
+
+    .btn-text-link {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      color: #ffffff !important;
+      font-size: 11.5px !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.16em !important;
+      text-transform: uppercase !important;
+      text-decoration: none !important;
+      padding-bottom: 4px !important;
+      border-bottom: 1.5px solid rgba(201, 168, 76, 0.6) !important;
+      font-family: 'Montserrat', sans-serif !important;
+      transition: all 0.3s ease !important;
+      line-height: 1 !important;
+    }
+    .btn-text-link:hover {
+      color: var(--gold-light) !important;
+      border-bottom-color: var(--gold-light) !important;
+      transform: translateX(3px) !important;
+    }
+
+    /* Adaptación móvil — todo visible, proporcionado y sin cortes */
+    @media (max-width: 900px) {
+      #hero {
+        min-height: 100vh;
+        min-height: 100svh;
+        display: flex;
+        align-items: center;
+      }
+      .hero-container {
+        justify-content: center;
+        padding: 85px 5vw 75px;
+        text-align: center;
+      }
+      .hero-content {
+        align-items: center;
+        max-width: 100%;
+        background: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        padding: 0 !important;
+      }
+      .hero-brand-badge {
+        margin-bottom: 0.75rem;
+      }
+      .hero-brand-badge img {
+        width: 34px;
+        height: 34px;
+      }
+      .hero-brand-name {
+        font-size: 13px;
+      }
+      .hero-brand-sub {
+        font-size: 8.5px;
+      }
+      .hero-title {
+        font-size: clamp(1.45rem, 5.8vw, 2.1rem);
+        margin-bottom: 0.75rem;
+        line-height: 1.2;
+      }
+      .hero-divider-bar {
+        margin: 0 auto 1rem;
+        max-width: 220px;
+      }
+      .hero-desc {
+        font-size: 12.5px;
+        line-height: 1.6;
+        margin-bottom: 1.4rem;
+        max-width: 440px;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+      }
+      .hero-cta-compact-group {
+        justify-content: center;
+        gap: 14px;
+      }
+      .btn-gold-compact {
+        padding: 10px 20px !important;
+        font-size: 10.5px !important;
+      }
+      .btn-text-link {
+        font-size: 11px !important;
+      }
+    }
+
+    /* =====================================================
+       ░░░ CONTROLES DEL VIDEO-CAROUSEL ░░░
+    ===================================================== */
+    .hero-controls {
+      display: none !important;
+
+      position: absolute;
+      bottom: 24px;
+      left: 6vw;
+      right: 6vw;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      pointer-events: auto;
+    }
+
+    .hero-controls-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .slider-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    .slider-current-num {
+      color: var(--gold-light);
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .slider-sep {
+      color: rgba(201, 168, 76, 0.4);
+    }
+    .slider-theme-tag {
+      font-size: 10px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.55);
+      padding-left: 10px;
+      border-left: 1px solid rgba(201, 168, 76, 0.35);
+      transition: color 0.4s ease;
+    }
+
+    /* Barra de progreso de tiempo tipo video */
+    .slider-progress-track {
+      width: 140px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.16);
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+    .slider-progress-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold-mid), var(--gold-light));
+      transition: width 0.1s linear;
+    }
+
+    /* Puntos / Indicadores de slides */
+    .slider-nav-pills {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-pill {
+      width: 32px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.22);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      border-radius: 2px;
+      transition: all 0.35s ease;
+    }
+    .nav-pill.active {
+      width: 48px;
+      background: var(--gold-mid);
+      box-shadow: 0 0 10px rgba(201, 168, 76, 0.5);
+    }
+    .nav-pill:hover:not(.active) {
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    /* Flechas de navegación elegantes */
+    .slider-arrows {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .slider-arrow {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(18, 20, 24, 0.65);
+      border: 1px solid rgba(201, 168, 76, 0.35);
+      color: rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+    }
+    .slider-arrow:hover {
+      background: #14161a;
+      border-color: var(--gold-mid);
+      color: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+    .slider-arrow svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    @media (max-width: 900px) {
+      .hero-controls {
+      display: none !important;
+
+        bottom: 18px;
+        left: 5vw;
+        right: auto;
+        width: calc(100% - 95px);
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+      }
+      .hero-controls-left {
+        width: 100%;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .slider-theme-tag {
+        display: none;
+      }
+      .slider-progress-track {
+        flex-grow: 1;
+        max-width: 120px;
+      }
+      .slider-nav-pills {
+        display: none;
+      }
+      .slider-arrows {
+        display: none;
+      }
+    }
+
+    /* =====================================================
+       ░░░ CARRUSEL CONTINUO DE ESPECIALIDADES (TICKER) ░░░
+    ===================================================== */
+    .practice-ticker-wrap {
+      width: 100%;
+      background: #f4efe6;
+      border-top: 1px solid rgba(201, 168, 76, 0.4);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.4);
+      overflow: hidden;
+      position: relative;
+      padding: 13px 0;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+    }
+    .practice-ticker {
+      display: flex;
+      width: max-content;
+      animation: tickerScroll 28s linear infinite;
+    }
+    .practice-ticker:hover {
+      animation-play-state: paused;
+    }
+    @keyframes tickerScroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .ticker-group {
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+    }
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+      padding: 0 20px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #2e2924;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .ticker-item:hover {
+      color: var(--gold-dark);
+    }
+    .ticker-bullet {
+      color: var(--gold-mid);
+      font-size: 10px;
+    }
+
+    /* =====================================================
+       ░░░ SECCIÓN DE ESTADÍSTICAS CON CONTADOR (CCA) ░░░
+    ===================================================== */
+    #stats-section {
+      background: #111714;
+      background-image: 
+        radial-gradient(circle at 50% 50%, rgba(22, 32, 26, 0.95) 0%, rgba(11, 16, 13, 0.98) 100%),
+        repeating-linear-gradient(-45deg, transparent 0, transparent 40px, rgba(255,255,255,0.012) 41px, transparent 42px);
+      padding: 80px 8vw;
+      position: relative;
+      border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+    }
+    .stats-grid-cca {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px 20px;
+      text-align: center;
+    }
+    @media (max-width: 900px) {
+      .stats-grid-cca {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 36px 14px;
+      }
+      #stats-section {
+        padding: 55px 5vw 60px;
+      }
+    }
+    .stat-card-cca {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .stat-number-cca {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(3rem, 5.5vw, 4.4rem);
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1;
+      color: #dfba6a;
+      margin-bottom: 10px;
+      display: inline-flex;
+      align-items: baseline;
+      justify-content: center;
+      letter-spacing: -0.01em;
+    }
+    .stat-label-cca {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(240, 235, 224, 0.78);
+      line-height: 1.5;
+      max-width: 190px;
+    }
+
+    /* =====================================================
+       ░░░ INTRO BAND — golden divider ░░░
+    ===================================================== */
+    .gold-band {
+      background: linear-gradient(90deg, var(--gold-deepest), var(--gold-dark) 30%, var(--gold-mid) 50%, var(--gold-dark) 70%, var(--gold-deepest));
+      padding: 1px 0;
+    }
+    .gold-band-inner {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4) 50%, transparent);
+    }
+
+    /* =====================================================
+       ░░░ INTRO STATEMENT ░░░
+    ===================================================== */
+    #intro {
+      padding: 90px 8vw;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .intro-left .section-heading { margin-bottom: 1.5rem; }
+    .intro-left p {
+      color: var(--text-mid);
+      font-size: 14px;
+      line-height: 1.95;
+      font-weight: 300;
+      max-width: 420px;
+    }
+
+    .intro-right {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5px;
+    }
+
+    .stat-box {
+      padding: 36px 28px;
+      background: var(--stone-mid);
+      border: 1px solid rgba(170,152,118,0.25);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+    .stat-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 2px; height: 0;
+      background: linear-gradient(to bottom, var(--gold-mid), transparent);
+      transition: height 0.6s ease;
+    }
+    .stat-box:hover::before { height: 100%; }
+    .stat-box:hover { background: rgba(201,168,76,0.05); }
+
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--gold-dark);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      font-weight: 400;
+    }
+
+    /* =====================================================
+       ░░░ PRACTICE AREAS — ACCORDION ░░░
+    ===================================================== */
+    #areas {
+      padding: 90px 8vw;
+      position: relative;
+      background-color: #111215;
+      background-image:
+        repeating-linear-gradient(-58deg, transparent 0px, transparent 60px, rgba(255,255,255,0.018) 62px, transparent 64px),
+        radial-gradient(ellipse at 20% 30%, #17191e 0%, #0d0e11 55%, #090a0c 100%);
+    }
+
+    .areas-header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+    .areas-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--gold-mid);
+      font-weight: 400;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .areas-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 400;
+      color: #f0ebe0;
+      letter-spacing: 0.06em;
+    }
+
+    /* Accordion list */
+    .accordion-list {
+      max-width: 860px;
+      margin: 0 auto;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .acc-item {
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+
+    .acc-trigger {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 22px 10px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.3s ease;
+      position: relative;
+    }
+    .acc-trigger:hover {
+      background: rgba(201,168,76,0.05);
+    }
+    .acc-item.open .acc-trigger {
+      background: rgba(201,168,76,0.07);
+    }
+
+    /* circular icon */
+    .acc-icon-wrap {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: rgba(201,168,76,0.07);
+      transition: all 0.35s ease;
+    }
+    .acc-item.open .acc-icon-wrap,
+    .acc-trigger:hover .acc-icon-wrap {
+      border-color: var(--gold-mid);
+      background: rgba(201,168,76,0.14);
+    }
+    .acc-icon-wrap svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--gold-mid);
+      stroke-width: 1.4;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* text block */
+    .acc-info { flex: 1; }
+    .acc-name {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(240,235,220,0.92);
+      margin-bottom: 3px;
+      transition: color 0.3s;
+    }
+    .acc-item.open .acc-name,
+    .acc-trigger:hover .acc-name { color: var(--gold-light); }
+
+    .acc-sub {
+      font-size: 9.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      font-weight: 300;
+    }
+
+    /* chevron */
+    .acc-chevron {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .acc-chevron svg {
+      width: 16px;
+      height: 16px;
+      stroke: rgba(201,168,76,0.6);
+      stroke-width: 1.8;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .acc-item.open .acc-chevron { transform: rotate(180deg); }
+
+    /* body — collapsed by default */
+    .acc-body {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.42s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .acc-item.open .acc-body { grid-template-rows: 1fr; }
+
+    .acc-body-inner {
+      overflow: hidden;
+      padding: 0 10px 0 86px;
+    }
+    .acc-body-inner-pad {
+      padding-bottom: 24px;
+    }
+
+    /* description */
+    .acc-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.85;
+      font-weight: 300;
+      margin-bottom: 16px;
+      max-width: 600px;
+    }
+
+    /* tags */
+    .acc-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .acc-tag {
+      padding: 5px 14px;
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 2px;
+      font-size: 10.5px;
+      letter-spacing: 0.08em;
+      color: rgba(220,195,140,0.75);
+      background: rgba(201,168,76,0.07);
+      white-space: nowrap;
+      transition: all 0.25s ease;
+      cursor: default;
+    }
+    .acc-tag:hover {
+      background: rgba(201,168,76,0.16);
+      border-color: var(--gold-mid);
+      color: var(--gold-light);
+    }
+
+    /* =====================================================
+       ░░░ PHILOSOPHY / DARK SECTION ░░░
+    ===================================================== */
+    #philosophy {
+      padding: 100px 8vw;
+      position: relative;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .philosophy-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .quote-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 8rem;
+      line-height: 0.4;
+      color: rgba(201,168,76,0.18);
+      display: block;
+      margin-bottom: 1.5rem;
+      user-select: none;
+    }
+
+    .philosophy-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 3.5vw, 2.1rem);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(240,230,210,0.88);
+      line-height: 1.65;
+      letter-spacing: 0.03em;
+      margin-bottom: 2rem;
+    }
+
+    .philosophy-attr {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold-mid);
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+    .philosophy-attr::before,
+    .philosophy-attr::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: rgba(201,168,76,0.4);
+    }
+
+    /* Glass card floating */
+    .glass-panel {
+      position: absolute;
+      border-radius: 1px;
+      border: 1px solid rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.025);
+      backdrop-filter: blur(2px);
+    }
+    .glass-panel-1 { width: 180px; height: 180px; top: 60px; right: 8%; transform: rotate(15deg); }
+    .glass-panel-2 { width: 100px; height: 100px; bottom: 80px; left: 6%; transform: rotate(-8deg); }
+
+    /* =====================================================
+       ░░░ CONTACT SECTION ░░░
+    ===================================================== */
+    #contact {
+      padding: 100px 8vw;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      position: relative;
+    }
+    #contact::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    #contact > * { position: relative; z-index: 1; }
+
+    .contact-left .section-heading { margin-bottom: 1.2rem; }
+    .contact-left p {
+      color: var(--text-mid);
+      font-size: 13.5px;
+      line-height: 1.9;
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 1.8rem;
+    }
+    .contact-info-icon {
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(170,152,118,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: rgba(201,168,76,0.07);
+      transition: all 0.3s;
+    }
+    .contact-info-item:hover .contact-info-icon {
+      border-color: var(--gold-mid);
+      background: rgba(201,168,76,0.14);
+    }
+    .contact-info-icon svg { width: 18px; height: 18px; stroke: var(--gold-dark); }
+    .contact-info-text { font-size: 13.5px; color: var(--text-mid); line-height: 1.65; font-weight: 300; }
+    .contact-info-text strong { display: block; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-dark); font-weight: 500; margin-bottom: 4px; }
+
+    /* WhatsApp */
+    .wa-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #141518;
+      color: rgba(255,255,255,0.88);
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 2px;
+      border: 1px solid rgba(201,168,76,0.35);
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 400;
+      transition: all 0.35s ease;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+      margin-top: 1rem;
+    }
+    .wa-cta svg { width: 18px; height: 18px; fill: #dfba6a; }
+    .wa-cta:hover {
+      background: #1d1e23;
+      border-color: rgba(201,168,76,0.7);
+      box-shadow: 0 10px 30px rgba(201,168,76,0.15);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* Contact form */
+    .contact-right {
+      background: rgba(248,244,238,0.9);
+      border: 1px solid rgba(170,152,118,0.3);
+      padding: 48px 44px;
+      position: relative;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 20px 60px rgba(80,55,20,0.08);
+    }
+    .contact-right::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 2px; height: 60px;
+      background: linear-gradient(to bottom, var(--gold-mid), transparent);
+    }
+
+    .form-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--text-dark);
+      margin-bottom: 1.8rem;
+      letter-spacing: 0.03em;
+    }
+
+    .form-group { margin-bottom: 1.4rem; }
+    .form-label {
+      display: block;
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .form-input, .form-textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(170,152,118,0.3);
+      color: var(--text-dark);
+      font-size: 13.5px;
+      font-weight: 300;
+      font-family: 'Montserrat', sans-serif;
+      padding: 12px 16px;
+      outline: none;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+      resize: none;
+    }
+    .form-input:focus, .form-textarea:focus {
+      border-color: var(--gold-mid);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+    }
+    .form-textarea { height: 100px; }
+
+    .form-select {
+      width: 100%;
+      background: rgba(255,255,255,0.7) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a5e1e' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 14px center;
+      border: 1px solid rgba(170,152,118,0.3);
+      color: var(--text-mid);
+      font-size: 13.5px;
+      font-weight: 300;
+      font-family: 'Montserrat', sans-serif;
+      padding: 12px 40px 12px 16px;
+      outline: none;
+      border-radius: 2px;
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .form-select:focus {
+      border-color: var(--gold-mid);
+      background-color: #fff;
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--gold-mid), var(--gold-dark));
+      color: #fff;
+      border: none;
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      font-weight: 500;
+      font-family: 'Montserrat', sans-serif;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.35s ease;
+      box-shadow: 0 6px 20px rgba(140,95,30,0.3);
+      margin-top: 0.6rem;
+    }
+    .form-submit:hover {
+      filter: brightness(1.1);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(140,95,30,0.45);
+    }
+
+    /* =====================================================
+       ░░░ FOOTER ░░░
+    ===================================================== */
+    #footer {
+      padding: 48px 8vw 36px;
+      border-top: 1px solid rgba(170,152,118,0.2);
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .footer-brand img {
+      height: 36px;
+      width: 36px;
+      object-fit: contain;
+      opacity: 0.75;
+      filter: sepia(60%) hue-rotate(10deg) saturate(60%);
+    }
+    .footer-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--text-dark);
+      letter-spacing: 0.06em;
+    }
+    .footer-name span { color: var(--gold-dark); }
+
+    .footer-copy {
+      text-align: center;
+      font-size: 10px;
+      color: var(--text-light);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 300;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1.4rem;
+    }
+    .footer-links a {
+      font-size: 10px;
+      color: var(--text-light);
+      text-decoration: none;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--gold-dark); }
+
+    /* =====================================================
+       ░░░ RESPONSIVE ░░░
+    ===================================================== */
+    @media (max-width: 1024px) {
+      #intro, #contact { grid-template-columns: 1fr; gap: 48px; }
+      .hero-glass { display: none; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      #nav { padding: 0 4vw; }
+      #intro, #contact { padding: 70px 6vw; }
+      #areas { padding: 70px 6vw; }
+      .intro-right { grid-template-columns: 1fr 1fr; }
+      #footer { grid-template-columns: 1fr; gap: 1.4rem; text-align: center; }
+      .footer-brand, .footer-links { justify-content: center; }
+      .contact-right { padding: 36px 28px; }
+      .acc-body-inner { padding-left: 10px; }
+    }
+
+    /* text below logo in splash */
+    .splash-firm {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      margin-top: -0.5rem;
+      opacity: 0;
+      animation: girtor-word-in 1.1s ease-out 2.5s forwards;
+    }
+    @keyframes girtor-word-in {
+      from { opacity: 0; letter-spacing: 1.2rem; filter: blur(5px); }
+      to   { opacity: 1; letter-spacing: 0.55rem; filter: blur(0); }
+    }
+    .splash-name {
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(14px, 2.8vw, 18px);
+      font-weight: 400;
+      letter-spacing: 0.55rem;
+      color: rgba(240, 220, 160, 0.82);
+      text-transform: uppercase;
+    }
+    .splash-tagline {
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(8px, 1.4vw, 10px);
+      font-weight: 300;
+      letter-spacing: 0.38em;
+      color: rgba(255,255,255,0.28);
+      text-transform: uppercase;
+      margin-top: 10px;
+    }
+    .splash-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 14px auto 0;
+    }
+    .splash-divider span {
+      display: block;
+      width: 36px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.5));
+    }
+    .splash-divider span:last-child {
+      background: linear-gradient(90deg, rgba(201,168,76,0.5), transparent);
+    }
+    .splash-divider i {
+      display: block;
+      width: 5px; height: 5px;
+      border: 1px solid rgba(201,168,76,0.55);
+      transform: rotate(45deg);
+    }
+    ===================================================== */
+    
+    /* ── CCA style typography for splash (color del logo, cero neon, fade limpio) ── */
+    @keyframes cca-fade-up {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes cca-sub-fade {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 0.78;
+        transform: translateY(0);
+      }
+    }
+
+    .cca-word {
+      font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 42px;
+      font-weight: 600;
+      letter-spacing: 0.52rem;
+      opacity: 0;
+      animation: cca-fade-up 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.1s forwards;
+    }
+
+    .cca-reg {
+      font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      opacity: 0;
+      animation: cca-fade-up 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.1s forwards;
+    }
+
+    .cca-sub {
+      font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      letter-spacing: 0.42rem;
+      opacity: 0;
+      animation: cca-sub-fade 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.4s forwards;
+    }
+
+    /* ── Ubicación & Google Maps Card ── */
+    #ubicacion {
+      padding: 90px 8vw 100px;
+      position: relative;
+    }
+
+    .map-frame-wrapper {
+      max-width: 960px;
+      margin: 0 auto;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 16px 45px rgba(0,0,0,0.12), 0 2px 10px rgba(0,0,0,0.06);
+      border: 1px solid rgba(170,152,118,0.3);
+      background: #e6e0d6;
+      position: relative;
+    }
+
+    .map-frame-wrapper iframe {
+      width: 100%;
+      height: 420px;
+      border: 0;
+      display: block;
+    }
+
+    .btn-maps-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #141517;
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 32px;
+      padding: 13px 32px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.22);
+      transition: all 0.3s ease;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .btn-maps-pill:hover {
+      background: #000;
+      border-color: rgba(201,168,76,0.6);
+      color: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.32);
+    }
+    .btn-maps-pill svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    /* ── Floating WhatsApp (Colores Oro & Obsidiana del despacho, CERO NEON) ── */
+    #wa-float {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    #wa-float.show {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .wa-float-label {
+      background: #141518;
+      border: 1px solid rgba(201,168,76,0.45);
+      color: #f0d898;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      padding: 8px 16px;
+      border-radius: 20px;
+      white-space: nowrap;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+      opacity: 1;
+      pointer-events: auto;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .wa-float-label::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      right: 22px;
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid #141518;
+    }
+
+    .wa-float-label:hover {
+      background: #1e2025;
+      border-color: var(--gold-mid);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    .wa-float-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #141518;
+      border: 1.5px solid rgba(201,168,76,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.5), 0 0 15px rgba(201,168,76,0.15);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .wa-float-btn svg {
+      width: 28px;
+      height: 28px;
+      fill: #dfba6a;
+    }
+
+    .wa-float-btn:hover {
+      background: #1d1e23;
+      border-color: #f0d898;
+      transform: scale(1.08);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6), 0 0 22px rgba(201,168,76,0.3);
+    }
+
+    .wa-float-btn::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.35);
+      animation: wa-gold-ring 3s ease-out infinite;
+    }
+
+    @keyframes wa-gold-ring {
+      0%   { opacity: 0.8; transform: scale(1); }
+      70%  { opacity: 0;   transform: scale(1.45); }
+      100% { opacity: 0;   transform: scale(1.45); }
+    }
+
+    /* =====================================================
+       ░░░ CÓMO TRABAJAMOS — PROCESO EN 4 PASOS (CCA) ░░░
+    ===================================================== */
+    #como-trabajamos {
+      padding: 95px 6vw 100px;
+      position: relative;
+      background: #fbf9f5;
+      background-image: 
+        radial-gradient(ellipse at 50% 20%, #ffffff 0%, #f7f3ec 60%, #eee8dd 100%),
+        repeating-linear-gradient(-55deg, transparent 0, transparent 48px, rgba(190,175,150,0.06) 50px, transparent 52px);
+      border-top: 1px solid rgba(201, 168, 76, 0.25);
+    }
+
+    .process-container {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .process-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .process-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: #9c6e2e;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+    .process-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 400;
+      color: #1e1b18;
+      letter-spacing: 0.02em;
+      line-height: 1.15;
+    }
+
+    .process-timeline {
+      position: relative;
+      padding-left: 20px;
+      margin-top: 30px;
+    }
+
+    /* Línea vertical conectora continua */
+    .process-timeline::before {
+      content: '';
+      position: absolute;
+      top: 25px;
+      bottom: 45px;
+      left: 45px;
+      width: 2px;
+      background: linear-gradient(to bottom, #d4c29d 0%, #c9a84c 50%, #e0d6c4 100%);
+      z-index: 1;
+    }
+
+    .process-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 22px;
+      position: relative;
+      margin-bottom: 34px;
+    }
+    .process-step:last-child {
+      margin-bottom: 15px;
+    }
+
+    .process-icon-wrap {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1.8px solid #c9a84c;
+      box-shadow: 0 4px 14px rgba(201, 168, 76, 0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+      flex-shrink: 0;
+    }
+    .process-icon-wrap svg {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: #332d26;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .process-icon-wrap svg.fill-icon {
+      fill: #332d26;
+      stroke: none;
+    }
+
+    /* Píldora de número de paso flotante */
+    .process-num-badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #9c6e2e;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
+
+    .process-body {
+      padding-top: 3px;
+    }
+    .process-step-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.45rem;
+      font-weight: 600;
+      color: #1e1b18;
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+    .process-step-desc {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13.5px;
+      color: #5c5348;
+      line-height: 1.65;
+      font-weight: 400;
+      max-width: 500px;
+    }
+
+    /* Píldora inferior de prioridad */
+    .process-priority-badge-wrap {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 15px;
+      padding-right: 10px;
+    }
+    .process-priority-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: #ffffff;
+      border: 1px solid rgba(201, 168, 76, 0.35);
+      border-radius: 24px;
+      padding: 9px 20px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: #383129;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .process-priority-badge .green-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #25a244;
+      display: inline-block;
+      box-shadow: 0 0 8px rgba(37, 162, 68, 0.6);
+      animation: pulseGreen 2s infinite ease-in-out;
+    }
+    @keyframes pulseGreen {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.7; }
+    }
+
+    @media (max-width: 900px) {
+      #como-trabajamos {
+        padding: 70px 5vw 75px;
+      }
+      .process-timeline {
+        padding-left: 0;
+      }
+      .process-timeline::before {
+        left: 25px;
+      }
+      .process-step {
+        gap: 16px;
+      }
+      .process-priority-badge-wrap {
+        justify-content: center;
+        padding-right: 0;
+        margin-top: 25px;
+      }
+    }
+
+
+    /* =====================================================
+       ░░░ SCROLL PORTRAIT WALL (ENTRE PROCESO Y ÁREAS) ░░░
+    ===================================================== */
+    .spw-root {
+      position: relative;
+      width: 100%;
+      background: #0d0f13;
+      background-image:
+        radial-gradient(ellipse at 50% 30%, #171a21 0%, #0d0f13 70%),
+        repeating-linear-gradient(-55deg, transparent 0, transparent 40px, rgba(255,255,255,0.012) 41px, transparent 42px);
+      color: #ffffff;
+      overflow: hidden;
+      border-top: 1px solid rgba(201, 168, 76, 0.35);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.35);
+    }
+
+    /* Scroll hint inicial */
+    .spw-hint-wrap {
+      pointer-events: none;
+      position: absolute;
+      left: 50%;
+      top: 50vh;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .spw-hint {
+      position: relative;
+      max-width: 18ch;
+      font-size: 11px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      line-height: 1.45;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+    }
+    .spw-hint::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 100%;
+      height: 55px;
+      width: 1.5px;
+      background: linear-gradient(to bottom, var(--gold-mid), transparent);
+      transform: translateX(-50%);
+      margin-top: 14px;
+    }
+
+    /* Título fijo centrado con inversión mix-blend-exclusion */
+    .spw-sticky-title {
+      pointer-events: none;
+      position: sticky;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 20;
+      text-align: center;
+      color: #ffffff;
+      mix-blend-mode: exclusion;
+      padding: 0 5vw;
+      width: 100%;
+    }
+    .spw-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(2.6rem, 7.8vw, 6.8rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      line-height: 1.05;
+      margin: 0;
+      text-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+    .spw-subtitle {
+      font-family: 'Montserrat', sans-serif;
+      margin-top: 12px;
+      font-size: clamp(10.5px, 1.4vw, 13.5px);
+      text-transform: uppercase;
+      letter-spacing: 0.32em;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 500;
+    }
+
+    /* Grid esparcido de retratos */
+    .spw-grid-wrap {
+      position: relative;
+      z-index: 2;
+      margin-top: 45vh;
+      margin-bottom: 50vh;
+      width: 100%;
+      max-width: 1440px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 3vw;
+    }
+
+    .spw-row {
+      display: flex;
+      width: 100%;
+    }
+
+    .spw-cell {
+      aspect-ratio: 1 / 1;
+      flex: 1;
+      padding: 16px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .spw-cell-empty {
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .spw-item {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 1px rgba(201, 168, 76, 0.3);
+      border: 1px solid rgba(201, 168, 76, 0.28);
+      will-change: transform;
+      background: #15181e;
+      transform: scale(0);
+      transition: box-shadow 0.4s ease;
+    }
+
+    .spw-item:hover {
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95), 0 0 15px rgba(201, 168, 76, 0.4);
+      border-color: var(--gold-mid);
+    }
+
+    .spw-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(80%) contrast(1.15) brightness(0.92);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+      display: block;
+    }
+
+    .spw-item:hover .spw-img {
+      transform: scale(1.06);
+      filter: grayscale(0%) contrast(1.05) brightness(1.02);
+    }
+
+    .spw-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 12px 14px;
+      background: linear-gradient(to top, rgba(9, 11, 14, 0.95) 0%, rgba(9, 11, 14, 0.6) 60%, transparent 100%);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.9);
+      pointer-events: none;
+    }
+    .spw-caption .spw-name {
+      font-weight: 700;
+      color: var(--gold-light);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .spw-caption .spw-role {
+      font-size: 9px;
+      color: rgba(255, 255, 255, 0.65);
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 900px) {
+      .spw-cell {
+        padding: 8px;
+      }
+      .spw-grid-wrap {
+        margin-top: 32vh;
+        margin-bottom: 38vh;
+        padding: 0 2vw;
+      }
+      .spw-caption {
+        padding: 8px 10px;
+      }
+      .spw-caption .spw-role {
+        display: none;
+      }
+    }
+
+</style>
+  <!-- GSAP & ScrollTrigger for ScrollPortraitWall -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+  <!-- ============================================================
+       S P L A S H   S C R E E N
+  ============================================================ -->
+  <div id="splash">
+        <div id="logo-stage">
+      <svg id="logo-svg" viewBox="0 0 640 675" role="img" aria-label="GirTor &amp; Asociados">
+        <defs>
+          <linearGradient id="gm" gradientUnits="userSpaceOnUse" x1="160" y1="80" x2="490" y2="560">
+            <stop offset="0%"   stop-color="#fff0c4"/>
+            <stop offset="18%"  stop-color="#dfba6a"/>
+            <stop offset="38%"  stop-color="#734f18"/>
+            <stop offset="58%"  stop-color="#f5d57f"/>
+            <stop offset="78%"  stop-color="#9d7129"/>
+            <stop offset="92%"  stop-color="#f8e4a9"/>
+            <stop offset="100%" stop-color="#553a12"/>
+          </linearGradient>
+          <linearGradient id="gs" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="640">
+            <stop offset="0%"   stop-color="#040405"/>
+            <stop offset="100%" stop-color="#121318"/>
+          </linearGradient>
+
+          <!-- Gradiente oro idéntico al logo para el texto -->
+          <linearGradient id="gold-text" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#fff2cc"/>
+            <stop offset="25%"  stop-color="#dfba6a"/>
+            <stop offset="50%"  stop-color="#8a5e1e"/>
+            <stop offset="75%"  stop-color="#f5d57f"/>
+            <stop offset="100%" stop-color="#c9a84c"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Bar 1 shadow + stroke -->
+        <g fill="none" stroke="url(#gs)" stroke-width="17" stroke-linecap="butt" stroke-linejoin="miter">
+          <path d="M207,104 L434,104 L442,109" pathLength="1" class="g-draw" style="animation-delay:.1s"/>
+        </g>
+        <g fill="none" stroke="url(#gm)" stroke-width="12" stroke-linecap="butt" stroke-linejoin="miter">
+          <path d="M207,104 L434,104 L442,109" pathLength="1" class="g-draw" style="animation-delay:.1s"/>
+        </g>
+        <!-- Bar 2 shadow + stroke -->
+        <g fill="none" stroke="url(#gs)" stroke-width="32" stroke-linecap="butt" stroke-linejoin="miter">
+          <path d="M208,137 L469,137 L487,146" pathLength="1" class="g-draw" style="animation-delay:.35s"/>
+        </g>
+        <g fill="none" stroke="url(#gm)" stroke-width="24" stroke-linecap="butt" stroke-linejoin="miter">
+          <path d="M208,137 L469,137 L487,146" pathLength="1" class="g-draw" style="animation-delay:.35s"/>
+        </g>
+        <!-- G arc shadow + stroke -->
+        <g fill="none" stroke="url(#gs)" stroke-width="63" stroke-linecap="butt" stroke-linejoin="round">
+          <path d="M286,189.5 L210,189.5 A100,100 0 0 0 210,389.5 L222,389.5" pathLength="1" class="g-draw" style="animation-delay:.65s"/>
+        </g>
+        <g fill="none" stroke="url(#gm)" stroke-width="51" stroke-linecap="butt" stroke-linejoin="round">
+          <path d="M286,189.5 L210,189.5 A100,100 0 0 0 210,389.5 L222,389.5" pathLength="1" class="g-draw" style="animation-delay:.65s"/>
+        </g>
+        <!-- G hook shadow + stroke -->
+        <g fill="none" stroke="url(#gs)" stroke-width="63" stroke-linecap="butt" stroke-linejoin="miter">
+          <path d="M208,288.5 L276.5,288.5 L276.5,545" pathLength="1" class="g-draw" style="animation-delay:1.05s"/>
+        </g>
+        <g fill="none" stroke="url(#gm)" stroke-width="51" stroke-linecap="butt" stroke-linejoin="miter">
+          <path d="M208,288.5 L276.5,288.5 L276.5,545" pathLength="1" class="g-draw" style="animation-delay:1.05s"/>
+        </g>
+        <!-- Center pillar shadow + stroke -->
+        <g fill="none" stroke="url(#gs)" stroke-width="64" stroke-linecap="butt">
+          <path d="M362,240 L362,545" pathLength="1" class="g-draw" style="animation-delay:1.35s"/>
+        </g>
+        <g fill="none" stroke="url(#gm)" stroke-width="52" stroke-linecap="butt">
+          <path d="M362,240 L362,545" pathLength="1" class="g-draw" style="animation-delay:1.35s"/>
+        </g>
+        <!-- R loop shadow + stroke -->
+        <g fill="none" stroke="url(#gs)" stroke-width="63" stroke-linecap="butt" stroke-linejoin="miter">
+          <path d="M300,189.5 L495,189.5 L521.5,216 L521.5,278 L495,304.5 L424,304.5" pathLength="1" class="g-draw" style="animation-delay:1.6s"/>
+        </g>
+        <g fill="none" stroke="url(#gm)" stroke-width="51" stroke-linecap="butt" stroke-linejoin="miter">
+          <path d="M300,189.5 L495,189.5 L521.5,216 L521.5,278 L495,304.5 L424,304.5" pathLength="1" class="g-draw" style="animation-delay:1.6s"/>
+        </g>
+        <!-- R leg shadow + stroke -->
+        <g fill="none" stroke="url(#gs)" stroke-width="63" stroke-linecap="butt">
+          <path d="M436,325 L529,437" pathLength="1" class="g-draw" style="animation-delay:1.85s"/>
+        </g>
+        <g fill="none" stroke="url(#gm)" stroke-width="51" stroke-linecap="butt">
+          <path d="M436,325 L529,437" pathLength="1" class="g-draw" style="animation-delay:1.85s"/>
+        </g>
+
+        <!-- Texto ABOGADOS ® y CORPORATIVO LEGAL con gradiente oro idéntico al logo -->
+        <text x="320" y="608" text-anchor="middle" class="cca-word" fill="url(#gold-text)">ABOGADOS</text>
+        <text x="495" y="590" class="cca-reg" fill="url(#gold-text)">®</text>
+        <text x="320" y="648" text-anchor="middle" class="cca-sub" fill="#dfba6a">CORPORATIVO LEGAL</text>
+      </svg>
+
+      <img id="logo-relief" src="assets/logo_transparent.png" alt="" />
+      <span id="logo-sheen"></span>
+    </div>
+    
+    <p class="skip-hint">Toca para continuar</p>
+  </div>
+
+  <!-- ============================================================
+       N A V I G A T I O N
+  ============================================================ -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">
+      <img src="assets/logo_transparent.png" alt="GirTor" />
+      <div class="nav-brand">
+        <span class="firm">GirTor &amp; Asociados</span>
+        <span class="tagline">Despacho Jurídico</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#areas">Áreas de Práctica</a></li>
+      <li><a href="#philosophy">Filosofía</a></li>
+      <li><a href="#contact">Contacto</a></li>
+      <li><a href="#ubicacion">Ubicación</a></li>
+      <li>
+        <a href="https://wa.me/5522604834" target="_blank" rel="noopener" class="nav-cta">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#c9a84c" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.484 2 12.017c0 1.761.457 3.413 1.253 4.856L2 22l5.3-1.387A9.945 9.945 0 0012.017 22C17.523 22 22 17.516 22 12c0-5.523-4.477-10-10-10zm0 18.015a7.994 7.994 0 01-4.072-1.111l-.291-.173-3.145.823.838-3.059-.19-.314A8.015 8.015 0 014 12.017C4 7.589 7.589 4 12 4s8 3.589 8 8.017c0 4.413-3.584 7.998-8 7.998z"/></svg>
+          Consulta
+        </a>
+      </li>
+    </ul>
+    <button class="nav-hamburger" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+    <!-- ============================================================
+       H E R O   ( Video-Carousel Cinemático Multi-Slide )
+  ============================================================ -->
+  <section id="hero">
+    <!-- Slider de fondo con 4 escenas cinemáticas -->
+    <div class="hero-slider" id="heroSlider">
+      <!-- Slide 1: Themis / Balanza y Justicia -->
+      <div class="hero-slide slide-themis active" data-index="0" data-tag="JUSTICIA &amp; LITIGIO ESTRATÉGICO">
+        <div class="hero-slide-img" style="background-image: url('assets/hero_slide_1.jpg');"></div>
+      </div>
+      <!-- Slide 2: Rascacielos Corporativo Santa Fe al atardecer -->
+      <div class="hero-slide slide-towers" data-index="1" data-tag="TORRE I · LOMAS DE SANTA FE">
+        <div class="hero-slide-img" style="background-image: url('assets/hero_slide_2.jpg');"></div>
+      </div>
+      <!-- Slide 3: Sala de Consejo Ejecutiva y Biblioteca Jurídica -->
+      <div class="hero-slide slide-boardroom" data-index="2" data-tag="CONSEJO &amp; ALTA DIRECCIÓN">
+        <div class="hero-slide-img" style="background-image: url('assets/hero_slide_3.jpg');"></div>
+      </div>
+      <!-- Slide 4: Columnata de Mármol y Corte de Justicia -->
+      <div class="hero-slide slide-pillars" data-index="3" data-tag="CORTE &amp; EXCELENCIA JURÍDICA">
+        <div class="hero-slide-img" style="background-image: url('assets/hero_slide_4.jpg');"></div>
+      </div>
+    </div>
+
+    <!-- Overlay y viñeta cinematográfica de pizarra y oro -->
+    <div class="hero-vignette"></div>
+
+    <!-- Contenedor del contenido del Hero -->
+    <div class="hero-container">
+      <div class="hero-content">
+        <!-- Titular potente y enfocado a vender / captar -->
+        <h1 class="hero-title">
+          Tu problema legal tiene solución.<br>
+          <span class="highlight-gold">Déjalo en nuestras manos.</span>
+        </h1>
+
+        <!-- Línea horizontal de corte editorial -->
+        <div class="hero-divider-bar"></div>
+
+        <!-- Descripción persuasiva de alto impacto -->
+        <p class="hero-desc">
+          Primera consulta sin costo y atención directa de abogados especialistas. Defensa estratégica con resultados comprobables en las áreas más complejas del derecho mexicano.
+        </p>
+
+        <!-- Botones estilo referencia exacta -->
+        <div class="hero-cta-compact-group">
+          <a href="https://wa.me/525522604834?text=Hola,%20me%20gustar%C3%ADa%20agendar%20una%20consulta%20con%20GirTor%20%26%20Asociados." target="_blank" rel="noopener" class="btn-gold-compact">
+            <svg width="15" height="15" style="width:15px;height:15px;min-width:15px;max-width:15px;display:inline-block;" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.484 2 12.017c0 1.761.457 3.413 1.253 4.856L2 22l5.3-1.387A9.945 9.945 0 0012.017 22C17.523 22 22 17.516 22 12c0-5.523-4.477-10-10-10zm0 18.015a7.994 7.994 0 01-4.072-1.111l-.291-.173-3.145.823.838-3.059-.19-.314A8.015 8.015 0 014 12.017C4 7.589 7.589 4 12 4s8 3.589 8 8.017c0 4.413-3.584 7.998-8 7.998z"/></svg>
+            <span>AGENDAR CONSULTA</span>
+          </a>
+          <a href="#como-trabajamos" class="btn-text-link">
+            CÓMO TRABAJAMOS &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       C A R R U C E L   D E   Á R E A S   ( Marquee Ticker )
+  ============================================================ -->
+  <div class="practice-ticker-wrap">
+    <div class="practice-ticker">
+      <div class="ticker-group">
+        <a href="#areas" class="ticker-item">Amparo <span class="ticker-bullet">&#9670;</span></a>
+        <a href="#areas" class="ticker-item">Derecho Penal <span class="ticker-bullet">&#9670;</span></a>
+        <a href="#areas" class="ticker-item">Derecho Fiscal <span class="ticker-bullet">&#9670;</span></a>
+        <a href="#areas" class="ticker-item">Derecho Mercantil <span class="ticker-bullet">&#9670;</span></a>
+        <a href="#areas" class="ticker-item">Derecho Civil <span class="ticker-bullet">&#9670;</span></a>
+        <a href="#areas" class="ticker-item">Derecho Familiar <span class="ticker-bullet">&#9670;</span></a>
+        <a href="#areas" class="ticker-item">Derecho Laboral <span class="ticker-bullet">&#9670;</span></a>
+        <a href="#areas" class="ticker-item">Litigio Estratégico <span class="ticker-bullet">&#9670;</span></a>
+        <a href="#areas" class="ticker-item">Corporativo Legal <span class="ticker-bullet">&#9670;</span></a>
+      </div>
+      <div class="ticker-group" aria-hidden="true">
+        <a href="#areas" class="ticker-item">Amparo <span class="ticker-bullet">&#9670;</span></a>
+        <a href="#areas" class="ticker-item">Derecho Penal <span class="ticker-bullet">&#9670;</span></a>
+        <a href="#areas" class="ticker-item">Derecho Fiscal <span class="ticker-bullet">&#9670;</span></a>
+        <a href="#areas" class="ticker-item">Derecho Mercantil <span class="ticker-bullet">&#9670;</span></a>
+        <a href="#areas" class="ticker-item">Derecho Civil <span class="ticker-bullet">&#9670;</span></a>
+        <a href="#areas" class="ticker-item">Derecho Familiar <span class="ticker-bullet">&#9670;</span></a>
+        <a href="#areas" class="ticker-item">Derecho Laboral <span class="ticker-bullet">&#9670;</span></a>
+        <a href="#areas" class="ticker-item">Litigio Estratégico <span class="ticker-bullet">&#9670;</span></a>
+        <a href="#areas" class="ticker-item">Corporativo Legal <span class="ticker-bullet">&#9670;</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       I N T R O   S T A T E M E N T
+  ============================================================ -->
+  <section id="intro" class="marble-bg" style="padding: 75px 8vw 60px; text-align: center; max-width: 960px; margin: 0 auto; display: block;">
+    <div class="reveal">
+      <div class="section-label" style="justify-content: center;">Nuestra Firma</div>
+      <h2 class="section-heading" style="margin-bottom: 1.5rem;">Comprometidos con la <em>excelencia</em> jurídica</h2>
+      <p style="color: var(--text-mid); font-size: 15px; line-height: 1.9; font-weight: 300; max-width: 740px; margin: 0 auto;">
+        GirTor &amp; Asociados es un despacho jurídico especializado en la atención de asuntos de alta complejidad
+        para personas físicas y morales. Con un equipo multidisciplinario y un enfoque estratégico,
+        ofrecemos representación de primer nivel en las ramas más exigentes del derecho mexicano.
+      </p>
+    </div>
+  </section>
+
+  <!-- thin gold divider -->
+  <div class="gold-band"><div class="gold-band-inner"></div></div>
+
+  <!-- ============================================================
+       C Ó M O   T R A B A J A M O S   ( Proceso en 4 Pasos )
+  ============================================================ -->
+  <section id="como-trabajamos">
+    <div class="process-container">
+      <div class="process-header reveal">
+        <span class="process-eyebrow">&mdash; C&Oacute;MO TRABAJAMOS</span>
+        <h2 class="process-title">Un proceso claro en 4 pasos</h2>
+      </div>
+
+      <div class="process-timeline reveal reveal-delay-1">
+        <!-- Paso 1 -->
+        <div class="process-step">
+          <div class="process-icon-wrap">
+            <span class="process-num-badge">1</span>
+            <svg class="fill-icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.484 2 12.017c0 1.761.457 3.413 1.253 4.856L2 22l5.3-1.387A9.945 9.945 0 0012.017 22C17.523 22 22 17.516 22 12c0-5.523-4.477-10-10-10zm0 18.015a7.994 7.994 0 01-4.072-1.111l-.291-.173-3.145.823.838-3.059-.19-.314A8.015 8.015 0 014 12.017C4 7.589 7.589 4 12 4s8 3.589 8 8.017c0 4.413-3.584 7.998-8 7.998z"/></svg>
+          </div>
+          <div class="process-body">
+            <h3 class="process-step-title">Escr&iacute;benos por WhatsApp</h3>
+            <p class="process-step-desc">Te respondemos el mismo d&iacute;a para entender brevemente tu situaci&oacute;n.</p>
+          </div>
+        </div>
+
+        <!-- Paso 2 -->
+        <div class="process-step">
+          <div class="process-icon-wrap">
+            <span class="process-num-badge">2</span>
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div class="process-body">
+            <h3 class="process-step-title">Consulta Inicial Sin Costo</h3>
+            <p class="process-step-desc">Evaluamos la viabilidad legal de tu caso con total honestidad.</p>
+          </div>
+        </div>
+
+        <!-- Paso 3 -->
+        <div class="process-step">
+          <div class="process-icon-wrap">
+            <span class="process-num-badge">3</span>
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <div class="process-body">
+            <h3 class="process-step-title">Propuesta Clara</h3>
+            <p class="process-step-desc">Te entregamos estrategia, tiempos estimados y honorarios por escrito.</p>
+          </div>
+        </div>
+
+        <!-- Paso 4 -->
+        <div class="process-step">
+          <div class="process-icon-wrap">
+            <span class="process-num-badge">4</span>
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="process-body">
+            <h3 class="process-step-title">Te Representamos</h3>
+            <p class="process-step-desc">Iniciamos la defensa con actualizaciones constantes del proceso.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Badge de atención prioritaria -->
+      <div class="process-priority-badge-wrap reveal reveal-delay-2">
+        <div class="process-priority-badge">
+          <span class="green-dot"></span>
+          <span>Atenci&oacute;n r&aacute;pida y prioritaria</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- thin gold divider -->
+  <div class="gold-band"><div class="gold-band-inner"></div></div>
+
+  <!-- ============================================================
+       S C R O L L   P O R T R A I T   W A L L   ( Animación de Fotos )
+  ============================================================ -->
+  <section id="portrait-wall" class="spw-root" aria-label="Firma Legal GirTor &amp; Asociados">
+    <!-- Pista de scroll animada -->
+    <div class="spw-hint-wrap" id="spwHint">
+      <span class="spw-hint">Desplaza para conocer nuestra firma</span>
+    </div>
+
+    <!-- Título fijo centrado que invierte colores con el fondo -->
+    <div class="spw-sticky-title">
+      <h2 class="spw-title">GirTor &amp; Asociados</h2>
+      <p class="spw-subtitle">Lomas de Santa Fe &middot; Ciudad de M&eacute;xico</p>
+    </div>
+
+    <!-- Rejilla esparcida de retratos -->
+    <div class="spw-grid-wrap" id="spwGrid">
+      <!-- Se genera dinámicamente con las fotos solicitadas -->
+    </div>
+  </section>
+
+  <!-- thin gold divider -->
+  <div class="gold-band"><div class="gold-band-inner"></div></div>
+
+  <!-- ============================================================
+       Á R E A S   D E   P R Á C T I C A  — Accordion
+  ============================================================ -->
+  <section id="areas">
+
+    <div class="areas-header reveal">
+      <span class="areas-eyebrow">¿Qué Hacemos?</span>
+      <h2 class="areas-title">Especialidades</h2>
+    </div>
+
+    <div class="accordion-list reveal reveal-delay-1">
+
+      <!-- PENAL -->
+      <div class="acc-item open">
+        <div class="acc-trigger" onclick="toggleAcc(this)">
+          <div class="acc-icon-wrap">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="acc-info">
+            <div class="acc-name">Penal</div>
+            <div class="acc-sub">Derecho Penal Acusatorio</div>
+          </div>
+          <div class="acc-chevron">
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <div class="acc-body-inner-pad">
+              <p class="acc-desc">Defensa estratégica ante el sistema acusatorio adversarial en todas sus etapas, desde investigación hasta segunda instancia y amparo.</p>
+              <div class="acc-tags">
+                <span class="acc-tag">Carpeta de investigación</span>
+                <span class="acc-tag">Vinculación a proceso</span>
+                <span class="acc-tag">Medidas cautelares</span>
+                <span class="acc-tag">Juicio oral</span>
+                <span class="acc-tag">Amparo penal</span>
+                <span class="acc-tag">Delitos corporativos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FISCAL -->
+      <div class="acc-item">
+        <div class="acc-trigger" onclick="toggleAcc(this)">
+          <div class="acc-icon-wrap">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <div class="acc-info">
+            <div class="acc-name">Fiscal</div>
+            <div class="acc-sub">Derecho Tributario</div>
+          </div>
+          <div class="acc-chevron">
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <div class="acc-body-inner-pad">
+              <p class="acc-desc">Asesoría y defensa fiscal ante el SAT, IMSS, INFONAVIT y el Tribunal Federal de Justicia Administrativa.</p>
+              <div class="acc-tags">
+                <span class="acc-tag">Controversias ante el SAT</span>
+                <span class="acc-tag">Recurso de revocación</span>
+                <span class="acc-tag">Juicio contencioso</span>
+                <span class="acc-tag">Amparo fiscal</span>
+                <span class="acc-tag">Planeación fiscal</span>
+                <span class="acc-tag">Devolución de impuestos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MERCANTIL -->
+      <div class="acc-item">
+        <div class="acc-trigger" onclick="toggleAcc(this)">
+          <div class="acc-icon-wrap">
+            <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <div class="acc-info">
+            <div class="acc-name">Mercantil</div>
+            <div class="acc-sub">Derecho Comercial y Empresarial</div>
+          </div>
+          <div class="acc-chevron">
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <div class="acc-body-inner-pad">
+              <p class="acc-desc">Litigio y asesoría en controversias comerciales, recuperación de créditos y restructuras empresariales.</p>
+              <div class="acc-tags">
+                <span class="acc-tag">Contratos mercantiles</span>
+                <span class="acc-tag">Juicio ejecutivo</span>
+                <span class="acc-tag">Concurso mercantil</span>
+                <span class="acc-tag">Recuperación de créditos</span>
+                <span class="acc-tag">Controversias societarias</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAMILIAR -->
+      <div class="acc-item">
+        <div class="acc-trigger" onclick="toggleAcc(this)">
+          <div class="acc-icon-wrap">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="acc-info">
+            <div class="acc-name">Familiar</div>
+            <div class="acc-sub">Derecho de Familia</div>
+          </div>
+          <div class="acc-chevron">
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <div class="acc-body-inner-pad">
+              <p class="acc-desc">Manejo discreto y profesional de conflictos familiares, con enfoque en el bienestar de todas las partes involucradas.</p>
+              <div class="acc-tags">
+                <span class="acc-tag">Divorcio</span>
+                <span class="acc-tag">Pensión alimenticia</span>
+                <span class="acc-tag">Guarda y custodia</span>
+                <span class="acc-tag">Adopción</span>
+                <span class="acc-tag">Sucesiones y herencias</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CIVIL -->
+      <div class="acc-item">
+        <div class="acc-trigger" onclick="toggleAcc(this)">
+          <div class="acc-icon-wrap">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <div class="acc-info">
+            <div class="acc-name">Civil</div>
+            <div class="acc-sub">Derecho Civil</div>
+          </div>
+          <div class="acc-chevron">
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <div class="acc-body-inner-pad">
+              <p class="acc-desc">Litigio en materia patrimonial, contractual e inmobiliaria con la firmeza y conocimiento que su caso merece.</p>
+              <div class="acc-tags">
+                <span class="acc-tag">Contratos civiles</span>
+                <span class="acc-tag">Responsabilidad civil</span>
+                <span class="acc-tag">Bienes inmuebles</span>
+                <span class="acc-tag">Arrendamiento</span>
+                <span class="acc-tag">Daños y perjuicios</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LABORAL -->
+      <div class="acc-item">
+        <div class="acc-trigger" onclick="toggleAcc(this)">
+          <div class="acc-icon-wrap">
+            <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+          </div>
+          <div class="acc-info">
+            <div class="acc-name">Laboral</div>
+            <div class="acc-sub">Derecho del Trabajo</div>
+          </div>
+          <div class="acc-chevron">
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <div class="acc-body-inner-pad">
+              <p class="acc-desc">Representación de empresas y trabajadores ante el Tribunal Federal de Conciliación y Arbitraje y juntas locales.</p>
+              <div class="acc-tags">
+                <span class="acc-tag">Despido injustificado</span>
+                <span class="acc-tag">Reinstalación</span>
+                <span class="acc-tag">Indemnizaciones</span>
+                <span class="acc-tag">Conflictos colectivos</span>
+                <span class="acc-tag">Contratos colectivos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /accordion-list -->
+  </section>
+
+  <!-- thin gold divider -->
+  <div class="gold-band"><div class="gold-band-inner"></div></div>
+
+  <!-- ============================================================
+       P H I L O S O P H Y   ( dark marble )
+  ============================================================ -->
+  <section id="philosophy" class="marble-dark">
+    <div class="glass-panel glass-panel-1"></div>
+    <div class="glass-panel glass-panel-2"></div>
+    <div class="philosophy-inner">
+      <span class="quote-mark reveal">&ldquo;</span>
+      <p class="philosophy-text reveal reveal-delay-1">
+        La justicia no es sólo el fin que perseguimos;<br>
+        es la exigencia mínima con la que iniciamos cada caso.
+      </p>
+      <div class="philosophy-attr reveal reveal-delay-2">
+        GirTor &amp; Asociados
+      </div>
+    </div>
+  </section>
+
+  <!-- thin gold divider -->
+  <div class="gold-band"><div class="gold-band-inner"></div></div>
+
+  <!-- ============================================================
+       C O N T A C T O
+  ============================================================ -->
+  <section id="contact" class="marble-bg">
+    <!-- Left: info -->
+    <div class="contact-left">
+      <div class="section-label reveal">Contáctenos</div>
+      <h2 class="section-heading reveal reveal-delay-1">Estamos para <em>orientarle</em></h2>
+      <p class="reveal reveal-delay-2">
+        Nuestro equipo está disponible para atender su caso con confidencialidad y profesionalismo.
+        La primera consulta nos permite conocer su situación para definir la estrategia más adecuada.
+      </p>
+
+      <div class="contact-info-item reveal reveal-delay-2">
+        <div class="contact-info-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <div class="contact-info-text">
+          <strong>Dirección</strong>
+          Av. Javier Barros Sierra 540, Torre I<br>
+          Lomas de Santa Fe, Álvaro Obregón<br>
+          C.P. 01210, Ciudad de México
+        </div>
+      </div>
+
+      <div class="contact-info-item reveal reveal-delay-3">
+        <div class="contact-info-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.59 1.23h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.99a16 16 0 0 0 5.99 5.99l.87-.87a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/>
+          </svg>
+        </div>
+        <div class="contact-info-text">
+          <strong>WhatsApp</strong>
+          55 2260 4834
+        </div>
+      </div>
+
+      <a href="https://wa.me/5522604834?text=Hola,%20me%20gustaría%20solicitar%20una%20consulta%20con%20GirTor%20%26%20Asociados." target="_blank" rel="noopener" class="wa-cta reveal reveal-delay-4">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.484 2 12.017c0 1.761.457 3.413 1.253 4.856L2 22l5.3-1.387A9.945 9.945 0 0012.017 22C17.523 22 22 17.516 22 12c0-5.523-4.477-10-10-10zm0 18.015a7.994 7.994 0 01-4.072-1.111l-.291-.173-3.145.823.838-3.059-.19-.314A8.015 8.015 0 014 12.017C4 7.589 7.589 4 12 4s8 3.589 8 8.017c0 4.413-3.584 7.998-8 7.998z"/></svg>
+        Escribir por WhatsApp
+      </a>
+    </div>
+
+    <!-- Right: form -->
+    <div class="contact-right reveal reveal-delay-2">
+      <div class="form-title">Solicitar consulta</div>
+      <form onsubmit="handleForm(event)">
+        <div class="form-group">
+          <label class="form-label">Nombre completo</label>
+          <input type="text" class="form-input" placeholder="Su nombre" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Teléfono o correo</label>
+          <input type="text" class="form-input" placeholder="Cómo podemos contactarle" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Área de interés</label>
+          <select class="form-select">
+            <option value="">Seleccionar área</option>
+            <option>Penal</option>
+            <option>Fiscal</option>
+            <option>Mercantil</option>
+            <option>Familiar</option>
+            <option>Civil</option>
+            <option>Laboral</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Breve descripción del caso</label>
+          <textarea class="form-textarea" placeholder="Describa brevemente su situación..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Enviar Solicitud</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- thin gold divider -->
+  <div class="gold-band"><div class="gold-band-inner"></div></div>
+
+  <!-- ============================================================
+       F O O T E R
+  ============================================================ -->
+  
+  <!-- thin gold divider -->
+  <div class="gold-band"><div class="gold-band-inner"></div></div>
+
+  <!-- ============================================================
+       U B I C A C I Ó N   ( Google Maps estilo CCA )
+  ============================================================ -->
+  <section id="ubicacion" class="marble-bg">
+    <div style="max-width: 960px; margin: 0 auto; text-align: center;">
+      <div class="section-label reveal" style="justify-content: center; margin-bottom: 1rem;">¿Dónde Estamos?</div>
+      <h2 class="section-heading reveal reveal-delay-1" style="margin-bottom: 1.2rem;">Ubicación <em>Estratégica</em></h2>
+      <p class="reveal reveal-delay-2" style="color: var(--text-mid); font-size: 13.5px; max-width: 580px; margin: 0 auto 2.5rem; font-weight: 300; line-height: 1.8;">
+        Av. Javier Barros Sierra 540, Torre I, Lomas de Santa Fe, Alcaldía Álvaro Obregón, C.P. 01210, Ciudad de México.
+      </p>
+
+      <!-- Tarjeta del Mapa Google Maps -->
+      <div class="map-frame-wrapper reveal reveal-delay-2">
+        <iframe
+          src="https://maps.google.com/maps?q=Av.+Javier+Barros+Sierra+540,+Torre+I,+Lomas+de+Santa+Fe,+%C3%81lvaro+Obreg%C3%B3n,+01210+Ciudad+de+M%C3%A9xico&t=&z=16&ie=UTF8&iwloc=&output=embed"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Ubicación GirTor &amp; Asociados">
+        </iframe>
+      </div>
+
+      <!-- Botón negro de cápsula idéntico a CCA -->
+      <div class="reveal reveal-delay-3" style="margin-top: 28px;">
+        <a href="https://maps.google.com/?q=Av.+Javier+Barros+Sierra+540,+Torre+I,+Lomas+de+Santa+Fe,+%C3%81lvaro+Obreg%C3%B3n,+01210+Ciudad+de+M%C3%A9xico" target="_blank" rel="noopener" class="btn-maps-pill">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          ABRIR EN GOOGLE MAPS
+        </a>
+      </div>
+    </div>
+  </section>
+<footer id="footer" class="marble-bg">
+    <div class="footer-brand">
+      <img src="assets/logo_transparent.png" alt="GirTor" />
+      <div class="footer-name">GirTor <span>&amp;</span> Asociados</div>
+    </div>
+    <div class="footer-copy">
+      &copy; 2025 GirTor &amp; Asociados · Todos los derechos reservados
+    </div>
+    <div class="footer-links">
+      <a href="#areas">Especialidades</a>
+      <a href="#philosophy">Filosofía</a>
+      <a href="#contact">Contacto</a>
+    </div>
+  </footer>
+
+
+  <!-- ============================================================
+       S C R I P T S
+  ============================================================ -->
+  <!-- ============================================================
+       F L O A T I N G   W H A T S A P P
+  ============================================================ -->
+    <div id="wa-float">
+    <a class="wa-float-label" href="https://wa.me/525522604834?text=Hola,%20me%20gustar%C3%ADa%20solicitar%20asesor%C3%ADa%20con%20GirTor%20%26%20Asociados." target="_blank" rel="noopener">
+      ¡Asesoría Inmediata!
+    </a>
+    <a class="wa-float-btn" href="https://wa.me/525522604834?text=Hola,%20me%20gustar%C3%ADa%20solicitar%20asesor%C3%ADa%20con%20GirTor%20%26%20Asociados." target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.484 2 12.017c0 1.761.457 3.413 1.253 4.856L2 22l5.3-1.387A9.945 9.945 0 0012.017 22C17.523 22 22 17.516 22 12c0-5.523-4.477-10-10-10zm0 18.015a7.994 7.994 0 01-4.072-1.111l-.291-.173-3.145.823.838-3.059-.19-.314A8.015 8.015 0 014 12.017C4 7.589 7.589 4 12 4s8 3.589 8 8.017c0 4.413-3.584 7.998-8 7.998z"/></svg>
+    </a>
+  </div>
+
+<script>
+    /* ── Splash logic ── */
+    (function () {
+      const splash  = document.getElementById('splash');
+      const relief  = document.getElementById('logo-relief');
+      const sheen   = document.getElementById('logo-sheen');
+      
+
+      function hideSplash () {
+        splash.classList.add('hide');
+        const waFloat = document.getElementById('wa-float');
+        if (waFloat) waFloat.classList.add('show');
+        setTimeout(() => { splash.style.display = 'none'; }, 1100);
+      }
+
+      
+      /* 2 — sheen sweep */
+      setTimeout(() => { sheen.classList.add('sheen-go'); }, 3200);
+      /* 3 — auto-dismiss */
+      setTimeout(hideSplash, 5200);
+      /* click to skip */
+      splash.addEventListener('click', hideSplash);
+    })();
+
+    /* ── Navbar scroll ── */
+    (function () {
+      const nav = document.getElementById('nav');
+      window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 60);
+      }, { passive: true });
+    })();
+
+    /* ── Scroll-reveal ── */
+    (function () {
+      const els = document.querySelectorAll('.reveal');
+      const io  = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); } });
+      }, { threshold: 0.12 });
+      els.forEach(el => io.observe(el));
+    })();
+
+    /* ── Accordion ── */
+    function toggleAcc(trigger) {
+      const item = trigger.closest('.acc-item');
+      const isOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.acc-item.open').forEach(el => el.classList.remove('open'));
+      // Open clicked if it was closed
+      if (!isOpen) item.classList.add('open');
+    }
+
+    /* ── Contact form handler ── */
+    function handleForm(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.form-submit');
+      btn.textContent = 'Enviando…';
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.textContent = '✓ Solicitud enviada';
+        btn.style.background = 'linear-gradient(135deg, #4a7c59, #2d5a3d)';
+        setTimeout(() => {
+          btn.textContent = 'Enviar Solicitud';
+          btn.style.background = '';
+          btn.disabled = false;
+          e.target.reset();
+        }, 3200);
+      }, 1400);
+    }
+      /* ── Video-Carousel Cinemático Slider Logic ── */
+    (function () {
+      const slides = document.querySelectorAll('.hero-slide');
+      if (!slides.length) return;
+
+      let currentIndex = 0;
+      const totalSlides = slides.length;
+      const slideDuration = 6000;
+      let isPaused = false;
+
+      function updateSlide(index) {
+        currentIndex = (index + totalSlides) % totalSlides;
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === currentIndex);
+        });
+      }
+
+      let interval = setInterval(() => {
+        if (!isPaused) updateSlide(currentIndex + 1);
+      }, slideDuration);
+
+      const hero = document.getElementById('hero');
+      if (hero) {
+        hero.addEventListener('mouseenter', () => { isPaused = true; });
+        hero.addEventListener('mouseleave', () => { isPaused = false; });
+        
+        let touchStartX = 0;
+        hero.addEventListener('touchstart', (e) => {
+          touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        hero.addEventListener('touchend', (e) => {
+          const touchEndX = e.changedTouches[0].screenX;
+          const diff = touchStartX - touchEndX;
+          if (Math.abs(diff) > 40) {
+            updateSlide(diff > 0 ? currentIndex + 1 : currentIndex - 1);
+          }
+        }, { passive: true });
+      }
+    })();
+
+
+    /* ── Contador Animado de Números (Empieza desde 0 hasta el final) ── */
+    (function () {
+      const counters = document.querySelectorAll('.counter');
+      if (!counters.length) return;
+
+      let started = false;
+
+      function startCounters() {
+        counters.forEach(counter => {
+          const target = parseInt(counter.getAttribute('data-target'), 10);
+          const duration = 2200; // 2.2 segundos para subir suavemente
+          const startTime = performance.now();
+
+          function updateCounter(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease out quart para suavidad ejecutiva
+            const easeOut = 1 - Math.pow(1 - progress, 4);
+            const currentVal = Math.floor(easeOut * target);
+
+            counter.textContent = currentVal;
+
+            if (progress < 1) {
+              requestAnimationFrame(updateCounter);
+            } else {
+              counter.textContent = target;
+            }
+          }
+
+          requestAnimationFrame(updateCounter);
+        });
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !started) {
+            started = true;
+            startCounters();
+          }
+        });
+      }, { threshold: 0.25 });
+
+      const statsSec = document.getElementById('stats-section');
+      if (statsSec) observer.observe(statsSec);
+    })();
+
+  
+    /* ── ScrollPortraitWall Animation & Grid Generation ── */
+    (function () {
+      const photos = [
+        { name: "Lic. Girón Torres", role: "Socio Director", src: "assets/fto1.jpeg" },
+        { name: "Defensa Corporativa", role: "Litigio Estratégico", src: "assets/fto.2.jpeg" },
+        { name: "Representación Jurídica", role: "Penal & Fiscal", src: "assets/fto3.jpeg" },
+        { name: "Sede Santa Fe", role: "Torre I · CDMX", src: "assets/fto4.jpeg" },
+        { name: "Asesoría de Alto Nivel", role: "Consultoría Especializada", src: "assets/fto5.jpeg" },
+        { name: "Consejo Legal", role: "Tribunales & Cortes", src: "assets/fto6.jpeg" },
+        { name: "GirTor & Asociados", role: "Atención Inmediata", src: "assets/fto1.jpeg" },
+        { name: "Firma Especializada", role: "Lomas de Santa Fe", src: "assets/fto.2.jpeg" },
+        { name: "Defensa Estratégica", role: "Resultados Precisos", src: "assets/fto3.jpeg" },
+        { name: "Litigio de Éxito", role: "Amparos & Juicios", src: "assets/fto4.jpeg" }
+      ];
+
+      const gridContainer = document.getElementById('spwGrid');
+      if (!gridContainer) return;
+
+      function getResponsiveColumns() {
+        const w = window.innerWidth;
+        if (w >= 1024) return 4;
+        if (w >= 640) return 3;
+        return 2;
+      }
+
+      function buildLayout(count, cols) {
+        const rows = [];
+        let i = 0;
+        let r = 0;
+        while (i < count) {
+          const row = new Array(cols).fill(-1);
+          const a = (r * 2 + (r % 2)) % cols;
+          row[a] = i++;
+          if (r % 3 === 0 && i < count) {
+            let b = (a + 2) % cols;
+            if (b === a) b = (a + 1) % cols;
+            row[b] = i++;
+          }
+          rows.push(row);
+          r++;
+        }
+        return rows;
+      }
+
+      let currentCols = 0;
+
+      function renderGrid() {
+        const cols = getResponsiveColumns();
+        if (cols === currentCols) return;
+        currentCols = cols;
+
+        const layout = buildLayout(photos.length, cols);
+        gridContainer.innerHTML = '';
+
+        layout.forEach((rowIndices, ri) => {
+          const rowDiv = document.createElement('div');
+          rowDiv.className = 'spw-row';
+
+          rowIndices.forEach((photoIdx, ci) => {
+            const cellDiv = document.createElement('div');
+            cellDiv.className = 'spw-cell';
+
+            if (photoIdx === -1) {
+              cellDiv.classList.add('spw-cell-empty');
+            } else {
+              const p = photos[photoIdx];
+              const origin = ci < cols / 2 ? 'right bottom' : 'left bottom';
+
+              cellDiv.innerHTML = `
+                <div class="spw-item" style="transform-origin: ${origin}; transform: scale(0);">
+                  <img src="${p.src}" alt="${p.name}" class="spw-img" loading="lazy" decoding="async" />
+                  <div class="spw-caption">
+                    <span class="spw-name">${p.name}</span>
+                    <span class="spw-role">${p.role}</span>
+                  </div>
+                </div>
+              `;
+            }
+            rowDiv.appendChild(cellDiv);
+          });
+
+          gridContainer.appendChild(rowDiv);
+        });
+
+        initAnimation();
+      }
+
+      function initAnimation() {
+        const hint = document.getElementById('spwHint');
+        const root = document.getElementById('portrait-wall');
+        const items = document.querySelectorAll('.spw-item');
+
+        if (window.gsap && window.ScrollTrigger) {
+          gsap.registerPlugin(ScrollTrigger);
+
+          if (hint && root) {
+            gsap.to(hint, {
+              autoAlpha: 0,
+              ease: "none",
+              scrollTrigger: {
+                trigger: root,
+                start: "top top",
+                end: "+=35%",
+                scrub: true,
+              },
+            });
+          }
+
+          items.forEach((el) => {
+            gsap.timeline({
+              scrollTrigger: {
+                trigger: el,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+              },
+            })
+            .fromTo(el, { scale: 0 }, { scale: 1, ease: "power2.out", duration: 0.5 })
+            .to(el, { scale: 0, ease: "power2.in", duration: 0.5 });
+          });
+        } else {
+          // Fallback con scroll nativo reactivo si GSAP tarda en cargar
+          function onNativeScroll() {
+            const vh = window.innerHeight;
+            if (hint && root) {
+              const rRect = root.getBoundingClientRect();
+              if (rRect.top < 0) {
+                const fade = Math.max(0, 1 + rRect.top / (vh * 0.4));
+                hint.style.opacity = fade;
+              } else {
+                hint.style.opacity = '1';
+              }
+            }
+
+            items.forEach((el) => {
+              const rect = el.getBoundingClientRect();
+              const center = rect.top + rect.height / 2;
+              const progress = center / vh;
+              // Pico en 0.5 (centro de pantalla)
+              const dist = Math.abs(progress - 0.5) * 2;
+              const scale = Math.max(0, Math.min(1, 1 - Math.pow(dist, 1.8)));
+              el.style.transform = `scale(${scale.toFixed(3)})`;
+            });
+          }
+
+          window.addEventListener('scroll', onNativeScroll, { passive: true });
+          onNativeScroll();
+        }
+      }
+
+      window.addEventListener('resize', () => {
+        renderGrid();
+      });
+
+      renderGrid();
+    })();
+
+  </script>
+</body>
+</html>
