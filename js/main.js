@@ -48,22 +48,37 @@
       if (!isOpen) item.classList.add('open');
     }
 
-    /* ── Contact form handler ── */
+    /* ── Contact form handler — Redirección inteligente a WhatsApp ── */
     function handleForm(e) {
       e.preventDefault();
-      const btn = e.target.querySelector('.form-submit');
-      btn.textContent = 'Enviando…';
+      const form = e.target;
+      const btn = form.querySelector('.form-submit');
+      const inputs = form.querySelectorAll('input, select, textarea');
+      const nombre = inputs[0] ? inputs[0].value.trim() : '';
+      const contacto = inputs[1] ? inputs[1].value.trim() : '';
+      const area = inputs[2] ? inputs[2].value : '';
+      const caso = inputs[3] ? inputs[3].value.trim() : '';
+
+      btn.textContent = 'Generando consulta…';
       btn.disabled = true;
+
+      const msg = `*SOLICITUD DE CONSULTA JURÍDICA*%0A%0A` +
+        `👤 *Nombre:* ${encodeURIComponent(nombre)}%0A` +
+        `📞 *Contacto:* ${encodeURIComponent(contacto)}%0A` +
+        `⚖️ *Materia:* ${encodeURIComponent(area || 'General')}%0A` +
+        `📝 *Breve descripción:* ${encodeURIComponent(caso || 'Deseo recibir asesoría inicial.')}`;
+
       setTimeout(() => {
-        btn.textContent = '✓ Solicitud enviada';
+        btn.textContent = '✓ Abriendo WhatsApp…';
         btn.style.background = 'linear-gradient(135deg, #4a7c59, #2d5a3d)';
+        window.open(`https://wa.me/525522604834?text=${msg}`, '_blank');
         setTimeout(() => {
           btn.textContent = 'Enviar Solicitud';
           btn.style.background = '';
           btn.disabled = false;
-          e.target.reset();
+          form.reset();
         }, 3200);
-      }, 1400);
+      }, 800);
     }
       /* ── Video-Carousel Cinemático Slider Logic ── */
     (function () {
