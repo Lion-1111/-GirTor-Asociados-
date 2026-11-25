@@ -27,7 +27,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 
-  <link rel="stylesheet" href="css/styles.css?v=19.0" />
+  <link rel="stylesheet" href="css/styles.css?v=20.0" />
 </head>
 <body>
 
@@ -353,18 +353,25 @@
   </section>
 
   <!-- ============================================================
-       #5. MISIÓN, VISIÓN Y VALORES
+       #5. MISIÓN, VISIÓN Y VALORES (PESTAÑAS INTERACTIVAS COMPACTAS)
   ============================================================ -->
   <section id="mision-vision-valores" class="mvv-band">
     <div class="container">
-      <div class="section-header-inline reveal">
+      <div class="section-header-inline reveal" style="margin-bottom: 10px;">
         <div>
           <span class="section-eyebrow">Pilares Institucionales</span>
           <h2 class="section-title-clean">Misión, visión y valores</h2>
         </div>
+        <a href="la-firma.html#mision-vision-valores" class="link-btn-clean">Ver detalle completo &rarr;</a>
       </div>
 
-      <div class="mv-cards-grid reveal reveal-delay-1">
+      <div class="editorial-tabs-nav" role="tablist" aria-label="Misión, visión y valores">
+        <button type="button" class="editorial-tab-btn active" role="tab" aria-selected="true" data-tab-target="tabMision">Misión</button>
+        <button type="button" class="editorial-tab-btn" role="tab" aria-selected="false" data-tab-target="tabVision">Visión</button>
+        <button type="button" class="editorial-tab-btn" role="tab" aria-selected="false" data-tab-target="tabValores">Valores (8)</button>
+      </div>
+
+      <div id="tabMision" class="editorial-tab-panel active" role="tabpanel">
         <article class="triad-card">
           <span class="section-eyebrow">01 · Propósito</span>
           <h3>Misión</h3>
@@ -372,7 +379,9 @@
             Brindar representación jurídica de alta precisión técnica y defensa estratégica, protegiendo con lealtad, confidencialidad y rigor procesal los derechos, la libertad, el patrimonio y los intereses legítimos de nuestros clientes ante autoridades administrativas y órganos jurisdiccionales.
           </p>
         </article>
+      </div>
 
+      <div id="tabVision" class="editorial-tab-panel" role="tabpanel">
         <article class="triad-card">
           <span class="section-eyebrow">02 · Proyección</span>
           <h3>Visión</h3>
@@ -382,8 +391,7 @@
         </article>
       </div>
 
-      <div class="reveal">
-        <span class="section-eyebrow" style="margin-bottom: 14px;">Valores Institucionales</span>
+      <div id="tabValores" class="editorial-tab-panel" role="tabpanel">
         <div class="values-cards-grid">
           <div class="value-item-card">
             <div class="value-item-title">Excelencia jurídica</div>
@@ -423,11 +431,11 @@
   </section>
 
   <!-- ============================================================
-       #6. METODOLOGÍA DE ATENCIÓN JURÍDICA
+       #6. METODOLOGÍA DE ATENCIÓN JURÍDICA (SELECTOR COMPACTO)
   ============================================================ -->
   <section id="metodologia" class="clean-steps-band">
     <div class="container">
-      <div class="section-header-inline reveal">
+      <div class="section-header-inline reveal" style="margin-bottom: 14px;">
         <div>
           <span class="section-eyebrow">Metodología de Trabajo</span>
           <h2 class="section-title-clean">Nuestra metodología de intervención</h2>
@@ -437,60 +445,96 @@
         </div>
       </div>
 
-      <div class="clean-steps-grid reveal reveal-delay-1">
-        <div class="clean-step-item">
-          <span class="clean-step-num">FASE 01</span>
-          <h3 class="clean-step-title">Consulta y evaluación inicial o asesoría jurídica</h3>
-          <p class="clean-step-desc">
-            La consulta jurídica inicial tiene un costo y comprende la exposición de los hechos, la revisión preliminar de la información disponible y la identificación de las posibles alternativas legales. Ese costo se le dará en el primer contacto con el especialista.
-          </p>
-          <p class="clean-step-desc">
-            En caso de que, después de la evaluación, el cliente contrate los servicios profesionales de la firma, el importe cubierto por la consulta podrá considerarse en la reestructuración del monto total de los honorarios, de acuerdo con la naturaleza, complejidad y alcances del asunto.
-          </p>
+      <div class="method-interactive-grid reveal reveal-delay-1">
+        <div class="method-tabs-col" role="tablist" aria-label="Fases de intervención">
+          <button type="button" class="method-step-btn active" data-method-target="methodPhase1">
+            <div>
+              <span class="method-step-btn-num">Fase 01</span>
+              <span class="method-step-btn-title">Consulta y evaluación inicial o asesoría jurídica</span>
+            </div>
+            <span class="method-step-arrow">&rarr;</span>
+          </button>
+
+          <button type="button" class="method-step-btn" data-method-target="methodPhase2">
+            <div>
+              <span class="method-step-btn-num">Fase 02</span>
+              <span class="method-step-btn-title">Integración y revisión del asunto</span>
+            </div>
+            <span class="method-step-arrow">&rarr;</span>
+          </button>
+
+          <button type="button" class="method-step-btn" data-method-target="methodPhase3">
+            <div>
+              <span class="method-step-btn-num">Fase 03</span>
+              <span class="method-step-btn-title">Diagnóstico y estrategia jurídica</span>
+            </div>
+            <span class="method-step-arrow">&rarr;</span>
+          </button>
+
+          <button type="button" class="method-step-btn" data-method-target="methodPhase4">
+            <div>
+              <span class="method-step-btn-num">Fase 04</span>
+              <span class="method-step-btn-title">Representación, ejecución y seguimiento</span>
+            </div>
+            <span class="method-step-arrow">&rarr;</span>
+          </button>
         </div>
 
-        <div class="clean-step-item">
-          <span class="clean-step-num">FASE 02</span>
-          <h3 class="clean-step-title">Integración y revisión del asunto</h3>
-          <p class="clean-step-desc">
-            Una vez recibida la información y documentación necesaria, el equipo jurídico realizará un análisis integral de los antecedentes, hechos, documentos, medios de prueba, riesgos, pretensiones y disposiciones legales aplicables.
-          </p>
-          <p class="clean-step-desc">
-            Esta fase permitirá identificar la situación jurídica del cliente, determinar la viabilidad de las acciones disponibles y establecer los elementos necesarios para formular una estrategia responsable.
-          </p>
-        </div>
+        <div class="method-detail-card">
+          <div id="methodPhase1" class="method-detail-panel active">
+            <span class="clean-step-num">FASE 01</span>
+            <h3 class="clean-step-title">Consulta y evaluación inicial o asesoría jurídica</h3>
+            <p class="clean-step-desc">
+              La consulta jurídica inicial tiene un costo y comprende la exposición de los hechos, la revisión preliminar de la información disponible y la identificación de las posibles alternativas legales. Ese costo se le dará en el primer contacto con el especialista.
+            </p>
+            <p class="clean-step-desc">
+              En caso de que, después de la evaluación, el cliente contrate los servicios profesionales de la firma, el importe cubierto por la consulta podrá considerarse en la reestructuración del monto total de los honorarios, de acuerdo con la naturaleza, complejidad y alcances del asunto.
+            </p>
+          </div>
 
-        <div class="clean-step-item">
-          <span class="clean-step-num">FASE 03</span>
-          <h3 class="clean-step-title">Diagnóstico y estrategia jurídica</h3>
-          <p class="clean-step-desc">
-            Concluido el análisis, se entregará al cliente una carta informe en la que se expondrán, de manera clara y estructurada:
-          </p>
-          <ul class="clean-step-list">
-            <li>Los antecedentes relevantes del asunto.</li>
-            <li>La situación jurídica identificada.</li>
-            <li>Las disposiciones legales aplicables.</li>
-            <li>Las alternativas de actuación.</li>
-            <li>Los riesgos jurídicos advertidos.</li>
-            <li>La estrategia recomendada.</li>
-            <li>Las etapas generales del procedimiento.</li>
-            <li>Los servicios profesionales requeridos.</li>
-            <li>La propuesta de honorarios correspondiente.</li>
-          </ul>
-          <p class="clean-step-desc">
-            El diagnóstico y la estrategia serán elaborados con base en la experiencia conjunta del equipo de abogados y especialistas de GirTor &amp; Asociados, S.A., atendiendo a la materia, complejidad y circunstancias particulares de cada caso.
-          </p>
-        </div>
+          <div id="methodPhase2" class="method-detail-panel">
+            <span class="clean-step-num">FASE 02</span>
+            <h3 class="clean-step-title">Integración y revisión del asunto</h3>
+            <p class="clean-step-desc">
+              Una vez recibida la información y documentación necesaria, el equipo jurídico realizará un análisis integral de los antecedentes, hechos, documentos, medios de prueba, riesgos, pretensiones y disposiciones legales aplicables.
+            </p>
+            <p class="clean-step-desc">
+              Esta fase permitirá identificar la situación jurídica del cliente, determinar la viabilidad de las acciones disponibles y establecer los elementos necesarios para formular una estrategia responsable.
+            </p>
+          </div>
 
-        <div class="clean-step-item">
-          <span class="clean-step-num">FASE 04</span>
-          <h3 class="clean-step-title">Representación, ejecución y seguimiento</h3>
-          <p class="clean-step-desc">
-            Una vez formalizada la contratación de los servicios profesionales, la firma implementará la estrategia jurídica acordada y dará seguimiento a las actuaciones, promociones, diligencias y etapas procesales correspondientes.
-          </p>
-          <p class="clean-step-desc">
-            El cliente recibirá información clara sobre los avances relevantes de su asunto, sin perjuicio de los tiempos, formalidades y determinaciones que correspondan a las autoridades competentes.
-          </p>
+          <div id="methodPhase3" class="method-detail-panel">
+            <span class="clean-step-num">FASE 03</span>
+            <h3 class="clean-step-title">Diagnóstico y estrategia jurídica</h3>
+            <p class="clean-step-desc">
+              Concluido el análisis, se entregará al cliente una carta informe en la que se expondrán, de manera clara y estructurada:
+            </p>
+            <ul class="clean-step-list">
+              <li>Los antecedentes relevantes del asunto.</li>
+              <li>La situación jurídica identificada.</li>
+              <li>Las disposiciones legales aplicables.</li>
+              <li>Las alternativas de actuación.</li>
+              <li>Los riesgos jurídicos advertidos.</li>
+              <li>La estrategia recomendada.</li>
+              <li>Las etapas generales del procedimiento.</li>
+              <li>Los servicios profesionales requeridos.</li>
+              <li>La propuesta de honorarios correspondiente.</li>
+            </ul>
+            <p class="clean-step-desc">
+              El diagnóstico y la estrategia serán elaborados con base en la experiencia conjunta del equipo de abogados y especialistas de GirTor &amp; Asociados, S.A., atendiendo a la materia, complejidad y circunstancias particulares de cada caso.
+            </p>
+          </div>
+
+          <div id="methodPhase4" class="method-detail-panel">
+            <span class="clean-step-num">FASE 04</span>
+            <h3 class="clean-step-title">Representación, ejecución y seguimiento</h3>
+            <p class="clean-step-desc">
+              Una vez formalizada la contratación de los servicios profesionales, la firma implementará la estrategia jurídica acordada y dará seguimiento a las actuaciones, promociones, diligencias y etapas procesales correspondientes.
+            </p>
+            <p class="clean-step-desc">
+              El cliente recibirá información clara sobre los avances relevantes de su asunto, sin perjuicio de los tiempos, formalidades y determinaciones que correspondan a las autoridades competentes.
+            </p>
+          </div>
         </div>
       </div>
 
@@ -922,6 +966,6 @@
     </button>
   </div>
 
-  <script src="js/main.js?v=19.0" defer></script>
+  <script src="js/main.js?v=20.0" defer></script>
 </body>
 </html>

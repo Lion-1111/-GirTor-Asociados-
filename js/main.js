@@ -259,11 +259,7 @@ window.handleForm = handleForm;
     { name: 'Espacios de Análisis', role: 'Atención Personalizada', src: 'assets/fto3.jpeg' },
     { name: 'Oficinas Corporativas', role: 'Santa Fe, Ciudad de México', src: 'assets/fto4.jpeg' },
     { name: 'Consultoría Especializada', role: 'Rigor Técnico', src: 'assets/fto5.jpeg' },
-    { name: 'Alcance Nacional', role: 'República Mexicana', src: 'assets/fto6.jpeg' },
-    { name: 'GirTor & Asociados, S.A.', role: 'Confidencialidad y Ética', src: 'assets/fto1.jpeg' },
-    { name: 'Análisis Integral', role: 'Evaluación Jurídica', src: 'assets/fto.2.jpeg' },
-    { name: 'Representación Legal', role: 'Visión Estratégica', src: 'assets/fto3.jpeg' },
-    { name: 'Compromiso Profesional', role: 'Amparos y Litigio', src: 'assets/fto4.jpeg' }
+    { name: 'Alcance Nacional', role: 'República Mexicana', src: 'assets/fto6.jpeg' }
   ];
 
   const gridContainer = document.getElementById('spwGrid');
@@ -390,4 +386,41 @@ window.handleForm = handleForm;
 
   window.addEventListener('resize', renderGrid);
   renderGrid();
+})();
+
+/* ── Pestañas Interactivas (Misión, Visión y Valores) & Selector de Metodología ── */
+(function () {
+  const tabBtns = document.querySelectorAll('[data-tab-target]');
+  const tabPanels = document.querySelectorAll('.editorial-tab-panel');
+  if (tabBtns.length && tabPanels.length) {
+    tabBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-tab-target');
+        tabBtns.forEach((b) => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        tabPanels.forEach((p) => p.classList.remove('active'));
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        const target = document.getElementById(targetId);
+        if (target) target.classList.add('active');
+      });
+    });
+  }
+
+  const methodBtns = document.querySelectorAll('[data-method-target]');
+  const methodPanels = document.querySelectorAll('.method-detail-panel');
+  if (methodBtns.length && methodPanels.length) {
+    methodBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-method-target');
+        methodBtns.forEach((b) => b.classList.remove('active'));
+        methodPanels.forEach((p) => p.classList.remove('active'));
+        btn.classList.add('active');
+        const target = document.getElementById(targetId);
+        if (target) target.classList.add('active');
+      });
+    });
+  }
 })();
