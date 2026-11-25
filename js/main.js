@@ -1,327 +1,370 @@
-/* ── Splash logic ── */
-    (function () {
-      const splash  = document.getElementById('splash');
-      const relief  = document.getElementById('logo-relief');
-      const sheen   = document.getElementById('logo-sheen');
-      
+/* =====================================================
+   GIRTOR & ASOCIADOS — INTERACTIVIDAD MULTI-PÁGINA
+===================================================== */
 
-      function hideSplash () {
-        splash.classList.add('hide');
-        const waFloat = document.getElementById('wa-float');
-        if (waFloat) waFloat.classList.add('show');
-        setTimeout(() => { splash.style.display = 'none'; }, 1100);
-      }
+/* ── Splash Intro Screen (Animación original GR + retardo exacto + muestra hero al salir) ── */
+(function () {
+  const splash = document.getElementById('splash');
+  const sheen = document.getElementById('logo-sheen');
+  const waFloat = document.getElementById('wa-float');
+  const hero = document.getElementById('hero');
 
-      
-      /* 2 — sheen sweep */
-      setTimeout(() => { sheen.classList.add('sheen-go'); }, 3200);
-      /* 3 — auto-dismiss */
-      setTimeout(hideSplash, 5200);
-      /* click to skip */
-      splash.addEventListener('click', hideSplash);
-    })();
+  function showWaButton() {
+    if (waFloat) waFloat.classList.add('show');
+  }
 
-    /* ── Navbar scroll ── */
-    (function () {
-      const nav = document.getElementById('nav');
-      window.addEventListener('scroll', () => {
-        nav.classList.toggle('scrolled', window.scrollY > 60);
-      }, { passive: true });
-    })();
+  function revealHero() {
+    if (hero) hero.classList.add('hero-ready');
+  }
 
-    /* ── Scroll-reveal ── */
-    (function () {
-      const els = document.querySelectorAll('.reveal');
-      const io  = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); } });
-      }, { threshold: 0.12 });
-      els.forEach(el => io.observe(el));
-    })();
+  if (!splash) {
+    // En páginas internas, WhatsApp visible de inmediato
+    showWaButton();
+    revealHero();
+    return;
+  }
 
-    /* ── Accordion ── */
-    function toggleAcc(trigger) {
-      const item = trigger.closest('.acc-item');
-      const isOpen = item.classList.contains('open');
-      // Close all
-      document.querySelectorAll('.acc-item.open').forEach(el => el.classList.remove('open'));
-      // Open clicked if it was closed
-      if (!isOpen) item.classList.add('open');
+  function hideSplash() {
+    splash.classList.add('hide');
+    showWaButton();
+    revealHero();
+    setTimeout(() => {
+      splash.style.display = 'none';
+    }, 1100);
+  }
+
+  // Solo omitir splash si el enlace apunta directamente a una sección inferior (no #hero)
+  const hash = window.location.hash;
+  if (hash && hash.length > 1 && hash !== '#hero') {
+    splash.style.display = 'none';
+    showWaButton();
+    revealHero();
+    return;
+  }
+
+  if (sheen) {
+    setTimeout(() => { sheen.classList.add('sheen-go'); }, 3200);
+  }
+  setTimeout(hideSplash, 5200);
+  splash.addEventListener('click', hideSplash);
+})();
+
+/* ── Navbar Scroll & Mobile Hamburger Drawer (Estilo Mijares) ── */
+(function () {
+  const nav = document.getElementById('nav');
+  const hamburger = document.getElementById('navHamburger');
+  const drawer = document.getElementById('mobileDrawer');
+  const practiceToggle = document.getElementById('drawerPracticeToggle');
+  const drawerAccordion = document.getElementById('drawerAccordion');
+
+  if (nav && !nav.classList.contains('nav-solid')) {
+    const toggleScroll = () => nav.classList.toggle('scrolled', window.scrollY > 50);
+    window.addEventListener('scroll', toggleScroll, { passive: true });
+    toggleScroll();
+  }
+
+  function openDrawer() {
+    if (!drawer) return;
+    drawer.classList.add('active');
+    if (hamburger) {
+      hamburger.classList.add('active');
+      hamburger.setAttribute('aria-expanded', 'true');
     }
+    drawer.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('menu-open');
+  }
 
-    /* ── Contact form handler — Redirección inteligente a WhatsApp ── */
-    function handleForm(e) {
+  function closeDrawer() {
+    if (!drawer) return;
+    drawer.classList.remove('active');
+    if (hamburger) {
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
+    drawer.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('menu-open');
+    if (drawerAccordion) {
+      drawerAccordion.classList.remove('open');
+      if (practiceToggle) practiceToggle.setAttribute('aria-expanded', 'false');
+    }
+  }
+
+  if (hamburger && drawer) {
+    hamburger.addEventListener('click', () => {
+      drawer.classList.contains('active') ? closeDrawer() : openDrawer();
+    });
+  }
+
+  // Acordeón de Áreas de Práctica en el Menú Móvil
+  if (practiceToggle && drawerAccordion) {
+    practiceToggle.addEventListener('click', (e) => {
       e.preventDefault();
-      const form = e.target;
-      const btn = form.querySelector('.form-submit');
-      const inputs = form.querySelectorAll('input, select, textarea');
-      const nombre = inputs[0] ? inputs[0].value.trim() : '';
-      const contacto = inputs[1] ? inputs[1].value.trim() : '';
-      const area = inputs[2] ? inputs[2].value : '';
-      const caso = inputs[3] ? inputs[3].value.trim() : '';
+      const isOpen = drawerAccordion.classList.toggle('open');
+      practiceToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  }
 
-      btn.textContent = 'Generando consulta…';
-      btn.disabled = true;
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeDrawer();
+  });
 
-      const msg = `*SOLICITUD DE CONSULTA JURÍDICA*%0A%0A` +
-        `👤 *Nombre:* ${encodeURIComponent(nombre)}%0A` +
-        `📞 *Contacto:* ${encodeURIComponent(contacto)}%0A` +
-        `⚖️ *Materia:* ${encodeURIComponent(area || 'General')}%0A` +
-        `📝 *Breve descripción:* ${encodeURIComponent(caso || 'Deseo recibir asesoría inicial.')}`;
+  window.closeDrawer = closeDrawer;
+  window.openDrawer = openDrawer;
+})();
 
-      setTimeout(() => {
-        btn.textContent = '✓ Abriendo WhatsApp…';
-        btn.style.background = 'linear-gradient(135deg, #4a7c59, #2d5a3d)';
-        window.open(`https://wa.me/525522604834?text=${msg}`, '_blank');
-        setTimeout(() => {
-          btn.textContent = 'Enviar Solicitud';
-          btn.style.background = '';
-          btn.disabled = false;
-          form.reset();
-        }, 3200);
-      }, 800);
+/* ── Scroll Reveal ── */
+(function () {
+  const els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+
+  if (!('IntersectionObserver' in window)) {
+    els.forEach((el) => el.classList.add('in-view'));
+    return;
+  }
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.08 }
+  );
+
+  els.forEach((el) => io.observe(el));
+})();
+
+/* ── Pre-seleccionar materia en contacto.html si viene por URL (?area=Penal) ── */
+(function () {
+  const select = document.getElementById('formArea');
+  if (!select) return;
+  const params = new URLSearchParams(window.location.search);
+  const area = params.get('area');
+  if (area) {
+    select.value = area;
+  }
+})();
+
+/* ── Selector Flotante de 3 Líneas WhatsApp ── */
+(function () {
+  const waFloat = document.getElementById('wa-float');
+  if (!waFloat) return;
+  const triggerBtn = waFloat.querySelector('.wa-float-btn');
+  const triggerLabel = waFloat.querySelector('.wa-float-label');
+
+  function toggleWaMenu(e) {
+    if (e) e.preventDefault();
+    waFloat.classList.toggle('menu-active');
+  }
+
+  if (triggerBtn) triggerBtn.addEventListener('click', toggleWaMenu);
+  if (triggerLabel) triggerLabel.addEventListener('click', toggleWaMenu);
+
+  document.addEventListener('click', (e) => {
+    if (!waFloat.contains(e.target)) {
+      waFloat.classList.remove('menu-active');
     }
-      /* ── Video-Carousel Cinemático Slider Logic ── */
-    (function () {
-      const slides = document.querySelectorAll('.hero-slide');
-      if (!slides.length) return;
+  });
+})();
 
-      let currentIndex = 0;
-      const totalSlides = slides.length;
-      const slideDuration = 6000;
-      let isPaused = false;
+/* ── Formulario de Contacto -> Envío directo a la línea WhatsApp elegida ── */
+function handleForm(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn = form.querySelector('.form-submit');
+  const nombre = document.getElementById('formName')?.value.trim() || '';
+  const contacto = document.getElementById('formPhone')?.value.trim() || '';
+  const area = document.getElementById('formArea')?.value || 'General';
+  const targetPhone = document.getElementById('formTarget')?.value || '525616878494';
+  const caso = document.getElementById('formCase')?.value.trim() || '';
 
-      function updateSlide(index) {
-        currentIndex = (index + totalSlides) % totalSlides;
-        slides.forEach((slide, i) => {
-          slide.classList.toggle('active', i === currentIndex);
-        });
+  const originalText = btn.textContent;
+  btn.textContent = 'Generando solicitud…';
+  btn.disabled = true;
+
+  const msg =
+    `*SOLICITUD DE CONSULTA JURÍDICA*%0A%0A` +
+    `👤 *Nombre:* ${encodeURIComponent(nombre)}%0A` +
+    `📞 *Contacto:* ${encodeURIComponent(contacto)}%0A` +
+    `⚖️ *Materia:* ${encodeURIComponent(area)}%0A` +
+    `📝 *Síntesis:* ${encodeURIComponent(caso || 'Deseo recibir asesoría inicial.')}`;
+
+  setTimeout(() => {
+    btn.textContent = '✓ Abriendo WhatsApp…';
+    window.open(`https://wa.me/${targetPhone}?text=${msg}`, '_blank', 'noopener');
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.disabled = false;
+      form.reset();
+    }, 2800);
+  }, 600);
+}
+window.handleForm = handleForm;
+
+/* ── Hero Carousel ── */
+(function () {
+  const slides = document.querySelectorAll('.hero-slide');
+  if (slides.length < 2) return;
+
+  let currentIndex = 0;
+  let isPaused = false;
+
+  function updateSlide(index) {
+    currentIndex = (index + slides.length) % slides.length;
+    slides.forEach((slide, i) => slide.classList.toggle('active', i === currentIndex));
+  }
+
+  setInterval(() => {
+    if (!isPaused) updateSlide(currentIndex + 1);
+  }, 6000);
+
+  const hero = document.getElementById('hero');
+  if (hero) {
+    hero.addEventListener('mouseenter', () => { isPaused = true; });
+    hero.addEventListener('mouseleave', () => { isPaused = false; });
+  }
+})();
+
+/* ── ScrollPortraitWall Animation & Grid Generation ── */
+(function () {
+  const photos = [
+    { name: 'Lic. Girón Torres', role: 'Socio Director', src: 'assets/fto1.jpeg' },
+    { name: 'Defensa Corporativa', role: 'Litigio Estratégico', src: 'assets/fto.2.jpeg' },
+    { name: 'Representación Jurídica', role: 'Penal & Fiscal', src: 'assets/fto3.jpeg' },
+    { name: 'Sede Santa Fe', role: 'Torre I · CDMX', src: 'assets/fto4.jpeg' },
+    { name: 'Asesoría de Alto Nivel', role: 'Consultoría Especializada', src: 'assets/fto5.jpeg' },
+    { name: 'Consejo Legal', role: 'Tribunales & Cortes', src: 'assets/fto6.jpeg' },
+    { name: 'GirTor & Asociados', role: 'Atención Inmediata', src: 'assets/fto1.jpeg' },
+    { name: 'Firma Especializada', role: 'Lomas de Santa Fe', src: 'assets/fto.2.jpeg' },
+    { name: 'Defensa Estratégica', role: 'Resultados Precisos', src: 'assets/fto3.jpeg' },
+    { name: 'Litigio de Éxito', role: 'Amparos & Juicios', src: 'assets/fto4.jpeg' }
+  ];
+
+  const gridContainer = document.getElementById('spwGrid');
+  if (!gridContainer) return;
+
+  function getResponsiveColumns() {
+    const w = window.innerWidth;
+    if (w >= 1024) return 4;
+    if (w >= 640) return 3;
+    return 2;
+  }
+
+  function buildLayout(count, cols) {
+    const rows = [];
+    let i = 0;
+    let r = 0;
+    while (i < count) {
+      const row = new Array(cols).fill(-1);
+      const a = (r * 2 + (r % 2)) % cols;
+      row[a] = i++;
+      if (r % 3 === 0 && i < count) {
+        let b = (a + 2) % cols;
+        if (b === a) b = (a + 1) % cols;
+        row[b] = i++;
       }
+      rows.push(row);
+      r++;
+    }
+    return rows;
+  }
 
-      let interval = setInterval(() => {
-        if (!isPaused) updateSlide(currentIndex + 1);
-      }, slideDuration);
+  let currentCols = 0;
 
-      const hero = document.getElementById('hero');
-      if (hero) {
-        hero.addEventListener('mouseenter', () => { isPaused = true; });
-        hero.addEventListener('mouseleave', () => { isPaused = false; });
-        
-        let touchStartX = 0;
-        hero.addEventListener('touchstart', (e) => {
-          touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
+  function renderGrid() {
+    const cols = getResponsiveColumns();
+    if (cols === currentCols) return;
+    currentCols = cols;
 
-        hero.addEventListener('touchend', (e) => {
-          const touchEndX = e.changedTouches[0].screenX;
-          const diff = touchStartX - touchEndX;
-          if (Math.abs(diff) > 40) {
-            updateSlide(diff > 0 ? currentIndex + 1 : currentIndex - 1);
-          }
-        }, { passive: true });
-      }
-    })();
+    const layout = buildLayout(photos.length, cols);
+    gridContainer.innerHTML = '';
 
+    layout.forEach((rowIndices) => {
+      const rowDiv = document.createElement('div');
+      rowDiv.className = 'spw-row';
 
-    /* ── Contador Animado de Números (Empieza desde 0 hasta el final) ── */
-    (function () {
-      const counters = document.querySelectorAll('.counter');
-      if (!counters.length) return;
+      rowIndices.forEach((photoIdx, ci) => {
+        const cellDiv = document.createElement('div');
+        cellDiv.className = 'spw-cell';
 
-      let started = false;
-
-      function startCounters() {
-        counters.forEach(counter => {
-          const target = parseInt(counter.getAttribute('data-target'), 10);
-          const duration = 2200; // 2.2 segundos para subir suavemente
-          const startTime = performance.now();
-
-          function updateCounter(currentTime) {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            // Ease out quart para suavidad ejecutiva
-            const easeOut = 1 - Math.pow(1 - progress, 4);
-            const currentVal = Math.floor(easeOut * target);
-
-            counter.textContent = currentVal;
-
-            if (progress < 1) {
-              requestAnimationFrame(updateCounter);
-            } else {
-              counter.textContent = target;
-            }
-          }
-
-          requestAnimationFrame(updateCounter);
-        });
-      }
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && !started) {
-            started = true;
-            startCounters();
-          }
-        });
-      }, { threshold: 0.25 });
-
-      const statsSec = document.getElementById('stats-section');
-      if (statsSec) observer.observe(statsSec);
-    })();
-
-  
-    /* ── ScrollPortraitWall Animation & Grid Generation ── */
-    (function () {
-      const photos = [
-        { name: "Lic. Girón Torres", role: "Socio Director", src: "assets/fto1.jpeg" },
-        { name: "Defensa Corporativa", role: "Litigio Estratégico", src: "assets/fto.2.jpeg" },
-        { name: "Representación Jurídica", role: "Penal & Fiscal", src: "assets/fto3.jpeg" },
-        { name: "Sede Santa Fe", role: "Torre I · CDMX", src: "assets/fto4.jpeg" },
-        { name: "Asesoría de Alto Nivel", role: "Consultoría Especializada", src: "assets/fto5.jpeg" },
-        { name: "Consejo Legal", role: "Tribunales & Cortes", src: "assets/fto6.jpeg" },
-        { name: "GirTor & Asociados", role: "Atención Inmediata", src: "assets/fto1.jpeg" },
-        { name: "Firma Especializada", role: "Lomas de Santa Fe", src: "assets/fto.2.jpeg" },
-        { name: "Defensa Estratégica", role: "Resultados Precisos", src: "assets/fto3.jpeg" },
-        { name: "Litigio de Éxito", role: "Amparos & Juicios", src: "assets/fto4.jpeg" }
-      ];
-
-      const gridContainer = document.getElementById('spwGrid');
-      if (!gridContainer) return;
-
-      function getResponsiveColumns() {
-        const w = window.innerWidth;
-        if (w >= 1024) return 4;
-        if (w >= 640) return 3;
-        return 2;
-      }
-
-      function buildLayout(count, cols) {
-        const rows = [];
-        let i = 0;
-        let r = 0;
-        while (i < count) {
-          const row = new Array(cols).fill(-1);
-          const a = (r * 2 + (r % 2)) % cols;
-          row[a] = i++;
-          if (r % 3 === 0 && i < count) {
-            let b = (a + 2) % cols;
-            if (b === a) b = (a + 1) % cols;
-            row[b] = i++;
-          }
-          rows.push(row);
-          r++;
-        }
-        return rows;
-      }
-
-      let currentCols = 0;
-
-      function renderGrid() {
-        const cols = getResponsiveColumns();
-        if (cols === currentCols) return;
-        currentCols = cols;
-
-        const layout = buildLayout(photos.length, cols);
-        gridContainer.innerHTML = '';
-
-        layout.forEach((rowIndices, ri) => {
-          const rowDiv = document.createElement('div');
-          rowDiv.className = 'spw-row';
-
-          rowIndices.forEach((photoIdx, ci) => {
-            const cellDiv = document.createElement('div');
-            cellDiv.className = 'spw-cell';
-
-            if (photoIdx === -1) {
-              cellDiv.classList.add('spw-cell-empty');
-            } else {
-              const p = photos[photoIdx];
-              const origin = ci < cols / 2 ? 'right bottom' : 'left bottom';
-
-              cellDiv.innerHTML = `
-                <div class="spw-item" style="transform-origin: ${origin}; transform: scale(0);">
-                  <img src="${p.src}" alt="${p.name}" class="spw-img" loading="lazy" decoding="async" />
-                  <div class="spw-caption">
-                    <span class="spw-name">${p.name}</span>
-                    <span class="spw-role">${p.role}</span>
-                  </div>
-                </div>
-              `;
-            }
-            rowDiv.appendChild(cellDiv);
-          });
-
-          gridContainer.appendChild(rowDiv);
-        });
-
-        initAnimation();
-      }
-
-      function initAnimation() {
-        const hint = document.getElementById('spwHint');
-        const root = document.getElementById('portrait-wall');
-        const items = document.querySelectorAll('.spw-item');
-
-        if (window.gsap && window.ScrollTrigger) {
-          gsap.registerPlugin(ScrollTrigger);
-
-          if (hint && root) {
-            gsap.to(hint, {
-              autoAlpha: 0,
-              ease: "none",
-              scrollTrigger: {
-                trigger: root,
-                start: "top top",
-                end: "+=35%",
-                scrub: true,
-              },
-            });
-          }
-
-          items.forEach((el) => {
-            gsap.timeline({
-              scrollTrigger: {
-                trigger: el,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: true,
-              },
-            })
-            .fromTo(el, { scale: 0 }, { scale: 1, ease: "power2.out", duration: 0.5 })
-            .to(el, { scale: 0, ease: "power2.in", duration: 0.5 });
-          });
+        if (photoIdx === -1) {
+          cellDiv.classList.add('spw-cell-empty');
         } else {
-          // Fallback con scroll nativo reactivo si GSAP tarda en cargar
-          function onNativeScroll() {
-            const vh = window.innerHeight;
-            if (hint && root) {
-              const rRect = root.getBoundingClientRect();
-              if (rRect.top < 0) {
-                const fade = Math.max(0, 1 + rRect.top / (vh * 0.4));
-                hint.style.opacity = fade;
-              } else {
-                hint.style.opacity = '1';
-              }
-            }
+          const p = photos[photoIdx];
+          const origin = ci < cols / 2 ? 'right bottom' : 'left bottom';
 
-            items.forEach((el) => {
-              const rect = el.getBoundingClientRect();
-              const center = rect.top + rect.height / 2;
-              const progress = center / vh;
-              // Pico en 0.5 (centro de pantalla)
-              const dist = Math.abs(progress - 0.5) * 2;
-              const scale = Math.max(0, Math.min(1, 1 - Math.pow(dist, 1.8)));
-              el.style.transform = `scale(${scale.toFixed(3)})`;
-            });
-          }
-
-          window.addEventListener('scroll', onNativeScroll, { passive: true });
-          onNativeScroll();
+          cellDiv.innerHTML = `
+            <div class="spw-item" style="transform-origin: ${origin}; transform: scale(0);">
+              <img src="${p.src}" alt="${p.name}" class="spw-img" loading="lazy" decoding="async" />
+              <div class="spw-caption">
+                <span class="spw-name">${p.name}</span>
+                <span class="spw-role">${p.role}</span>
+              </div>
+            </div>
+          `;
         }
-      }
-
-      window.addEventListener('resize', () => {
-        renderGrid();
+        rowDiv.appendChild(cellDiv);
       });
 
-      renderGrid();
-    })();
+      gridContainer.appendChild(rowDiv);
+    });
+
+    initAnimation();
+  }
+
+  function initAnimation() {
+    const hint = document.getElementById('spwHint');
+    const root = document.getElementById('portrait-wall');
+    const items = document.querySelectorAll('.spw-item');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduce) {
+      items.forEach((el) => { el.style.transform = 'scale(1)'; });
+      return;
+    }
+
+    if (window.gsap && window.ScrollTrigger) {
+      gsap.registerPlugin(ScrollTrigger);
+
+      if (hint && root) {
+        gsap.to(hint, {
+          autoAlpha: 0,
+          ease: 'none',
+          scrollTrigger: { trigger: root, start: 'top top', end: '+=30%', scrub: true }
+        });
+      }
+
+      items.forEach((el) => {
+        gsap.timeline({
+          scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true }
+        })
+          .fromTo(el, { scale: 0 }, { scale: 1, ease: 'power2.out', duration: 0.5 })
+          .to(el, { scale: 0, ease: 'power2.in', duration: 0.5 });
+      });
+    } else {
+      function onNativeScroll() {
+        const vh = window.innerHeight;
+        if (hint && root) {
+          const rRect = root.getBoundingClientRect();
+          hint.style.opacity = rRect.top < 0 ? Math.max(0, 1 + rRect.top / (vh * 0.4)) : '1';
+        }
+        items.forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          const center = rect.top + rect.height / 2;
+          const progress = center / vh;
+          const dist = Math.abs(progress - 0.5) * 2;
+          const scale = Math.max(0, Math.min(1, 1 - Math.pow(dist, 1.8)));
+          el.style.transform = `scale(${scale.toFixed(3)})`;
+        });
+      }
+      window.addEventListener('scroll', onNativeScroll, { passive: true });
+      onNativeScroll();
+    }
+  }
+
+  window.addEventListener('resize', renderGrid);
+  renderGrid();
+})();
