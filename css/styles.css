@@ -808,7 +808,7 @@ body.menu-open #wa-float,
   inset: 0;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 1.3s ease, visibility 1.3s ease;
+  transition: opacity 0.95s ease, visibility 0.95s ease;
 }
 
 .hero-slide.active {
@@ -827,7 +827,7 @@ body.menu-open #wa-float,
 }
 
 .hero-slide.active .hero-slide-img {
-  animation: kenBurnsZoom 8.5s ease-out forwards;
+  animation: kenBurnsZoom 6s ease-out forwards;
 }
 
 @keyframes kenBurnsZoom {

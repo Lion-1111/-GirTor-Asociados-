@@ -242,7 +242,7 @@ window.handleForm = handleForm;
 
   setInterval(() => {
     if (!isPaused) updateSlide(currentIndex + 1);
-  }, 6000);
+  }, 4000);
 
   const hero = document.getElementById('hero');
   if (hero) {
