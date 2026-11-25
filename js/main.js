@@ -196,7 +196,7 @@ function handleForm(e) {
     `👤 *Nombre:* ${encodeURIComponent(nombre)}%0A` +
     `📞 *Contacto:* ${encodeURIComponent(contacto)}%0A` +
     `⚖️ *Materia:* ${encodeURIComponent(area)}%0A` +
-    `📝 *Síntesis:* ${encodeURIComponent(caso || 'Deseo recibir asesoría inicial.')}`;
+    `📝 *Síntesis:* ${encodeURIComponent(caso || 'Deseo solicitar atención jurídica.')}`;
 
   setTimeout(() => {
     btn.textContent = '✓ Abriendo WhatsApp…';
@@ -254,16 +254,16 @@ window.handleForm = handleForm;
 /* ── ScrollPortraitWall Animation & Grid Generation ── */
 (function () {
   const photos = [
-    { name: 'Lic. Girón Torres', role: 'Socio Director', src: 'assets/fto1.jpeg' },
-    { name: 'Defensa Corporativa', role: 'Litigio Estratégico', src: 'assets/fto.2.jpeg' },
-    { name: 'Representación Jurídica', role: 'Penal & Fiscal', src: 'assets/fto3.jpeg' },
-    { name: 'Sede Santa Fe', role: 'Torre I · CDMX', src: 'assets/fto4.jpeg' },
-    { name: 'Asesoría de Alto Nivel', role: 'Consultoría Especializada', src: 'assets/fto5.jpeg' },
-    { name: 'Consejo Legal', role: 'Tribunales & Cortes', src: 'assets/fto6.jpeg' },
-    { name: 'GirTor & Asociados', role: 'Atención Inmediata', src: 'assets/fto1.jpeg' },
-    { name: 'Firma Especializada', role: 'Lomas de Santa Fe', src: 'assets/fto.2.jpeg' },
-    { name: 'Defensa Estratégica', role: 'Resultados Precisos', src: 'assets/fto3.jpeg' },
-    { name: 'Litigio de Éxito', role: 'Amparos & Juicios', src: 'assets/fto4.jpeg' }
+    { name: 'Sala de Juntas', role: 'Santa Fe, Ciudad de México', src: 'assets/fto1.jpeg' },
+    { name: 'Defensa Corporativa', role: 'Estrategia Jurídica', src: 'assets/fto.2.jpeg' },
+    { name: 'Espacios de Análisis', role: 'Atención Personalizada', src: 'assets/fto3.jpeg' },
+    { name: 'Oficinas Corporativas', role: 'Santa Fe, Ciudad de México', src: 'assets/fto4.jpeg' },
+    { name: 'Consultoría Especializada', role: 'Rigor Técnico', src: 'assets/fto5.jpeg' },
+    { name: 'Alcance Nacional', role: 'República Mexicana', src: 'assets/fto6.jpeg' },
+    { name: 'GirTor & Asociados, S.A.', role: 'Confidencialidad y Ética', src: 'assets/fto1.jpeg' },
+    { name: 'Análisis Integral', role: 'Evaluación Jurídica', src: 'assets/fto.2.jpeg' },
+    { name: 'Representación Legal', role: 'Visión Estratégica', src: 'assets/fto3.jpeg' },
+    { name: 'Compromiso Profesional', role: 'Amparos y Litigio', src: 'assets/fto4.jpeg' }
   ];
 
   const gridContainer = document.getElementById('spwGrid');
