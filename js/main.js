@@ -316,7 +316,7 @@ window.handleForm = handleForm;
           const origin = ci < cols / 2 ? 'right bottom' : 'left bottom';
 
           cellDiv.innerHTML = `
-            <div class="spw-item" style="transform-origin: ${origin}; transform: scale(0);">
+            <div class="spw-item" style="transform-origin: ${origin}; transform: scale(0.8);">
               <img src="${p.src}" alt="${p.name}" class="spw-img" loading="lazy" decoding="async" />
               <div class="spw-caption">
                 <span class="spw-name">${p.name}</span>
@@ -360,22 +360,25 @@ window.handleForm = handleForm;
         gsap.timeline({
           scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true }
         })
-          .fromTo(el, { scale: 0 }, { scale: 1, ease: 'power2.out', duration: 0.5 })
-          .to(el, { scale: 0, ease: 'power2.in', duration: 0.5 });
+          .fromTo(el, { scale: 0.68, autoAlpha: 0.72 }, { scale: 1, autoAlpha: 1, ease: 'power2.out', duration: 0.5 })
+          .to(el, { scale: 0.68, autoAlpha: 0.72, ease: 'power2.in', duration: 0.5 });
       });
+
+      window.addEventListener('load', () => ScrollTrigger.refresh(), { once: true });
     } else {
       function onNativeScroll() {
         const vh = window.innerHeight;
         if (hint && root) {
           const rRect = root.getBoundingClientRect();
-          hint.style.opacity = rRect.top < 0 ? Math.max(0, 1 + rRect.top / (vh * 0.4)) : '1';
+          hint.style.opacity = rRect.top < 0 ? Math.max(0.2, 1 + rRect.top / (vh * 0.4)) : '1';
         }
         items.forEach((el) => {
           const rect = el.getBoundingClientRect();
           const center = rect.top + rect.height / 2;
           const progress = center / vh;
           const dist = Math.abs(progress - 0.5) * 2;
-          const scale = Math.max(0, Math.min(1, 1 - Math.pow(dist, 1.8)));
+          const factor = Math.max(0, Math.min(1, 1 - Math.pow(dist, 1.8)));
+          const scale = 0.68 + 0.32 * factor;
           el.style.transform = `scale(${scale.toFixed(3)})`;
         });
       }
