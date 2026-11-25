@@ -210,9 +210,13 @@ function handleForm(e) {
 }
 window.handleForm = handleForm;
 
-/* ── Hero Carousel (Carga diferida de diapositivas 2-4 para apertura instantánea) ── */
+/* ── Hero Carousel Sincronizado (4 Fotos + 4 Mensajes + 4 Barritas Interactivas) ── */
 (function () {
+  const hero = document.getElementById('hero');
   const slides = document.querySelectorAll('.hero-slide');
+  const syncItems = document.querySelectorAll('.hero-sync-item');
+  const bars = document.querySelectorAll('.hero-bar');
+  const counterEl = document.getElementById('heroSlideCounter');
   if (slides.length < 2) return;
 
   function hydrateDeferredSlides() {
@@ -233,22 +237,96 @@ window.handleForm = handleForm;
 
   let currentIndex = 0;
   let isPaused = false;
+  let timerId = null;
+  const INTERVAL_MS = 4000;
 
   function updateSlide(index) {
     hydrateDeferredSlides();
     currentIndex = (index + slides.length) % slides.length;
+
     slides.forEach((slide, i) => slide.classList.toggle('active', i === currentIndex));
+
+    syncItems.forEach((item, i) => {
+      item.classList.toggle('active', i === currentIndex);
+    });
+
+    bars.forEach((bar, i) => {
+      const isActive = i === currentIndex;
+      bar.classList.remove('active');
+      bar.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      if (isActive) {
+        void bar.offsetWidth;
+        bar.classList.add('active');
+      }
+    });
+
+    if (counterEl) {
+      counterEl.textContent = `0${currentIndex + 1} / 0${slides.length}`;
+    }
   }
 
-  setInterval(() => {
-    if (!isPaused) updateSlide(currentIndex + 1);
-  }, 4000);
+  function startTimer() {
+    clearInterval(timerId);
+    timerId = setInterval(() => {
+      if (!isPaused && (!hero || hero.classList.contains('hero-ready'))) {
+        updateSlide(currentIndex + 1);
+      }
+    }, INTERVAL_MS);
+  }
 
-  const hero = document.getElementById('hero');
+  bars.forEach((bar) => {
+    bar.addEventListener('click', () => {
+      const target = Number(bar.getAttribute('data-slide'));
+      if (!Number.isNaN(target)) {
+        updateSlide(target);
+        startTimer();
+      }
+    });
+  });
+
   if (hero) {
-    hero.addEventListener('mouseenter', () => { isPaused = true; });
-    hero.addEventListener('mouseleave', () => { isPaused = false; });
+    hero.addEventListener('mouseenter', () => {
+      isPaused = true;
+      hero.classList.add('hero-paused');
+    });
+    hero.addEventListener('mouseleave', () => {
+      isPaused = false;
+      hero.classList.remove('hero-paused');
+    });
+
+    // Deslizar (swipe) en móvil entre las 4 diapositivas
+    let touchStartX = 0;
+    let touchStartY = 0;
+    hero.addEventListener('touchstart', (e) => {
+      if (e.changedTouches && e.changedTouches.length) {
+        touchStartX = e.changedTouches[0].clientX;
+        touchStartY = e.changedTouches[0].clientY;
+      }
+    }, { passive: true });
+    hero.addEventListener('touchend', (e) => {
+      if (!e.changedTouches || !e.changedTouches.length) return;
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      const dy = e.changedTouches[0].clientY - touchStartY;
+      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+        updateSlide(dx < 0 ? currentIndex + 1 : currentIndex - 1);
+        startTimer();
+      }
+    }, { passive: true });
+
+    // Reinicia barra 01 cuando termina el splash y aparece el Hero
+    if (!hero.classList.contains('hero-ready') && 'MutationObserver' in window) {
+      const mo = new MutationObserver(() => {
+        if (hero.classList.contains('hero-ready')) {
+          updateSlide(0);
+          startTimer();
+          mo.disconnect();
+        }
+      });
+      mo.observe(hero, { attributes: true, attributeFilter: ['class'] });
+    }
   }
+
+  startTimer();
 })();
 
 /* ── ScrollPortraitWall Animation & Grid Generation ── */
@@ -391,7 +469,7 @@ window.handleForm = handleForm;
   renderGrid();
 })();
 
-/* ── Acordeón Metodología (21st.dev Smooth Grid), Spotlight Cards & Barra de Progreso ── */
+/* ── Acordeón Metodología & Barra de Progreso ── */
 (function () {
   // 1. Barra de progreso de lectura
   const progressEl = document.getElementById('scrollProgress');
@@ -406,18 +484,9 @@ window.handleForm = handleForm;
     updateProgress();
   }
 
-  // 2. Spotlight Cursor Tracking (21st.dev style)
-  document.querySelectorAll('.spotlight-card').forEach((card) => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      card.style.setProperty('--mx', `${e.clientX - rect.left}px`);
-      card.style.setProperty('--my', `${e.clientY - rect.top}px`);
-    });
-  });
-
-  // 3. Acordeón de Metodología (abre y cierra en su mismo lugar)
-  const accItems = document.querySelectorAll('.method-acc-item');
-  if (accItems.length) {
+  // 2. Acordeones independientes (Valores y Metodología)
+  document.querySelectorAll('.method-accordion').forEach((accordion) => {
+    const accItems = accordion.querySelectorAll('.method-acc-item');
     accItems.forEach((item) => {
       const trigger = item.querySelector('.method-acc-trigger');
       if (!trigger) return;
@@ -434,5 +503,5 @@ window.handleForm = handleForm;
         }
       });
     });
-  }
+  });
 })();

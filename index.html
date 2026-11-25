@@ -27,7 +27,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 
-  <link rel="stylesheet" href="css/styles.css?v=22.0" />
+  <link rel="stylesheet" href="css/styles.css?v=30.0" />
 </head>
 <body>
 
@@ -142,7 +142,7 @@
         </button>
         <div class="nav-dropdown">
           <a href="#quienes-somos"><span>Quiénes somos</span><span class="drop-tag">FIRMA</span></a>
-          <a href="la-firma.html#mision-vision-valores"><span>Misión, visión y valores</span><span class="drop-tag">PRINCIPIOS</span></a>
+          <a href="#mision-vision-valores"><span>Misión, visión y valores</span><span class="drop-tag">PRINCIPIOS</span></a>
           <a href="#socios-fundadores"><span>Socios fundadores</span><span class="drop-tag">DIRECCIÓN</span></a>
           <a href="la-firma.html"><span>Identidad institucional</span><span class="drop-tag">DETALLE</span></a>
         </div>
@@ -202,7 +202,13 @@
             <a href="contacto.html" class="drawer-link drawer-link--featured" onclick="closeDrawer()">CONTACTO</a>
           </li>
           <li class="drawer-menu-item">
+            <a href="la-firma.html" class="drawer-link" onclick="closeDrawer()">LA FIRMA</a>
+          </li>
+          <li class="drawer-menu-item">
             <a href="#quienes-somos" class="drawer-link" onclick="closeDrawer()">QUIÉNES SOMOS</a>
+          </li>
+          <li class="drawer-menu-item">
+            <a href="#mision-vision-valores" class="drawer-link" onclick="closeDrawer()">MISIÓN, VISIÓN Y VALORES</a>
           </li>
           <li class="drawer-menu-item">
             <a href="#socios-fundadores" class="drawer-link" onclick="closeDrawer()">SOCIOS FUNDADORES</a>
@@ -274,15 +280,22 @@
           Tu problema legal tiene solución.
           <span class="highlight-gold">Déjalo en nuestras manos.</span>
         </h1>
-        <p class="hero-subtitle-lead">
-          En GirTor &amp; Asociados, S.A. asumimos la defensa de tus derechos con rigor jurídico, visión estratégica y absoluta responsabilidad profesional.
-        </p>
-        <p class="hero-desc">
-          Cada asunto exige conocimiento, estrategia y una intervención jurídica correctamente estructurada. Nuestro equipo analiza integralmente cada caso para definir la ruta legal más adecuada y proteger, con firmeza y responsabilidad, los derechos e intereses de nuestros clientes.
-        </p>
-        <p class="hero-phrase-note">
-          Donde existe un derecho que proteger, debe existir una estrategia para defenderlo.
-        </p>
+
+        <div class="hero-sync-stage" aria-live="polite">
+          <p class="hero-sync-item hero-sync-item--lead active" data-slide="0">
+            En GirTor &amp; Asociados, S.A. asumimos la defensa de tus derechos con rigor jurídico, visión estratégica y absoluta responsabilidad profesional.
+          </p>
+          <p class="hero-sync-item" data-slide="1">
+            Cada asunto exige conocimiento, estrategia y una intervención jurídica correctamente estructurada.
+          </p>
+          <p class="hero-sync-item" data-slide="2">
+            Nuestro equipo analiza integralmente cada caso para definir la ruta legal más adecuada y proteger, con firmeza y responsabilidad, los derechos e intereses de nuestros clientes.
+          </p>
+          <p class="hero-sync-item hero-sync-item--quote" data-slide="3">
+            Donde existe un derecho que proteger, debe existir una estrategia para defenderlo.
+          </p>
+        </div>
+
         <div class="hero-cta-group">
           <a href="https://wa.me/525616878494?text=Hola,%20deseo%20solicitar%20atenci%C3%B3n%20jur%C3%ADdica%20con%20GirTor%20%26%20Asociados,%20S.A." target="_blank" rel="noopener" class="btn-gold-solid shimmer-gold-btn">
             <span>Solicitar atención jurídica</span>
@@ -318,7 +331,7 @@
   </section>
 
   <!-- ============================================================
-       #4. SECCIÓN "QUIÉNES SOMOS" (RESUMEN ORDENADO + ENLACE A LA FIRMA)
+       #4. SECCIÓN "QUIÉNES SOMOS" (TEXTO COMPLETO)
   ============================================================ -->
   <section id="quienes-somos" class="editorial-manifesto">
     <div class="container">
@@ -333,26 +346,234 @@
           <strong>GirTor &amp; Asociados, S.A.</strong> es una firma jurídica con oficinas corporativas en Santa Fe, Ciudad de México, y presencia profesional en el área metropolitana y en diversas entidades de la República Mexicana.
         </p>
         <p class="manifesto-copy">
-          Nuestra práctica se distingue por el análisis integral de cada asunto, la construcción de estrategias jurídicas personalizadas y la intervención coordinada de abogados y especialistas con rigor técnico, confidencialidad y responsabilidad.
+          Nuestra práctica se distingue por el análisis integral de cada asunto, la construcción de estrategias jurídicas personalizadas y la intervención coordinada de abogados y especialistas con experiencia en distintas áreas del derecho.
+        </p>
+        <p class="manifesto-copy">
+          Entendemos que detrás de cada conflicto jurídico existen derechos, patrimonio, libertad, estabilidad familiar o intereses empresariales que requieren una defensa seria y profesional. Por ello, cada asunto es atendido con rigor técnico, confidencialidad, responsabilidad y absoluta claridad respecto de sus alcances legales.
+        </p>
+        <p class="manifesto-copy">
+          Nuestra presencia en distintas regiones del país nos permite brindar asesoría, representación y defensa jurídica con una visión nacional, manteniendo una atención cercana y personalizada.
         </p>
 
         <div class="manifesto-location-badge">
           Oficinas corporativas en Santa Fe, Ciudad de México.
         </div>
 
-        <div class="pillars-teaser-grid">
-          <a href="la-firma.html#mision-vision-valores" class="pillar-teaser-card spotlight-card">
-            <div class="pillar-teaser-title">Misión y Visión &rarr;</div>
-            <p class="pillar-teaser-text">Representación jurídica con rigor procesal y cobertura estratégica a nivel nacional.</p>
-          </a>
-          <a href="la-firma.html#valores" class="pillar-teaser-card spotlight-card">
-            <div class="pillar-teaser-title">8 Valores Institucionales &rarr;</div>
-            <p class="pillar-teaser-text">Excelencia jurídica, ética profesional, lealtad, confidencialidad, transparencia y estrategia.</p>
-          </a>
-        </div>
-
-        <div style="margin-top: 22px;">
+        <div>
           <a href="la-firma.html" class="link-btn-clean">Conocer identidad completa en La Firma &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       #5. MISIÓN, VISIÓN Y VALORES (COMPLETO EN INICIO)
+  ============================================================ -->
+  <section id="mision-vision-valores" class="mvv-band">
+    <div class="container">
+      <div class="section-header-inline reveal">
+        <div>
+          <span class="section-eyebrow">Pilares del Despacho</span>
+          <h2 class="section-title-clean blur-reveal">Misión, visión y valores</h2>
+        </div>
+      </div>
+
+      <div class="mv-cards-grid reveal reveal-delay-1">
+        <article id="mision" class="triad-card">
+          <span class="section-eyebrow">01 · Propósito</span>
+          <h3>Misión</h3>
+          <p>
+            Brindar representación jurídica de alta precisión técnica y defensa estratégica, protegiendo con lealtad, confidencialidad y rigor procesal los derechos, la libertad, el patrimonio y los intereses legítimos de nuestros clientes ante autoridades administrativas y órganos jurisdiccionales.
+          </p>
+        </article>
+
+        <article id="vision" class="triad-card">
+          <span class="section-eyebrow">02 · Proyección</span>
+          <h3>Visión</h3>
+          <p>
+            Consolidarnos como una firma jurídica de referencia a nivel nacional desde nuestras oficinas corporativas en Santa Fe, Ciudad de México, distinguidos por la seriedad de nuestros diagnósticos, la claridad de nuestras estrategias y la atención personalizada en cada procedimiento.
+          </p>
+        </article>
+      </div>
+
+      <div id="valores" class="reveal">
+        <span class="section-eyebrow" style="margin-bottom: 14px;">Valores Institucionales</span>
+        <div class="method-accordion method-accordion--grid">
+          <div class="method-acc-item open">
+            <button type="button" class="method-acc-trigger" aria-expanded="true">
+              <div class="method-acc-head">
+                <span class="method-acc-num" aria-hidden="true">
+                  <!-- Estrella / distinción -->
+                  <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><polygon points="10,2 12.4,7.3 18,7.8 13.8,11.7 15.1,17.2 10,14.2 4.9,17.2 6.2,11.7 2,7.8 7.6,7.3"/></svg>
+                </span>
+                <span class="method-acc-title">Excelencia jurídica</span>
+              </div>
+              <span class="method-acc-icon" aria-hidden="true">
+                <svg viewBox="0 0 14 14" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 7 9 11 5"/></svg>
+              </span>
+            </button>
+            <div class="method-acc-body">
+              <div class="method-acc-inner">
+                <div class="method-acc-content">
+                  <p class="clean-step-desc">Cada asunto es estudiado con profundidad, rigor técnico y conocimiento especializado.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="method-acc-item">
+            <button type="button" class="method-acc-trigger" aria-expanded="false">
+              <div class="method-acc-head">
+                <span class="method-acc-num" aria-hidden="true">
+                  <!-- Balanza / ética -->
+                  <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="10" y1="3" x2="10" y2="17"/><line x1="4" y1="17" x2="16" y2="17"/><line x1="4" y1="8" x2="16" y2="8"/><path d="M4 8 L2 12 C2 13.7 3.3 15 5 15 C6.7 15 8 13.7 8 12 Z"/><path d="M16 8 L14 12 C14 13.7 15.3 15 17 15 C18.7 15 20 13.7 20 12 Z"/></svg>
+                </span>
+                <span class="method-acc-title">Ética profesional</span>
+              </div>
+              <span class="method-acc-icon" aria-hidden="true">
+                <svg viewBox="0 0 14 14" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 7 9 11 5"/></svg>
+              </span>
+            </button>
+            <div class="method-acc-body">
+              <div class="method-acc-inner">
+                <div class="method-acc-content">
+                  <p class="clean-step-desc">Nuestra actuación se sustenta en la legalidad, la honestidad y el respeto absoluto por los principios que rigen el ejercicio de la abogacía.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="method-acc-item">
+            <button type="button" class="method-acc-trigger" aria-expanded="false">
+              <div class="method-acc-head">
+                <span class="method-acc-num" aria-hidden="true">
+                  <!-- Apretón de manos / lealtad -->
+                  <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 11 L6 7 L9 10 L13 6 L18 11"/><path d="M6 7 C6 7 7 5 10 5 C13 5 14 6 14 6"/><path d="M2 11 L2 14 C2 14 5 17 10 17 C15 17 18 14 18 14 L18 11"/></svg>
+                </span>
+                <span class="method-acc-title">Lealtad</span>
+              </div>
+              <span class="method-acc-icon" aria-hidden="true">
+                <svg viewBox="0 0 14 14" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 7 9 11 5"/></svg>
+              </span>
+            </button>
+            <div class="method-acc-body">
+              <div class="method-acc-inner">
+                <div class="method-acc-content">
+                  <p class="clean-step-desc">Defendemos los intereses legítimos de nuestros clientes con firmeza, responsabilidad y compromiso profesional.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="method-acc-item">
+            <button type="button" class="method-acc-trigger" aria-expanded="false">
+              <div class="method-acc-head">
+                <span class="method-acc-num" aria-hidden="true">
+                  <!-- Candado / confidencialidad -->
+                  <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="9" width="12" height="9" rx="2"/><path d="M7 9 V6 C7 4.3 8.3 3 10 3 C11.7 3 13 4.3 13 6 V9"/><circle cx="10" cy="14" r="1.2" fill="currentColor" stroke="none"/></svg>
+                </span>
+                <span class="method-acc-title">Confidencialidad</span>
+              </div>
+              <span class="method-acc-icon" aria-hidden="true">
+                <svg viewBox="0 0 14 14" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 7 9 11 5"/></svg>
+              </span>
+            </button>
+            <div class="method-acc-body">
+              <div class="method-acc-inner">
+                <div class="method-acc-content">
+                  <p class="clean-step-desc">Protegemos estrictamente la información, documentación y circunstancias relacionadas con cada asunto.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="method-acc-item">
+            <button type="button" class="method-acc-trigger" aria-expanded="false">
+              <div class="method-acc-head">
+                <span class="method-acc-num" aria-hidden="true">
+                  <!-- Escudo / responsabilidad -->
+                  <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2 L17 5 L17 10 C17 14 13.5 17.5 10 18.5 C6.5 17.5 3 14 3 10 L3 5 Z"/><polyline points="7,10 9,12 13,8"/></svg>
+                </span>
+                <span class="method-acc-title">Responsabilidad</span>
+              </div>
+              <span class="method-acc-icon" aria-hidden="true">
+                <svg viewBox="0 0 14 14" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 7 9 11 5"/></svg>
+              </span>
+            </button>
+            <div class="method-acc-body">
+              <div class="method-acc-inner">
+                <div class="method-acc-content">
+                  <p class="clean-step-desc">Asumimos cada representación con seriedad, disciplina y plena conciencia de sus implicaciones jurídicas.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="method-acc-item">
+            <button type="button" class="method-acc-trigger" aria-expanded="false">
+              <div class="method-acc-head">
+                <span class="method-acc-num" aria-hidden="true">
+                  <!-- Ojo / transparencia -->
+                  <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10 C4.5 5 15.5 5 18 10 C15.5 15 4.5 15 2 10 Z"/><circle cx="10" cy="10" r="2.5"/></svg>
+                </span>
+                <span class="method-acc-title">Transparencia</span>
+              </div>
+              <span class="method-acc-icon" aria-hidden="true">
+                <svg viewBox="0 0 14 14" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 7 9 11 5"/></svg>
+              </span>
+            </button>
+            <div class="method-acc-body">
+              <div class="method-acc-inner">
+                <div class="method-acc-content">
+                  <p class="clean-step-desc">Informamos con claridad los alcances del servicio, la estrategia propuesta, los honorarios profesionales y las condiciones particulares de cada procedimiento.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="method-acc-item">
+            <button type="button" class="method-acc-trigger" aria-expanded="false">
+              <div class="method-acc-head">
+                <span class="method-acc-num" aria-hidden="true">
+                  <!-- Tablero de ajedrez / estrategia -->
+                  <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 L10 5 L17 17"/><line x1="6" y1="12" x2="14" y2="12"/></svg>
+                </span>
+                <span class="method-acc-title">Estrategia</span>
+              </div>
+              <span class="method-acc-icon" aria-hidden="true">
+                <svg viewBox="0 0 14 14" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 7 9 11 5"/></svg>
+              </span>
+            </button>
+            <div class="method-acc-body">
+              <div class="method-acc-inner">
+                <div class="method-acc-content">
+                  <p class="clean-step-desc">Cada acción jurídica responde a un análisis previo y a una ruta de intervención definida conforme a las circunstancias específicas del caso.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="method-acc-item">
+            <button type="button" class="method-acc-trigger" aria-expanded="false">
+              <div class="method-acc-head">
+                <span class="method-acc-num" aria-hidden="true">
+                  <!-- Persona / atención personalizada -->
+                  <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="6" r="3"/><path d="M4 18 C4 14.7 6.7 12 10 12 C13.3 12 16 14.7 16 18"/></svg>
+                </span>
+                <span class="method-acc-title">Atención personalizada</span>
+              </div>
+              <span class="method-acc-icon" aria-hidden="true">
+                <svg viewBox="0 0 14 14" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 7 9 11 5"/></svg>
+              </span>
+            </button>
+            <div class="method-acc-body">
+              <div class="method-acc-inner">
+                <div class="method-acc-content">
+                  <p class="clean-step-desc">Reconocemos que ningún asunto es idéntico a otro. Por ello, cada caso recibe una evaluación y una estrategia particularmente diseñadas.</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -648,36 +869,44 @@
         <div>
           <span class="section-eyebrow">Canales de Atención Directa</span>
           <div class="clean-wa-list">
-            <a href="https://wa.me/525616878494?text=Hola,%20deseo%20solicitar%20atenci%C3%B3n%20jur%C3%ADdica%20corporativa%20con%20GirTor%20%26%20Asociados,%20S.A." target="_blank" rel="noopener" class="clean-wa-row spotlight-card">
-              <div>
-                <span class="clean-wa-row-title">01 · Oficina Corporativa</span>
+            <a href="https://wa.me/525616878494?text=Hola,%20deseo%20solicitar%20atenci%C3%B3n%20jur%C3%ADdica%20corporativa%20con%20GirTor%20%26%20Asociados,%20S.A." target="_blank" rel="noopener" class="clean-wa-row">
+              <span class="clean-wa-index" aria-hidden="true">01</span>
+              <div class="clean-wa-body">
+                <span class="clean-wa-row-title">Oficina Corporativa</span>
                 <span class="clean-wa-row-num">Contactar por WhatsApp</span>
+                <span class="clean-wa-row-sub">Recepción y canalización jurídica general</span>
               </div>
-              <span class="clean-wa-row-arrow">Enviar mensaje &rarr;</span>
+              <span class="clean-wa-row-arrow">WhatsApp &rarr;</span>
             </a>
 
-            <a href="https://wa.me/528261163940?text=Hola,%20solicito%20atenci%C3%B3n%20jur%C3%ADdica%20directa%20con%20la%20Socia%20Fundadora%20de%20GirTor%20%26%20Asociados,%20S.A." target="_blank" rel="noopener" class="clean-wa-row spotlight-card">
-              <div>
-                <span class="clean-wa-row-title">02 · Socia Fundadora · Ángeles C H Torres</span>
+            <a href="https://wa.me/528261163940?text=Hola,%20solicito%20atenci%C3%B3n%20jur%C3%ADdica%20directa%20con%20la%20Socia%20Fundadora%20de%20GirTor%20%26%20Asociados,%20S.A." target="_blank" rel="noopener" class="clean-wa-row">
+              <span class="clean-wa-index" aria-hidden="true">02</span>
+              <div class="clean-wa-body">
+                <span class="clean-wa-row-title">Socia Fundadora · Ángeles C H Torres</span>
                 <span class="clean-wa-row-num">Solicitar atención jurídica</span>
+                <span class="clean-wa-row-sub">Atención directa por WhatsApp</span>
               </div>
-              <span class="clean-wa-row-arrow">Enviar mensaje &rarr;</span>
+              <span class="clean-wa-row-arrow">WhatsApp &rarr;</span>
             </a>
 
-            <a href="https://wa.me/525522604834?text=Hola,%20solicito%20atenci%C3%B3n%20jur%C3%ADdica%20directa%20con%20el%20Socio%20Fundador%20de%20GirTor%20%26%20Asociados,%20S.A." target="_blank" rel="noopener" class="clean-wa-row spotlight-card">
-              <div>
-                <span class="clean-wa-row-title">03 · Socio Fundador · Rubén M. Girón G (Guardia Penal 24/7)</span>
+            <a href="https://wa.me/525522604834?text=Hola,%20solicito%20atenci%C3%B3n%20jur%C3%ADdica%20directa%20con%20el%20Socio%20Fundador%20de%20GirTor%20%26%20Asociados,%20S.A." target="_blank" rel="noopener" class="clean-wa-row">
+              <span class="clean-wa-index" aria-hidden="true">03</span>
+              <div class="clean-wa-body">
+                <span class="clean-wa-row-title">Socio Fundador · Rubén M. Girón G</span>
                 <span class="clean-wa-row-num">Solicitar atención jurídica</span>
+                <span class="clean-wa-row-sub">Atención estratégica y Guardia Penal 24/7 por WhatsApp</span>
               </div>
-              <span class="clean-wa-row-arrow">Enviar mensaje &rarr;</span>
+              <span class="clean-wa-row-arrow">WhatsApp &rarr;</span>
             </a>
 
-            <a href="tel:+525580008384" class="clean-wa-row spotlight-card">
-              <div>
-                <span class="clean-wa-row-title">04 · Vía Telefónica Directa</span>
+            <a href="tel:+525580008384" class="clean-wa-row clean-wa-row--phone">
+              <span class="clean-wa-index" aria-hidden="true">04</span>
+              <div class="clean-wa-body">
+                <span class="clean-wa-row-title">Vía Telefónica Directa</span>
                 <span class="clean-wa-row-num">Llamar a Oficina Corporativa</span>
+                <span class="clean-wa-row-sub">Enlace directo a línea de oficina</span>
               </div>
-              <span class="clean-wa-row-arrow">Llamar ahora &rarr;</span>
+              <span class="clean-wa-row-arrow">Llamar &rarr;</span>
             </a>
           </div>
         </div>
@@ -827,7 +1056,7 @@
           <div class="footer-col-title">La Firma</div>
           <ul class="footer-col-links">
             <li><a href="#quienes-somos">Quiénes somos</a></li>
-            <li><a href="la-firma.html#mision-vision-valores">Misión, visión y valores</a></li>
+            <li><a href="#mision-vision-valores">Misión, visión y valores</a></li>
             <li><a href="#metodologia">Metodología de intervención</a></li>
             <li><a href="#socios-fundadores">Socios fundadores</a></li>
             <li><a href="la-firma.html">Identidad institucional</a></li>
@@ -904,6 +1133,6 @@
     </button>
   </div>
 
-  <script src="js/main.js?v=22.0" defer></script>
+  <script src="js/main.js?v=30.0" defer></script>
 </body>
 </html>
