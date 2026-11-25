@@ -1108,9 +1108,47 @@ body.menu-open #wa-float,
   color: var(--gold-light);
 }
 
+/* ── Animaciones Modernas Limpias (Cero Neón) ── */
+.reveal.in-view .manifesto-headline {
+  animation: fade-up 0.7s var(--ease) 0.04s both;
+}
+.reveal.in-view .manifesto-sub {
+  animation: fade-up 0.7s var(--ease) 0.16s both;
+}
+.reveal.in-view .manifesto-copy {
+  animation: fade-up 0.7s var(--ease) 0.26s both;
+}
+
+.obsidian-arrow-list li {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+
+.reveal.in-view .obsidian-arrow-list li {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal.in-view .obsidian-arrow-list li:nth-child(1) { transition-delay: 0.05s; }
+.reveal.in-view .obsidian-arrow-list li:nth-child(2) { transition-delay: 0.11s; }
+.reveal.in-view .obsidian-arrow-list li:nth-child(3) { transition-delay: 0.17s; }
+.reveal.in-view .obsidian-arrow-list li:nth-child(4) { transition-delay: 0.23s; }
+.reveal.in-view .obsidian-arrow-list li:nth-child(5) { transition-delay: 0.29s; }
+.reveal.in-view .obsidian-arrow-list li:nth-child(6) { transition-delay: 0.35s; }
+
 .obsidian-arrow-list li a:hover {
   color: var(--gold-light);
   padding-left: 8px;
+}
+
+.obsidian-arrow-list li a span.arrow-mark {
+  display: inline-block;
+  transition: transform 0.22s ease;
+}
+
+.obsidian-arrow-list li a:hover span.arrow-mark {
+  transform: translateX(4px);
 }
 
 .obsidian-area-main {
@@ -1128,7 +1166,7 @@ body.menu-open #wa-float,
   padding-left: 24px;
 }
 
-/* 4 Pasos Minimalistas (Sin Cajas Pesadas) */
+/* 4 Pasos Minimalistas con Línea Animada */
 .clean-steps-band {
   background: var(--bg-soft);
   padding: 68px 0;
@@ -1143,9 +1181,44 @@ body.menu-open #wa-float,
 }
 
 .clean-step-item {
-  border-top: 2px solid var(--gold-mid);
+  position: relative;
   padding-top: 18px;
+  border-top: 1px solid var(--border-light);
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
 }
+
+.clean-step-item::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--gold-mid);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.in-view .clean-step-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal.in-view .clean-step-item::before {
+  transform: scaleX(1);
+}
+
+.reveal.in-view .clean-step-item:nth-child(1) { transition-delay: 0.05s; }
+.reveal.in-view .clean-step-item:nth-child(1)::before { transition-delay: 0.1s; }
+.reveal.in-view .clean-step-item:nth-child(2) { transition-delay: 0.14s; }
+.reveal.in-view .clean-step-item:nth-child(2)::before { transition-delay: 0.2s; }
+.reveal.in-view .clean-step-item:nth-child(3) { transition-delay: 0.23s; }
+.reveal.in-view .clean-step-item:nth-child(3)::before { transition-delay: 0.3s; }
+.reveal.in-view .clean-step-item:nth-child(4) { transition-delay: 0.32s; }
+.reveal.in-view .clean-step-item:nth-child(4)::before { transition-delay: 0.4s; }
 
 .clean-step-num {
   display: inline-block;
@@ -1180,7 +1253,7 @@ body.menu-open #wa-float,
   .clean-steps-grid { grid-template-columns: 1fr; }
 }
 
-/* Sección Limpia de Contacto y Horarios (Sin ruido de cajas) */
+/* Sección Limpia de Contacto y Horarios (Separación clara en Móvil + Tarjetas Modernas) */
 .clean-contact-band {
   background: var(--bg-soft);
   padding: 72px 0;
@@ -1190,18 +1263,57 @@ body.menu-open #wa-float,
 .clean-contact-grid {
   display: grid;
   grid-template-columns: 1fr 1.15fr;
-  gap: 48px;
+  gap: 44px;
   align-items: start;
 }
 
 .clean-info-block {
-  padding-top: 18px;
-  border-top: 1px solid var(--border-light);
-  margin-bottom: 24px;
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  padding: 20px 22px;
+  margin-bottom: 14px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.clean-info-block:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
 }
 
 .clean-info-block:last-child {
   margin-bottom: 0;
+}
+
+.clean-info-block--penal {
+  background: #141518;
+  border: 1px solid rgba(166, 141, 91, 0.35);
+  border-left: 3px solid var(--gold-mid);
+  color: #ffffff;
+}
+
+.clean-info-block--penal .clean-info-label {
+  color: var(--gold-light);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.clean-info-block--penal .clean-info-value {
+  color: #ffffff;
+}
+
+.clean-info-block--penal .clean-info-sub {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.live-dot-gold {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold-light);
+  display: inline-block;
+  animation: pulseGreen 2s infinite ease-in-out;
 }
 
 .clean-info-label {
@@ -1209,7 +1321,7 @@ body.menu-open #wa-float,
   font-family: var(--font-heading);
   font-size: 10.5px;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--gold-dark);
   margin-bottom: 6px;
@@ -1231,31 +1343,51 @@ body.menu-open #wa-float,
 }
 
 .clean-wa-list {
-  border-top: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
 }
 
 .clean-wa-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 16px 0;
-  border-bottom: 1px solid var(--border-light);
-  transition: padding-left 0.2s ease;
+  gap: 14px;
+  padding: 16px 18px;
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-left: 3px solid var(--gold-mid);
+  border-radius: 4px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.45s var(--ease), transform 0.45s var(--ease), border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+.reveal.in-view .clean-wa-row {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal.in-view .clean-wa-row:nth-child(1) { transition-delay: 0.06s; }
+.reveal.in-view .clean-wa-row:nth-child(2) { transition-delay: 0.16s; }
+.reveal.in-view .clean-wa-row:nth-child(3) { transition-delay: 0.26s; }
+
 .clean-wa-row:hover {
-  padding-left: 6px;
+  border-color: var(--gold-dark);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
 }
 
 .clean-wa-row-title {
   font-family: var(--font-heading);
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--gold-dark);
   display: block;
+  margin-bottom: 2px;
 }
 
 .clean-wa-row-num {
@@ -1266,24 +1398,99 @@ body.menu-open #wa-float,
 }
 
 .clean-wa-row-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 14px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-light);
+  border-radius: 3px;
   font-family: var(--font-heading);
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-strong);
   white-space: nowrap;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
 .clean-wa-row:hover .clean-wa-row-arrow {
-  color: var(--gold-dark);
+  background: var(--ink-strong);
+  border-color: var(--ink-strong);
+  color: var(--gold-light);
+  transform: translateX(2px);
 }
 
 @media (max-width: 820px) {
   .editorial-manifesto { padding: 56px 0; }
   .obsidian-practice-band { padding: 56px 0; }
   .clean-contact-band { padding: 56px 0; }
-  .clean-contact-grid { grid-template-columns: 1fr; gap: 32px; }
+  .clean-contact-grid { grid-template-columns: 1fr; gap: 36px; }
+}
+
+@media (max-width: 480px) {
+  .clean-wa-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 16px;
+  }
+  .clean-wa-row-arrow {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Sección Inferior de Ubicación, Mapa y Formulario Simple en Inicio */
+.clean-bottom-band {
+  background: var(--bg-white);
+  padding: 68px 0;
+  border-top: 1px solid var(--border-light);
+}
+
+.clean-bottom-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 44px;
+  align-items: start;
+}
+
+.clean-map-card {
+  margin-top: 18px;
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--bg-soft);
+}
+
+.clean-map-card iframe {
+  width: 100%;
+  height: 310px;
+  border: 0;
+  display: block;
+}
+
+.clean-form-simple {
+  background: var(--bg-soft);
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  padding: 30px 28px;
+}
+
+.clean-form-simple h3 {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink-strong);
+  margin-bottom: 6px;
+}
+
+@media (max-width: 860px) {
+  .clean-bottom-band { padding: 52px 0; }
+  .clean-bottom-grid { grid-template-columns: 1fr; gap: 32px; }
+  .clean-map-card iframe { height: 260px; }
+  .clean-form-simple { padding: 24px 20px; }
 }
 
 /* Sección Inferior de Ubicación, Mapa y Formulario Simple en Inicio */
