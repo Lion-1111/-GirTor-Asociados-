@@ -27,7 +27,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 
-  <link rel="stylesheet" href="css/styles.css?v=21.0" />
+  <link rel="stylesheet" href="css/styles.css?v=22.0" />
 </head>
 <body>
 
@@ -142,7 +142,7 @@
         </button>
         <div class="nav-dropdown">
           <a href="#quienes-somos"><span>Quiénes somos</span><span class="drop-tag">FIRMA</span></a>
-          <a href="#mision-vision-valores"><span>Misión, visión y valores</span><span class="drop-tag">PRINCIPIOS</span></a>
+          <a href="la-firma.html#mision-vision-valores"><span>Misión, visión y valores</span><span class="drop-tag">PRINCIPIOS</span></a>
           <a href="#socios-fundadores"><span>Socios fundadores</span><span class="drop-tag">DIRECCIÓN</span></a>
           <a href="la-firma.html"><span>Identidad institucional</span><span class="drop-tag">DETALLE</span></a>
         </div>
@@ -178,6 +178,7 @@
       <span></span><span></span><span></span>
     </button>
   </nav>
+  <div id="scrollProgress" aria-hidden="true"></div>
 
   <!-- Menú Móvil Estilo Editorial -->
   <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
@@ -283,7 +284,7 @@
           Donde existe un derecho que proteger, debe existir una estrategia para defenderlo.
         </p>
         <div class="hero-cta-group">
-          <a href="https://wa.me/525616878494?text=Hola,%20deseo%20solicitar%20atenci%C3%B3n%20jur%C3%ADdica%20con%20GirTor%20%26%20Asociados,%20S.A." target="_blank" rel="noopener" class="btn-gold-solid">
+          <a href="https://wa.me/525616878494?text=Hola,%20deseo%20solicitar%20atenci%C3%B3n%20jur%C3%ADdica%20con%20GirTor%20%26%20Asociados,%20S.A." target="_blank" rel="noopener" class="btn-gold-solid shimmer-gold-btn">
             <span>Solicitar atención jurídica</span>
           </a>
           <a href="tel:+525580008384" class="btn-hero-outline">
@@ -301,7 +302,7 @@
   <section class="quote-featured-band" aria-label="Frase Institucional Destacada">
     <div class="container">
       <div class="quote-featured-inner reveal">
-        <blockquote class="quote-juarez-text">
+        <blockquote class="quote-juarez-text blur-reveal">
           “Entre los individuos, como entre las naciones, el respeto al derecho ajeno es la paz.”
         </blockquote>
         <cite class="quote-juarez-author" style="font-style: normal;">Benito Juárez</cite>
@@ -317,13 +318,13 @@
   </section>
 
   <!-- ============================================================
-       #4. SECCIÓN "QUIÉNES SOMOS"
+       #4. SECCIÓN "QUIÉNES SOMOS" (RESUMEN ORDENADO + ENLACE A LA FIRMA)
   ============================================================ -->
   <section id="quienes-somos" class="editorial-manifesto">
     <div class="container">
       <div class="manifesto-inner reveal">
         <span class="section-eyebrow">Identidad de la Firma</span>
-        <h2 class="manifesto-headline">Quiénes somos</h2>
+        <h2 class="manifesto-headline blur-reveal">Quiénes somos</h2>
         <p class="manifesto-sub">
           Experiencia jurídica, visión estratégica y compromiso profesional.
         </p>
@@ -332,208 +333,155 @@
           <strong>GirTor &amp; Asociados, S.A.</strong> es una firma jurídica con oficinas corporativas en Santa Fe, Ciudad de México, y presencia profesional en el área metropolitana y en diversas entidades de la República Mexicana.
         </p>
         <p class="manifesto-copy">
-          Nuestra práctica se distingue por el análisis integral de cada asunto, la construcción de estrategias jurídicas personalizadas y la intervención coordinada de abogados y especialistas con experiencia en distintas áreas del derecho.
-        </p>
-        <p class="manifesto-copy">
-          Entendemos que detrás de cada conflicto jurídico existen derechos, patrimonio, libertad, estabilidad familiar o intereses empresariales que requieren una defensa seria y profesional. Por ello, cada asunto es atendido con rigor técnico, confidencialidad, responsabilidad y absoluta claridad respecto de sus alcances legales.
-        </p>
-        <p class="manifesto-copy">
-          Nuestra presencia en distintas regiones del país nos permite brindar asesoría, representación y defensa jurídica con una visión nacional, manteniendo una atención cercana y personalizada.
+          Nuestra práctica se distingue por el análisis integral de cada asunto, la construcción de estrategias jurídicas personalizadas y la intervención coordinada de abogados y especialistas con rigor técnico, confidencialidad y responsabilidad.
         </p>
 
         <div class="manifesto-location-badge">
           Oficinas corporativas en Santa Fe, Ciudad de México.
         </div>
 
-        <div>
-          <a href="la-firma.html" class="link-btn-clean">Conocer más sobre la firma &rarr;</a>
+        <div class="pillars-teaser-grid">
+          <a href="la-firma.html#mision-vision-valores" class="pillar-teaser-card spotlight-card">
+            <div class="pillar-teaser-title">Misión y Visión &rarr;</div>
+            <p class="pillar-teaser-text">Representación jurídica con rigor procesal y cobertura estratégica a nivel nacional.</p>
+          </a>
+          <a href="la-firma.html#valores" class="pillar-teaser-card spotlight-card">
+            <div class="pillar-teaser-title">8 Valores Institucionales &rarr;</div>
+            <p class="pillar-teaser-text">Excelencia jurídica, ética profesional, lealtad, confidencialidad, transparencia y estrategia.</p>
+          </a>
+        </div>
+
+        <div style="margin-top: 22px;">
+          <a href="la-firma.html" class="link-btn-clean">Conocer identidad completa en La Firma &rarr;</a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ============================================================
-       #5. MISIÓN, VISIÓN Y VALORES (PESTAÑAS INTERACTIVAS COMPACTAS)
-  ============================================================ -->
-  <section id="mision-vision-valores" class="mvv-band">
-    <div class="container">
-      <div class="section-header-inline reveal" style="margin-bottom: 10px;">
-        <div>
-          <span class="section-eyebrow">Pilares Institucionales</span>
-          <h2 class="section-title-clean">Misión, visión y valores</h2>
-        </div>
-        <a href="la-firma.html#mision-vision-valores" class="link-btn-clean">Ver detalle completo &rarr;</a>
-      </div>
-
-      <div class="editorial-tabs-nav" role="tablist" aria-label="Misión, visión y valores">
-        <button type="button" class="editorial-tab-btn active" role="tab" aria-selected="true" data-tab-target="tabMision">Misión</button>
-        <button type="button" class="editorial-tab-btn" role="tab" aria-selected="false" data-tab-target="tabVision">Visión</button>
-        <button type="button" class="editorial-tab-btn" role="tab" aria-selected="false" data-tab-target="tabValores">Valores (8)</button>
-      </div>
-
-      <div id="tabMision" class="editorial-tab-panel active" role="tabpanel">
-        <article class="triad-card">
-          <span class="section-eyebrow">01 · Propósito</span>
-          <h3>Misión</h3>
-          <p>
-            Brindar representación jurídica de alta precisión técnica y defensa estratégica, protegiendo con lealtad, confidencialidad y rigor procesal los derechos, la libertad, el patrimonio y los intereses legítimos de nuestros clientes ante autoridades administrativas y órganos jurisdiccionales.
-          </p>
-        </article>
-      </div>
-
-      <div id="tabVision" class="editorial-tab-panel" role="tabpanel">
-        <article class="triad-card">
-          <span class="section-eyebrow">02 · Proyección</span>
-          <h3>Visión</h3>
-          <p>
-            Consolidarnos como una firma jurídica de referencia a nivel nacional desde nuestras oficinas corporativas en Santa Fe, Ciudad de México, distinguidos por la seriedad de nuestros diagnósticos, la claridad de nuestras estrategias y la atención personalizada en cada procedimiento.
-          </p>
-        </article>
-      </div>
-
-      <div id="tabValores" class="editorial-tab-panel" role="tabpanel">
-        <div class="values-cards-grid">
-          <div class="value-item-card">
-            <div class="value-item-title">Excelencia jurídica</div>
-            <p class="value-item-desc">Cada asunto es estudiado con profundidad, rigor técnico y conocimiento especializado.</p>
-          </div>
-          <div class="value-item-card">
-            <div class="value-item-title">Ética profesional</div>
-            <p class="value-item-desc">Nuestra actuación se sustenta en la legalidad, la honestidad y el respeto absoluto por los principios que rigen el ejercicio de la abogacía.</p>
-          </div>
-          <div class="value-item-card">
-            <div class="value-item-title">Lealtad</div>
-            <p class="value-item-desc">Defendemos los intereses legítimos de nuestros clientes con firmeza, responsabilidad y compromiso profesional.</p>
-          </div>
-          <div class="value-item-card">
-            <div class="value-item-title">Confidencialidad</div>
-            <p class="value-item-desc">Protegemos estrictamente la información, documentación y circunstancias relacionadas con cada asunto.</p>
-          </div>
-          <div class="value-item-card">
-            <div class="value-item-title">Responsabilidad</div>
-            <p class="value-item-desc">Asumimos cada representación con seriedad, disciplina y plena conciencia de sus implicaciones jurídicas.</p>
-          </div>
-          <div class="value-item-card">
-            <div class="value-item-title">Transparencia</div>
-            <p class="value-item-desc">Informamos con claridad los alcances del servicio, la estrategia propuesta, los honorarios profesionales y las condiciones particulares de cada procedimiento.</p>
-          </div>
-          <div class="value-item-card">
-            <div class="value-item-title">Estrategia</div>
-            <p class="value-item-desc">Cada acción jurídica responde a un análisis previo y a una ruta de intervención definida conforme a las circunstancias específicas del caso.</p>
-          </div>
-          <div class="value-item-card">
-            <div class="value-item-title">Atención personalizada</div>
-            <p class="value-item-desc">Reconocemos que ningún asunto es idéntico a otro. Por ello, cada caso recibe una evaluación y una estrategia particularmente diseñadas.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       #6. METODOLOGÍA DE ATENCIÓN JURÍDICA (SELECTOR COMPACTO)
+       #6. METODOLOGÍA DE ATENCIÓN JURÍDICA (ACORDEÓN INLINE 21ST.DEV)
   ============================================================ -->
   <section id="metodologia" class="clean-steps-band">
     <div class="container">
-      <div class="section-header-inline reveal" style="margin-bottom: 14px;">
+      <div class="section-header-inline reveal" style="margin-bottom: 12px;">
         <div>
           <span class="section-eyebrow">Metodología de Trabajo</span>
-          <h2 class="section-title-clean">Nuestra metodología de intervención</h2>
+          <h2 class="section-title-clean blur-reveal">Nuestra metodología de intervención</h2>
           <p class="methodology-phrase-top">
             Cada asunto exige estudio. Cada decisión exige estrategia. Cada defensa exige firmeza.
           </p>
         </div>
       </div>
 
-      <div class="method-interactive-grid reveal reveal-delay-1">
-        <div class="method-tabs-col" role="tablist" aria-label="Fases de intervención">
-          <button type="button" class="method-step-btn active" data-method-target="methodPhase1">
-            <div>
-              <span class="method-step-btn-num">Fase 01</span>
-              <span class="method-step-btn-title">Consulta y evaluación inicial o asesoría jurídica</span>
+      <div class="method-accordion reveal reveal-delay-1">
+        <!-- Fase 01 -->
+        <div class="method-acc-item spotlight-card open">
+          <button type="button" class="method-acc-trigger" aria-expanded="true">
+            <div class="method-acc-head">
+              <span class="method-acc-num">Fase 01</span>
+              <span class="method-acc-title">Consulta y evaluación inicial o asesoría jurídica</span>
             </div>
-            <span class="method-step-arrow">&rarr;</span>
+            <span class="method-acc-icon" aria-hidden="true">
+              <svg viewBox="0 0 14 14" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 7 9 11 5"/></svg>
+            </span>
           </button>
-
-          <button type="button" class="method-step-btn" data-method-target="methodPhase2">
-            <div>
-              <span class="method-step-btn-num">Fase 02</span>
-              <span class="method-step-btn-title">Integración y revisión del asunto</span>
+          <div class="method-acc-body">
+            <div class="method-acc-inner">
+              <div class="method-acc-content">
+                <p class="clean-step-desc">
+                  La consulta jurídica inicial tiene un costo y comprende la exposición de los hechos, la revisión preliminar de la información disponible y la identificación de las posibles alternativas legales. Ese costo se le dará en el primer contacto con el especialista.
+                </p>
+                <p class="clean-step-desc">
+                  En caso de que, después de la evaluación, el cliente contrate los servicios profesionales de la firma, el importe cubierto por la consulta podrá considerarse en la reestructuración del monto total de los honorarios, de acuerdo con la naturaleza, complejidad y alcances del asunto.
+                </p>
+              </div>
             </div>
-            <span class="method-step-arrow">&rarr;</span>
-          </button>
-
-          <button type="button" class="method-step-btn" data-method-target="methodPhase3">
-            <div>
-              <span class="method-step-btn-num">Fase 03</span>
-              <span class="method-step-btn-title">Diagnóstico y estrategia jurídica</span>
-            </div>
-            <span class="method-step-arrow">&rarr;</span>
-          </button>
-
-          <button type="button" class="method-step-btn" data-method-target="methodPhase4">
-            <div>
-              <span class="method-step-btn-num">Fase 04</span>
-              <span class="method-step-btn-title">Representación, ejecución y seguimiento</span>
-            </div>
-            <span class="method-step-arrow">&rarr;</span>
-          </button>
+          </div>
         </div>
 
-        <div class="method-detail-card">
-          <div id="methodPhase1" class="method-detail-panel active">
-            <span class="clean-step-num">FASE 01</span>
-            <h3 class="clean-step-title">Consulta y evaluación inicial o asesoría jurídica</h3>
-            <p class="clean-step-desc">
-              La consulta jurídica inicial tiene un costo y comprende la exposición de los hechos, la revisión preliminar de la información disponible y la identificación de las posibles alternativas legales. Ese costo se le dará en el primer contacto con el especialista.
-            </p>
-            <p class="clean-step-desc">
-              En caso de que, después de la evaluación, el cliente contrate los servicios profesionales de la firma, el importe cubierto por la consulta podrá considerarse en la reestructuración del monto total de los honorarios, de acuerdo con la naturaleza, complejidad y alcances del asunto.
-            </p>
+        <!-- Fase 02 -->
+        <div class="method-acc-item spotlight-card">
+          <button type="button" class="method-acc-trigger" aria-expanded="false">
+            <div class="method-acc-head">
+              <span class="method-acc-num">Fase 02</span>
+              <span class="method-acc-title">Integración y revisión del asunto</span>
+            </div>
+            <span class="method-acc-icon" aria-hidden="true">
+              <svg viewBox="0 0 14 14" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 7 9 11 5"/></svg>
+            </span>
+          </button>
+          <div class="method-acc-body">
+            <div class="method-acc-inner">
+              <div class="method-acc-content">
+                <p class="clean-step-desc">
+                  Una vez recibida la información y documentación necesaria, el equipo jurídico realizará un análisis integral de los antecedentes, hechos, documentos, medios de prueba, riesgos, pretensiones y disposiciones legales aplicables.
+                </p>
+                <p class="clean-step-desc">
+                  Esta fase permitirá identificar la situación jurídica del cliente, determinar la viabilidad de las acciones disponibles y establecer los elementos necesarios para formular una estrategia responsable.
+                </p>
+              </div>
+            </div>
           </div>
+        </div>
 
-          <div id="methodPhase2" class="method-detail-panel">
-            <span class="clean-step-num">FASE 02</span>
-            <h3 class="clean-step-title">Integración y revisión del asunto</h3>
-            <p class="clean-step-desc">
-              Una vez recibida la información y documentación necesaria, el equipo jurídico realizará un análisis integral de los antecedentes, hechos, documentos, medios de prueba, riesgos, pretensiones y disposiciones legales aplicables.
-            </p>
-            <p class="clean-step-desc">
-              Esta fase permitirá identificar la situación jurídica del cliente, determinar la viabilidad de las acciones disponibles y establecer los elementos necesarios para formular una estrategia responsable.
-            </p>
+        <!-- Fase 03 -->
+        <div class="method-acc-item spotlight-card">
+          <button type="button" class="method-acc-trigger" aria-expanded="false">
+            <div class="method-acc-head">
+              <span class="method-acc-num">Fase 03</span>
+              <span class="method-acc-title">Diagnóstico y estrategia jurídica</span>
+            </div>
+            <span class="method-acc-icon" aria-hidden="true">
+              <svg viewBox="0 0 14 14" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 7 9 11 5"/></svg>
+            </span>
+          </button>
+          <div class="method-acc-body">
+            <div class="method-acc-inner">
+              <div class="method-acc-content">
+                <p class="clean-step-desc">
+                  Concluido el análisis, se entregará al cliente una carta informe en la que se expondrán, de manera clara y estructurada:
+                </p>
+                <ul class="clean-step-list">
+                  <li>Los antecedentes relevantes del asunto.</li>
+                  <li>La situación jurídica identificada.</li>
+                  <li>Las disposiciones legales aplicables.</li>
+                  <li>Las alternativas de actuación.</li>
+                  <li>Los riesgos jurídicos advertidos.</li>
+                  <li>La estrategia recomendada.</li>
+                  <li>Las etapas generales del procedimiento.</li>
+                  <li>Los servicios profesionales requeridos.</li>
+                  <li>La propuesta de honorarios correspondiente.</li>
+                </ul>
+                <p class="clean-step-desc">
+                  El diagnóstico y la estrategia serán elaborados con base en la experiencia conjunta del equipo de abogados y especialistas de GirTor &amp; Asociados, S.A., atendiendo a la materia, complejidad y circunstancias particulares de cada caso.
+                </p>
+              </div>
+            </div>
           </div>
+        </div>
 
-          <div id="methodPhase3" class="method-detail-panel">
-            <span class="clean-step-num">FASE 03</span>
-            <h3 class="clean-step-title">Diagnóstico y estrategia jurídica</h3>
-            <p class="clean-step-desc">
-              Concluido el análisis, se entregará al cliente una carta informe en la que se expondrán, de manera clara y estructurada:
-            </p>
-            <ul class="clean-step-list">
-              <li>Los antecedentes relevantes del asunto.</li>
-              <li>La situación jurídica identificada.</li>
-              <li>Las disposiciones legales aplicables.</li>
-              <li>Las alternativas de actuación.</li>
-              <li>Los riesgos jurídicos advertidos.</li>
-              <li>La estrategia recomendada.</li>
-              <li>Las etapas generales del procedimiento.</li>
-              <li>Los servicios profesionales requeridos.</li>
-              <li>La propuesta de honorarios correspondiente.</li>
-            </ul>
-            <p class="clean-step-desc">
-              El diagnóstico y la estrategia serán elaborados con base en la experiencia conjunta del equipo de abogados y especialistas de GirTor &amp; Asociados, S.A., atendiendo a la materia, complejidad y circunstancias particulares de cada caso.
-            </p>
-          </div>
-
-          <div id="methodPhase4" class="method-detail-panel">
-            <span class="clean-step-num">FASE 04</span>
-            <h3 class="clean-step-title">Representación, ejecución y seguimiento</h3>
-            <p class="clean-step-desc">
-              Una vez formalizada la contratación de los servicios profesionales, la firma implementará la estrategia jurídica acordada y dará seguimiento a las actuaciones, promociones, diligencias y etapas procesales correspondientes.
-            </p>
-            <p class="clean-step-desc">
-              El cliente recibirá información clara sobre los avances relevantes de su asunto, sin perjuicio de los tiempos, formalidades y determinaciones que correspondan a las autoridades competentes.
-            </p>
+        <!-- Fase 04 -->
+        <div class="method-acc-item spotlight-card">
+          <button type="button" class="method-acc-trigger" aria-expanded="false">
+            <div class="method-acc-head">
+              <span class="method-acc-num">Fase 04</span>
+              <span class="method-acc-title">Representación, ejecución y seguimiento</span>
+            </div>
+            <span class="method-acc-icon" aria-hidden="true">
+              <svg viewBox="0 0 14 14" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 7 9 11 5"/></svg>
+            </span>
+          </button>
+          <div class="method-acc-body">
+            <div class="method-acc-inner">
+              <div class="method-acc-content">
+                <p class="clean-step-desc">
+                  Una vez formalizada la contratación de los servicios profesionales, la firma implementará la estrategia jurídica acordada y dará seguimiento a las actuaciones, promociones, diligencias y etapas procesales correspondientes.
+                </p>
+                <p class="clean-step-desc">
+                  El cliente recibirá información clara sobre los avances relevantes de su asunto, sin perjuicio de los tiempos, formalidades y determinaciones que correspondan a las autoridades competentes.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -552,12 +500,12 @@
       <div class="section-header-inline reveal" style="margin-bottom: 14px;">
         <div>
           <span class="section-eyebrow">Dirección Jurídica</span>
-          <h2 class="section-title-clean">Socios fundadores | Founding Partners</h2>
+          <h2 class="section-title-clean blur-reveal">Socios fundadores | Founding Partners</h2>
         </div>
       </div>
 
       <div class="partners-grid reveal reveal-delay-1">
-        <article class="partner-card">
+        <article class="partner-card spotlight-card">
           <div class="partner-visual" aria-hidden="true">
             <div class="partner-monogram">AC</div>
           </div>
@@ -567,7 +515,7 @@
           </div>
         </article>
 
-        <article class="partner-card">
+        <article class="partner-card spotlight-card">
           <div class="partner-visual" aria-hidden="true">
             <div class="partner-monogram">RG</div>
           </div>
@@ -675,22 +623,22 @@
   </section>
 
   <!-- ============================================================
-       HORARIOS Y LÍNEAS DIRECTAS (SIN NÚMEROS TELEFÓNICOS VISIBLES)
+       ATENCIÓN DIRECTA, SEDE Y FORMULARIO (BLOQUE UNIFICADO LIMPIO)
   ============================================================ -->
   <section id="contacto-rapido" class="clean-contact-band">
     <div class="container">
       <div class="clean-contact-grid reveal">
         <div>
           <span class="section-eyebrow">Disponibilidad &amp; Sede</span>
-          <h2 class="section-title-clean" style="margin-bottom: 24px;">Horarios y Atención Directa</h2>
+          <h2 class="section-title-clean blur-reveal" style="margin-bottom: 20px;">Horarios y Atención Directa</h2>
 
-          <div class="clean-info-block">
+          <div class="clean-info-block spotlight-card">
             <span class="clean-info-label">Horario de Atención Corporativa</span>
             <div class="clean-info-value">Lunes a Viernes · 9:00 a 18:00 hrs.</div>
             <p class="clean-info-sub">Atención en todas las materias jurídicas. Oficinas corporativas en Santa Fe, Ciudad de México.</p>
           </div>
 
-          <div class="clean-info-block clean-info-block--penal">
+          <div class="clean-info-block clean-info-block--penal spotlight-card">
             <span class="clean-info-label"><span class="live-dot-gold"></span> Guardia Penal Permanente · 24/7</span>
             <div class="clean-info-value">Disponible las 24 horas, los 7 días de la semana</div>
             <p class="clean-info-sub">Atención urgente para detenciones, comparecencias ante Ministerio Público y audiencias iniciales.</p>
@@ -700,7 +648,7 @@
         <div>
           <span class="section-eyebrow">Canales de Atención Directa</span>
           <div class="clean-wa-list">
-            <a href="https://wa.me/525616878494?text=Hola,%20deseo%20solicitar%20atenci%C3%B3n%20jur%C3%ADdica%20corporativa%20con%20GirTor%20%26%20Asociados,%20S.A." target="_blank" rel="noopener" class="clean-wa-row">
+            <a href="https://wa.me/525616878494?text=Hola,%20deseo%20solicitar%20atenci%C3%B3n%20jur%C3%ADdica%20corporativa%20con%20GirTor%20%26%20Asociados,%20S.A." target="_blank" rel="noopener" class="clean-wa-row spotlight-card">
               <div>
                 <span class="clean-wa-row-title">01 · Oficina Corporativa</span>
                 <span class="clean-wa-row-num">Contactar por WhatsApp</span>
@@ -708,7 +656,7 @@
               <span class="clean-wa-row-arrow">Enviar mensaje &rarr;</span>
             </a>
 
-            <a href="https://wa.me/528261163940?text=Hola,%20solicito%20atenci%C3%B3n%20jur%C3%ADdica%20directa%20con%20la%20Socia%20Fundadora%20de%20GirTor%20%26%20Asociados,%20S.A." target="_blank" rel="noopener" class="clean-wa-row">
+            <a href="https://wa.me/528261163940?text=Hola,%20solicito%20atenci%C3%B3n%20jur%C3%ADdica%20directa%20con%20la%20Socia%20Fundadora%20de%20GirTor%20%26%20Asociados,%20S.A." target="_blank" rel="noopener" class="clean-wa-row spotlight-card">
               <div>
                 <span class="clean-wa-row-title">02 · Socia Fundadora · Ángeles C H Torres</span>
                 <span class="clean-wa-row-num">Solicitar atención jurídica</span>
@@ -716,7 +664,7 @@
               <span class="clean-wa-row-arrow">Enviar mensaje &rarr;</span>
             </a>
 
-            <a href="https://wa.me/525522604834?text=Hola,%20solicito%20atenci%C3%B3n%20jur%C3%ADdica%20directa%20con%20el%20Socio%20Fundador%20de%20GirTor%20%26%20Asociados,%20S.A." target="_blank" rel="noopener" class="clean-wa-row">
+            <a href="https://wa.me/525522604834?text=Hola,%20solicito%20atenci%C3%B3n%20jur%C3%ADdica%20directa%20con%20el%20Socio%20Fundador%20de%20GirTor%20%26%20Asociados,%20S.A." target="_blank" rel="noopener" class="clean-wa-row spotlight-card">
               <div>
                 <span class="clean-wa-row-title">03 · Socio Fundador · Rubén M. Girón G (Guardia Penal 24/7)</span>
                 <span class="clean-wa-row-num">Solicitar atención jurídica</span>
@@ -724,7 +672,7 @@
               <span class="clean-wa-row-arrow">Enviar mensaje &rarr;</span>
             </a>
 
-            <a href="tel:+525580008384" class="clean-wa-row">
+            <a href="tel:+525580008384" class="clean-wa-row spotlight-card">
               <div>
                 <span class="clean-wa-row-title">04 · Vía Telefónica Directa</span>
                 <span class="clean-wa-row-num">Llamar a Oficina Corporativa</span>
@@ -732,21 +680,11 @@
               <span class="clean-wa-row-arrow">Llamar ahora &rarr;</span>
             </a>
           </div>
-
-          <div style="margin-top: 22px;">
-            <a href="contacto.html" class="link-btn-clean">Ir a página completa de Contacto &rarr;</a>
-          </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ============================================================
-       UBICACIÓN, MAPA Y FORMULARIO SIMPLE
-  ============================================================ -->
-  <section id="ubicacion" class="clean-bottom-band">
-    <div class="container">
-      <div class="clean-bottom-grid reveal">
+      <!-- Ubicación, Mapa y Formulario integrados de manera ordenada -->
+      <div id="ubicacion" class="clean-bottom-grid reveal" style="margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--border-light);">
         <div>
           <span class="section-eyebrow">Sede Institucional</span>
           <h2 class="section-title-clean" style="margin-bottom: 10px;">Ubicación</h2>
@@ -768,7 +706,7 @@
           </div>
         </div>
 
-        <div class="clean-form-simple">
+        <div class="clean-form-simple" style="background: #ffffff;">
           <span class="section-eyebrow">Atención Directa</span>
           <h3>Solicitar atención jurídica</h3>
           <p class="form-note">
@@ -806,7 +744,7 @@
             </div>
             <div class="form-group">
               <label class="form-label" for="formCase">Breve síntesis del asunto</label>
-              <textarea id="formCase" class="form-textarea" style="height: 84px;" placeholder="Describa brevemente su situación jurídica..."></textarea>
+              <textarea id="formCase" class="form-textarea" style="height: 80px;" placeholder="Describa brevemente su situación jurídica..."></textarea>
             </div>
             <div class="form-group form-check-group">
               <label class="form-check-label">
@@ -816,7 +754,7 @@
                 </span>
               </label>
             </div>
-            <button type="submit" class="form-submit">Solicitar atención jurídica &rarr;</button>
+            <button type="submit" class="form-submit shimmer-gold-btn">Solicitar atención jurídica &rarr;</button>
           </form>
         </div>
       </div>
@@ -826,13 +764,13 @@
   <!-- ============================================================
        #12. CIERRE INSTITUCIONAL
   ============================================================ -->
-  <section id="cierre-institucional" class="closing-institutional-band">
+  <section id="cierre-institucional" class="closing-institutional-band" style="background: var(--bg-white);">
     <div class="container">
       <div class="closing-institutional-inner reveal">
         <p class="closing-phrase-lead">
           La defensa de tus derechos comienza con una decisión informada.
         </p>
-        <h2 class="closing-headline">
+        <h2 class="closing-headline blur-reveal">
           Defendemos derechos. Protegemos intereses. Construimos estrategias.
         </h2>
         <p class="closing-copy">
@@ -843,7 +781,7 @@
         </p>
 
         <div class="closing-actions">
-          <a href="https://wa.me/525616878494?text=Hola,%20deseo%20solicitar%20atenci%C3%B3n%20jur%C3%ADdica%20con%20GirTor%20%26%20Asociados,%20S.A." target="_blank" rel="noopener" class="btn-gold-solid">
+          <a href="https://wa.me/525616878494?text=Hola,%20deseo%20solicitar%20atenci%C3%B3n%20jur%C3%ADdica%20con%20GirTor%20%26%20Asociados,%20S.A." target="_blank" rel="noopener" class="btn-gold-solid shimmer-gold-btn">
             <span>Solicitar atención jurídica</span>
           </a>
           <a href="tel:+525580008384" class="link-btn-clean">
@@ -889,7 +827,7 @@
           <div class="footer-col-title">La Firma</div>
           <ul class="footer-col-links">
             <li><a href="#quienes-somos">Quiénes somos</a></li>
-            <li><a href="#mision-vision-valores">Misión, visión y valores</a></li>
+            <li><a href="la-firma.html#mision-vision-valores">Misión, visión y valores</a></li>
             <li><a href="#metodologia">Metodología de intervención</a></li>
             <li><a href="#socios-fundadores">Socios fundadores</a></li>
             <li><a href="la-firma.html">Identidad institucional</a></li>
@@ -966,6 +904,6 @@
     </button>
   </div>
 
-  <script src="js/main.js?v=21.0" defer></script>
+  <script src="js/main.js?v=22.0" defer></script>
 </body>
 </html>

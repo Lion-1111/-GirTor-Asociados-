@@ -391,38 +391,47 @@ window.handleForm = handleForm;
   renderGrid();
 })();
 
-/* ── Pestañas Interactivas (Misión, Visión y Valores) & Selector de Metodología ── */
+/* ── Acordeón Metodología (21st.dev Smooth Grid), Spotlight Cards & Barra de Progreso ── */
 (function () {
-  const tabBtns = document.querySelectorAll('[data-tab-target]');
-  const tabPanels = document.querySelectorAll('.editorial-tab-panel');
-  if (tabBtns.length && tabPanels.length) {
-    tabBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const targetId = btn.getAttribute('data-tab-target');
-        tabBtns.forEach((b) => {
-          b.classList.remove('active');
-          b.setAttribute('aria-selected', 'false');
-        });
-        tabPanels.forEach((p) => p.classList.remove('active'));
-        btn.classList.add('active');
-        btn.setAttribute('aria-selected', 'true');
-        const target = document.getElementById(targetId);
-        if (target) target.classList.add('active');
-      });
-    });
+  // 1. Barra de progreso de lectura
+  const progressEl = document.getElementById('scrollProgress');
+  if (progressEl) {
+    const updateProgress = () => {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+      progressEl.style.width = `${Math.min(100, Math.max(0, pct)).toFixed(1)}%`;
+    };
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
   }
 
-  const methodBtns = document.querySelectorAll('[data-method-target]');
-  const methodPanels = document.querySelectorAll('.method-detail-panel');
-  if (methodBtns.length && methodPanels.length) {
-    methodBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const targetId = btn.getAttribute('data-method-target');
-        methodBtns.forEach((b) => b.classList.remove('active'));
-        methodPanels.forEach((p) => p.classList.remove('active'));
-        btn.classList.add('active');
-        const target = document.getElementById(targetId);
-        if (target) target.classList.add('active');
+  // 2. Spotlight Cursor Tracking (21st.dev style)
+  document.querySelectorAll('.spotlight-card').forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+      card.style.setProperty('--my', `${e.clientY - rect.top}px`);
+    });
+  });
+
+  // 3. Acordeón de Metodología (abre y cierra en su mismo lugar)
+  const accItems = document.querySelectorAll('.method-acc-item');
+  if (accItems.length) {
+    accItems.forEach((item) => {
+      const trigger = item.querySelector('.method-acc-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', () => {
+        const wasOpen = item.classList.contains('open');
+        accItems.forEach((el) => {
+          el.classList.remove('open');
+          const btn = el.querySelector('.method-acc-trigger');
+          if (btn) btn.setAttribute('aria-expanded', 'false');
+        });
+        if (!wasOpen) {
+          item.classList.add('open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
       });
     });
   }
