@@ -5,18 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>La Firma — GirTor &amp; Asociados</title>
   <meta name="description" content="Quiénes somos, Misión, Visión, Valores y Filosofía institucional de GirTor & Asociados, Despacho Jurídico en Lomas de Santa Fe, CDMX." />
-  <link rel="icon" type="image/png" href="assets/logo_transparent.png" />
+  <link rel="icon" type="image/png" href="assets/logo_nav.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=12.0" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <link rel="stylesheet" href="css/styles.css?v=14.0" />
 </head>
 <body>
 
   <!-- Navegación Sólida -->
   <nav id="nav" class="nav-solid">
     <a href="index.html" class="nav-logo">
-      <img src="assets/logo_transparent.png" alt="GirTor &amp; Asociados" />
+      <img src="assets/logo_nav.png" alt="GirTor &amp; Asociados" />
       <div class="nav-brand">
         <span class="firm">GirTor &amp; Asociados</span>
         <span class="tagline">Despacho Jurídico</span>
@@ -212,6 +214,18 @@
     </div>
   </section>
 
+  <!-- Galería Institucional con Animación Scroll -->
+  <section id="portrait-wall" class="spw-root" aria-label="Firma Legal GirTor &amp; Asociados">
+    <div class="spw-hint-wrap" id="spwHint">
+      <span class="spw-hint">Desplaza para conocer nuestra firma</span>
+    </div>
+    <div class="spw-sticky-title">
+      <h2 class="spw-title">GirTor &amp; Asociados</h2>
+      <p class="spw-subtitle">Lomas de Santa Fe &middot; Ciudad de México</p>
+    </div>
+    <div class="spw-grid-wrap" id="spwGrid"></div>
+  </section>
+
   <!-- Filosofía Institucional -->
   <section id="filosofia" class="editorial-photo-band" style="text-align: center;">
     <div class="editorial-photo-bg" style="background-image: url('assets/hero_themis.jpg');"></div>
@@ -232,7 +246,7 @@
       <div class="footer-grid">
         <div>
           <div class="footer-brand">
-            <img src="assets/logo_transparent.png" alt="GirTor &amp; Asociados" />
+            <img src="assets/logo_nav.png" alt="GirTor &amp; Asociados" loading="lazy" decoding="async" />
             <div>
               <div class="footer-name">GirTor &amp; Asociados</div>
               <div class="footer-sub">Despacho Jurídico S.C.</div>
@@ -314,7 +328,7 @@
     </button>
   </div>
 
-  <script src="js/main.js?v=12.0"></script>
+  <script src="js/main.js?v=14.0" defer></script>
 </body>
 </html>
 

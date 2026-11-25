@@ -19,16 +19,15 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://girtor-asociados.vercel.app/assets/hero_slide_1.jpg" />
 
-  <link rel="icon" type="image/png" href="assets/logo_transparent.png" />
+  <link rel="icon" type="image/png" href="assets/logo_nav.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="assets/hero_slide_1.jpg" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 
-  <!-- GSAP & ScrollTrigger for ScrollPortraitWall -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-  <link rel="stylesheet" href="css/styles.css?v=13.0" />
+  <link rel="stylesheet" href="css/styles.css?v=17.0" />
 </head>
 <body>
 
@@ -115,7 +114,6 @@
         <text x="495" y="590" class="cca-reg" fill="url(#gold-text)">®</text>
         <text x="320" y="648" text-anchor="middle" class="cca-sub" fill="#dfba6a">CORPORATIVO LEGAL</text>
       </svg>
-      <img id="logo-relief" src="assets/logo_transparent.png" alt="" />
       <span id="logo-sheen"></span>
     </div>
   </div>
@@ -125,7 +123,7 @@
   ============================================================ -->
   <nav id="nav">
     <a href="index.html" class="nav-logo">
-      <img src="assets/logo_transparent.png" alt="GirTor &amp; Asociados" />
+      <img src="assets/logo_nav.png" alt="GirTor &amp; Asociados" />
       <div class="nav-brand">
         <span class="firm">GirTor &amp; Asociados</span>
         <span class="tagline">Despacho Jurídico</span>
@@ -253,13 +251,13 @@
         <div class="hero-slide-img" style="background-image: url('assets/hero_slide_1.jpg'); background-position: 28% center;"></div>
       </div>
       <div class="hero-slide">
-        <div class="hero-slide-img" style="background-image: url('assets/hero_slide_2.jpg');"></div>
+        <div class="hero-slide-img" data-bg="assets/hero_slide_2.jpg"></div>
       </div>
       <div class="hero-slide">
-        <div class="hero-slide-img" style="background-image: url('assets/hero_slide_3.jpg'); background-position: 60% center;"></div>
+        <div class="hero-slide-img" data-bg="assets/hero_slide_3.jpg" style="background-position: 60% center;"></div>
       </div>
       <div class="hero-slide">
-        <div class="hero-slide-img" style="background-image: url('assets/hero_slide_4.jpg');"></div>
+        <div class="hero-slide-img" data-bg="assets/hero_slide_4.jpg"></div>
       </div>
     </div>
 
@@ -267,110 +265,81 @@
 
     <div class="hero-container">
       <div class="hero-content">
-        <h1 class="hero-title">
-          Tu problema legal tiene solución.
-          <span class="highlight-gold">Déjalo en nuestras manos.</span>
-        </h1>
+        <span class="hero-eyebrow">GirTor &amp; Asociados · Santa Fe, CDMX</span>
         <div class="hero-divider-bar"></div>
+        <h1 class="hero-title">
+          Defensa jurídica con
+          <span class="highlight-gold">estrategia y rigor real.</span>
+        </h1>
         <p class="hero-desc">
-          Primera consulta sin costo y atención directa de abogados especialistas. Defensa estratégica con resultados comprobables en las áreas más complejas del derecho mexicano.
+          Penal (24/7), Fiscal, Mercantil, Civil, Familiar y Laboral. Primera consulta sin costo.
         </p>
         <div class="hero-cta-group">
-          <a href="https://wa.me/525616878494?text=Hola,%20me%20gustar%C3%ADa%20agendar%20una%20consulta%20con%20GirTor%20%26%20Asociados." target="_blank" rel="noopener" class="btn-gold-solid">
-            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.484 2 12.017c0 1.761.457 3.413 1.253 4.856L2 22l5.3-1.387A9.945 9.945 0 0012.017 22C17.523 22 22 17.516 22 12c0-5.523-4.477-10-10-10zm0 18.015a7.994 7.994 0 01-4.072-1.111l-.291-.173-3.145.823.838-3.059-.19-.314A8.015 8.015 0 014 12.017C4 7.589 7.589 4 12 4s8 3.589 8 8.017c0 4.413-3.584 7.998-8 7.998z"/></svg>
-            <span>Agendar Consulta</span>
+          <a href="la-firma.html" class="btn-gold-solid">
+            <span>La Firma</span>
           </a>
-          <a href="#como-trabajamos" class="btn-hero-link">Cómo Trabajamos &rarr;</a>
+          <a href="https://wa.me/525616878494?text=Hola,%20me%20gustar%C3%ADa%20agendar%20una%20consulta%20con%20GirTor%20%26%20Asociados." target="_blank" rel="noopener" class="btn-hero-link">Agendar Consulta &rarr;</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Ticker -->
-  <div class="practice-ticker-wrap">
-    <div class="practice-ticker">
-      <div class="ticker-group">
-        <a href="practica.html" class="ticker-item">Amparo <span class="ticker-bullet">&#9670;</span></a>
-        <a href="practica.html#penal" class="ticker-item">Derecho Penal · 24/7 <span class="ticker-bullet">&#9670;</span></a>
-        <a href="practica.html#fiscal" class="ticker-item">Derecho Fiscal <span class="ticker-bullet">&#9670;</span></a>
-        <a href="practica.html#mercantil" class="ticker-item">Derecho Mercantil <span class="ticker-bullet">&#9670;</span></a>
-        <a href="practica.html#civil" class="ticker-item">Derecho Civil <span class="ticker-bullet">&#9670;</span></a>
-        <a href="practica.html#familiar" class="ticker-item">Derecho Familiar <span class="ticker-bullet">&#9670;</span></a>
-        <a href="practica.html#laboral" class="ticker-item">Derecho Laboral <span class="ticker-bullet">&#9670;</span></a>
-        <a href="practica.html" class="ticker-item">Litigio Estratégico <span class="ticker-bullet">&#9670;</span></a>
-      </div>
-      <div class="ticker-group" aria-hidden="true">
-        <a href="practica.html" class="ticker-item">Amparo <span class="ticker-bullet">&#9670;</span></a>
-        <a href="practica.html#penal" class="ticker-item">Derecho Penal · 24/7 <span class="ticker-bullet">&#9670;</span></a>
-        <a href="practica.html#fiscal" class="ticker-item">Derecho Fiscal <span class="ticker-bullet">&#9670;</span></a>
-        <a href="practica.html#mercantil" class="ticker-item">Derecho Mercantil <span class="ticker-bullet">&#9670;</span></a>
-        <a href="practica.html#civil" class="ticker-item">Derecho Civil <span class="ticker-bullet">&#9670;</span></a>
-        <a href="practica.html#familiar" class="ticker-item">Derecho Familiar <span class="ticker-bullet">&#9670;</span></a>
-        <a href="practica.html#laboral" class="ticker-item">Derecho Laboral <span class="ticker-bullet">&#9670;</span></a>
-        <a href="practica.html" class="ticker-item">Litigio Estratégico <span class="ticker-bullet">&#9670;</span></a>
-      </div>
-    </div>
-  </div>
-
   <!-- ============================================================
-       IDENTIDAD CLARA (LIMPIO Y LEGIBLE SIN RUIDO VISUAL)
+       MANIFIESTO EDITORIAL LIMPIO (ESPACIO BLANCO Y CALMA VISUAL)
   ============================================================ -->
-  <section class="section-clean">
+  <section class="editorial-manifesto">
     <div class="container">
-      <div class="editorial-statement reveal">
-        <span class="section-eyebrow">GirTor &amp; Asociados · Santa Fe, CDMX</span>
-        <h2 class="editorial-headline-italic">
-          Creemos en una defensa técnica, no improvisada
+      <div class="manifesto-inner reveal">
+        <h2 class="manifesto-headline">
+          Hay firmas que nacen de una oportunidad.
         </h2>
-        <p class="editorial-sub-italic">
-          Estrategia, confidencialidad y rigor técnico.
+        <p class="manifesto-sub">
+          Otras, de una convicción.
         </p>
-        <div style="margin-top: 28px;">
-          <a href="la-firma.html" class="link-btn-clean">Conoce Quiénes Somos, Misión y Valores &rarr;</a>
-        </div>
+        <p class="manifesto-copy">
+          <strong>GirTor &amp; Asociados</strong> es un despacho jurídico ubicado en Lomas de Santa Fe, Ciudad de México, enfocado en la prevención, blindaje y resolución de controversias jurídicas complejas con atención directa, confidencialidad absoluta y primera consulta sin costo.
+        </p>
+        <a href="la-firma.html" class="link-btn-clean">Conoce Quiénes Somos, Misión y Valores &rarr;</a>
       </div>
     </div>
   </section>
 
   <!-- ============================================================
-       CÓMO TRABAJAMOS (COMPACTO EN 4 PASOS)
+       CÓMO TRABAJAMOS (4 PASOS LIMPIOS SIN CAJAS)
   ============================================================ -->
-  <section id="como-trabajamos" class="section-clean section-clean--soft">
+  <section id="como-trabajamos" class="clean-steps-band">
     <div class="container">
       <div class="section-header-inline reveal">
         <div>
           <span class="section-eyebrow">Metodología</span>
           <h2 class="section-title-clean">Un proceso claro en 4 pasos</h2>
         </div>
-      </div>
-
-      <div class="steps-row reveal reveal-delay-1">
-        <div class="step-card">
-          <div class="step-num">1</div>
-          <h3 class="step-title">Escríbenos por WhatsApp</h3>
-          <p class="step-desc">Te respondemos el mismo día para entender brevemente tu situación jurídica.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-num">2</div>
-          <h3 class="step-title">Consulta Inicial Sin Costo</h3>
-          <p class="step-desc">Evaluamos la viabilidad legal de tu caso con total honestidad y reserva.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-num">3</div>
-          <h3 class="step-title">Propuesta Clara</h3>
-          <p class="step-desc">Te entregamos estrategia, tiempos estimados y honorarios por escrito.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-num">4</div>
-          <h3 class="step-title">Te Representamos</h3>
-          <p class="step-desc">Iniciamos tu defensa con seguimiento directo y actualizaciones constantes.</p>
-        </div>
-      </div>
-
-      <div class="priority-bar reveal reveal-delay-2">
-        <div class="priority-badge">
+        <div class="priority-badge" style="margin-top: 0;">
           <span class="green-dot"></span>
           <span>Atención rápida y prioritaria</span>
+        </div>
+      </div>
+
+      <div class="clean-steps-grid reveal reveal-delay-1">
+        <div class="clean-step-item">
+          <span class="clean-step-num">PASO 01</span>
+          <h3 class="clean-step-title">Escríbenos por WhatsApp</h3>
+          <p class="clean-step-desc">Te respondemos el mismo día para entender brevemente tu situación jurídica.</p>
+        </div>
+        <div class="clean-step-item">
+          <span class="clean-step-num">PASO 02</span>
+          <h3 class="clean-step-title">Consulta Inicial Sin Costo</h3>
+          <p class="clean-step-desc">Evaluamos la viabilidad legal de tu caso con total honestidad y reserva.</p>
+        </div>
+        <div class="clean-step-item">
+          <span class="clean-step-num">PASO 03</span>
+          <h3 class="clean-step-title">Propuesta Clara</h3>
+          <p class="clean-step-desc">Te entregamos estrategia, tiempos estimados y honorarios por escrito.</p>
+        </div>
+        <div class="clean-step-item">
+          <span class="clean-step-num">PASO 04</span>
+          <h3 class="clean-step-title">Te Representamos</h3>
+          <p class="clean-step-desc">Iniciamos tu defensa con seguimiento directo y actualizaciones constantes.</p>
         </div>
       </div>
     </div>
@@ -391,143 +360,217 @@
   </section>
 
   <!-- ============================================================
-       RESUMEN DE ESPECIALIDADES (DETALLE EN PRACTICA.HTML)
+       ESPECIALIDADES EN BANDA OBSIDIANA SÓLIDA (6 ÁREAS COMPLETAS)
   ============================================================ -->
-  <section id="areas" class="section-clean">
+  <section id="areas" class="obsidian-practice-band">
     <div class="container">
-      <div class="section-header-inline reveal">
-        <div>
-          <span class="section-eyebrow">¿Qué Hacemos?</span>
-          <h2 class="section-title-clean">Áreas de Especialidad</h2>
-        </div>
-        <a href="practica.html" class="link-btn-clean">Ver todas en detalle &rarr;</a>
-      </div>
+      <div class="obsidian-practice-wrap reveal">
+        <h2 class="obsidian-practice-title">GirTor &amp; Asociados</h2>
+        <p class="obsidian-practice-lead">
+          No fue concebida como un despacho improvisado. Desde su origen, se diseñó como una estructura técnica especializada en:
+        </p>
 
-      <div class="areas-summary-grid reveal reveal-delay-1">
-        <div class="area-summary-card">
-          <div>
-            <div class="area-card-head">
-              <span class="area-summary-title">Derecho Penal</span>
-              <span class="area-tag-247">Guardia 24/7</span>
-            </div>
-            <p class="area-summary-desc">Defensa técnica en el sistema acusatorio, audiencias iniciales, juicio oral y amparo penal.</p>
-          </div>
-          <a href="practica.html#penal" class="area-link">Ver alcances &rarr;</a>
-        </div>
+        <ul class="obsidian-arrow-list">
+          <li>
+            <a href="practica.html#penal">
+              <div class="obsidian-area-main">
+                <span><span class="arrow-mark">&rarr;</span> Derecho Penal</span>
+                <span class="obsidian-area-desc">Defensa técnica en el sistema acusatorio, audiencias iniciales, juicio oral y amparo penal.</span>
+              </div>
+              <span class="arrow-tag">Guardia 24/7</span>
+            </a>
+          </li>
+          <li>
+            <a href="practica.html#fiscal">
+              <div class="obsidian-area-main">
+                <span><span class="arrow-mark">&rarr;</span> Derecho Fiscal</span>
+                <span class="obsidian-area-desc">Controversias ante el SAT, IMSS, INFONAVIT y el Tribunal Federal de Justicia Administrativa.</span>
+              </div>
+              <span class="arrow-tag">SAT / TFJA</span>
+            </a>
+          </li>
+          <li>
+            <a href="practica.html#mercantil">
+              <div class="obsidian-area-main">
+                <span><span class="arrow-mark">&rarr;</span> Derecho Mercantil</span>
+                <span class="obsidian-area-desc">Controversias comerciales, contratos, recuperación de cartera y conflictos societarios.</span>
+              </div>
+              <span class="arrow-tag">Empresarial</span>
+            </a>
+          </li>
+          <li>
+            <a href="practica.html#familiar">
+              <div class="obsidian-area-main">
+                <span><span class="arrow-mark">&rarr;</span> Derecho Familiar</span>
+                <span class="obsidian-area-desc">Divorcios, pensiones alimenticias, guarda y custodia, sucesiones y patrimonio familiar.</span>
+              </div>
+              <span class="arrow-tag">Familia</span>
+            </a>
+          </li>
+          <li>
+            <a href="practica.html#civil">
+              <div class="obsidian-area-main">
+                <span><span class="arrow-mark">&rarr;</span> Derecho Civil</span>
+                <span class="obsidian-area-desc">Litigio patrimonial, responsabilidad civil, contratos, arrendamiento y bienes inmuebles.</span>
+              </div>
+              <span class="arrow-tag">Patrimonio</span>
+            </a>
+          </li>
+          <li>
+            <a href="practica.html#laboral">
+              <div class="obsidian-area-main">
+                <span><span class="arrow-mark">&rarr;</span> Derecho Laboral</span>
+                <span class="obsidian-area-desc">Representación patronal y directiva ante tribunales laborales, indemnizaciones y compliance.</span>
+              </div>
+              <span class="arrow-tag">Trabajo</span>
+            </a>
+          </li>
+        </ul>
 
-        <div class="area-summary-card">
-          <div>
-            <div class="area-card-head">
-              <span class="area-summary-title">Derecho Fiscal</span>
-            </div>
-            <p class="area-summary-desc">Controversias ante el SAT, IMSS, INFONAVIT y el Tribunal Federal de Justicia Administrativa.</p>
-          </div>
-          <a href="practica.html#fiscal" class="area-link">Ver alcances &rarr;</a>
-        </div>
-
-        <div class="area-summary-card">
-          <div>
-            <div class="area-card-head">
-              <span class="area-summary-title">Derecho Mercantil</span>
-            </div>
-            <p class="area-summary-desc">Controversias comerciales, contratos, recuperación de cartera y conflictos societarios.</p>
-          </div>
-          <a href="practica.html#mercantil" class="area-link">Ver alcances &rarr;</a>
-        </div>
-
-        <div class="area-summary-card">
-          <div>
-            <div class="area-card-head">
-              <span class="area-summary-title">Derecho Familiar</span>
-            </div>
-            <p class="area-summary-desc">Divorcios, pensiones alimenticias, guarda y custodia, sucesiones y patrimonio familiar.</p>
-          </div>
-          <a href="practica.html#familiar" class="area-link">Ver alcances &rarr;</a>
-        </div>
-
-        <div class="area-summary-card">
-          <div>
-            <div class="area-card-head">
-              <span class="area-summary-title">Derecho Civil</span>
-            </div>
-            <p class="area-summary-desc">Litigio patrimonial, responsabilidad civil, contratos, arrendamiento y bienes inmuebles.</p>
-          </div>
-          <a href="practica.html#civil" class="area-link">Ver alcances &rarr;</a>
-        </div>
-
-        <div class="area-summary-card">
-          <div>
-            <div class="area-card-head">
-              <span class="area-summary-title">Derecho Laboral</span>
-            </div>
-            <p class="area-summary-desc">Representación patronal y directiva ante tribunales laborales, indemnizaciones y compliance.</p>
-          </div>
-          <a href="practica.html#laboral" class="area-link">Ver alcances &rarr;</a>
+        <div style="margin-top: 26px;">
+          <a href="practica.html" class="link-btn-clean" style="color: var(--gold-light); border-color: var(--gold-light);">Ver alcances completos de cada área &rarr;</a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ============================================================
-       HORARIOS Y ACCESO DIRECTO A CONTACTO
+       HORARIOS Y LÍNEAS DIRECTAS (LIMPIO Y ORDENADO)
   ============================================================ -->
-  <section class="section-clean section-clean--soft">
+  <section id="contacto-rapido" class="clean-contact-band">
     <div class="container">
-      <div class="section-header-inline reveal">
+      <div class="clean-contact-grid reveal">
         <div>
-          <span class="section-eyebrow">Disponibilidad &amp; Atención</span>
-          <h2 class="section-title-clean">Horarios y Contacto Directo</h2>
+          <span class="section-eyebrow">Disponibilidad &amp; Sede</span>
+          <h2 class="section-title-clean" style="margin-bottom: 24px;">Horarios y Atención Directa</h2>
+
+          <div class="clean-info-block">
+            <span class="clean-info-label">Horario de Atención Corporativa</span>
+            <div class="clean-info-value">Lunes a Viernes · 9:00 a 18:00 hrs.</div>
+            <p class="clean-info-sub">Fiscal, Mercantil, Civil, Familiar, Laboral y Juicio de Amparo en Torre I, Lomas de Santa Fe.</p>
+          </div>
+
+          <div class="clean-info-block">
+            <span class="clean-info-label">Guardia Penal Permanente · 24/7</span>
+            <div class="clean-info-value">Disponible las 24 horas, los 7 días de la semana</div>
+            <p class="clean-info-sub">Atención urgente para detenciones, comparecencias ante Ministerio Público y audiencias iniciales.</p>
+          </div>
         </div>
-        <a href="contacto.html" class="link-btn-clean">Ir a Formulario y Mapa &rarr;</a>
+
+        <div>
+          <span class="section-eyebrow">Líneas Directas de WhatsApp</span>
+          <div class="clean-wa-list">
+            <a href="https://wa.me/525616878494?text=Hola,%20me%20comunico%20a%20la%20l%C3%ADnea%20corporativa%20de%20GirTor%20%26%20Asociados." target="_blank" rel="noopener" class="clean-wa-row">
+              <div>
+                <span class="clean-wa-row-title">01 · WhatsApp Corporativo</span>
+                <span class="clean-wa-row-num">56 1687 8494</span>
+              </div>
+              <span class="clean-wa-row-arrow">Enviar WhatsApp &rarr;</span>
+            </a>
+
+            <a href="https://wa.me/528261163940?text=Hola,%20solicito%20asesor%C3%ADa%20jur%C3%ADdica%20con%20la%20Licenciada." target="_blank" rel="noopener" class="clean-wa-row">
+              <div>
+                <span class="clean-wa-row-title">02 · WhatsApp Lic. Femenino</span>
+                <span class="clean-wa-row-num">826 116 3940</span>
+              </div>
+              <span class="clean-wa-row-arrow">Enviar WhatsApp &rarr;</span>
+            </a>
+
+            <a href="https://wa.me/525522604834?text=Hola,%20solicito%20asesor%C3%ADa%20jur%C3%ADdica%20con%20el%20Licenciado." target="_blank" rel="noopener" class="clean-wa-row">
+              <div>
+                <span class="clean-wa-row-title">03 · WhatsApp Lic. Masculino</span>
+                <span class="clean-wa-row-num">55 2260 4834</span>
+              </div>
+              <span class="clean-wa-row-arrow">Enviar WhatsApp &rarr;</span>
+            </a>
+          </div>
+
+          <div style="margin-top: 22px;">
+            <a href="contacto.html" class="link-btn-clean">Ir a página completa de Contacto &rarr;</a>
+          </div>
+        </div>
       </div>
+    </div>
+  </section>
 
-      <div class="schedule-banner-grid reveal reveal-delay-1">
-        <div class="schedule-box">
-          <h3>Horario de Atención Corporativa</h3>
-          <p><strong>Lunes a Viernes · 9:00 a 18:00 hrs.</strong></p>
-          <span class="schedule-sub">
-            Atención integral en materias Fiscal, Mercantil, Civil, Familiar, Laboral y Juicio de Amparo en nuestra sede de Torre I, Lomas de Santa Fe.
-          </span>
+  <!-- ============================================================
+       UBICACIÓN, MAPA Y FORMULARIO SIMPLE AL FINAL
+  ============================================================ -->
+  <section id="ubicacion" class="clean-bottom-band">
+    <div class="container">
+      <div class="clean-bottom-grid reveal">
+        <div>
+          <span class="section-eyebrow">Sede Corporativa</span>
+          <h2 class="section-title-clean" style="margin-bottom: 10px;">Ubicación en Santa Fe</h2>
+          <p class="clean-info-sub" style="margin-bottom: 12px;">
+            <strong>Av. Javier Barros Sierra 540, Torre I</strong><br />
+            Lomas de Santa Fe, Álvaro Obregón, C.P. 01210, Ciudad de México.
+          </p>
+          <a href="https://maps.google.com/?q=Av.+Javier+Barros+Sierra+540,+Torre+I,+Lomas+de+Santa+Fe,+%C3%81lvaro+Obreg%C3%B3n,+01210+Ciudad+de+M%C3%A9xico" target="_blank" rel="noopener" class="link-btn-clean">
+            Abrir en Google Maps &rarr;
+          </a>
+
+          <div class="clean-map-card">
+            <iframe
+              src="https://maps.google.com/maps?q=Av.+Javier+Barros+Sierra+540,+Torre+I,+Lomas+de+Santa+Fe,+%C3%81lvaro+Obreg%C3%B3n,+01210+Ciudad+de+M%C3%A9xico&t=&z=16&ie=UTF8&iwloc=&output=embed"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Ubicación GirTor &amp; Asociados en Lomas de Santa Fe">
+            </iframe>
+          </div>
         </div>
 
-        <div class="schedule-box schedule-box--penal">
-          <h3>Guardia Penal Permanente · 24/7</h3>
-          <p><strong>Disponible las 24 horas, los 7 días de la semana.</strong></p>
-          <span class="schedule-sub">
-            Respuesta jurídica inmediata para urgencias penales, detenciones, comparecencias ante Ministerio Público y audiencias iniciales.
-          </span>
-        </div>
-      </div>
+        <div class="clean-form-simple">
+          <span class="section-eyebrow">Primera Consulta</span>
+          <h3>Escríbenos de forma directa</h3>
+          <p class="form-note">
+            Envía tus datos directo a nuestra línea de WhatsApp. Tu información está protegida bajo Secreto Profesional.
+          </p>
 
-      <div class="wa-directory-wrap reveal reveal-delay-2">
-        <div class="wa-directory-heading">Líneas Directas de WhatsApp</div>
-        <div class="wa-directory-grid">
-          <a href="https://wa.me/525616878494?text=Hola,%20me%20comunico%20a%20la%20l%C3%ADnea%20corporativa%20de%20GirTor%20%26%20Asociados." target="_blank" rel="noopener" class="wa-line-card">
-            <div>
-              <div class="wa-line-role">01 · WhatsApp Corporativo</div>
-              <div class="wa-line-number">56 1687 8494</div>
-              <div class="wa-line-desc">Atención general, citas e informes del despacho.</div>
+          <form id="contactForm" onsubmit="handleForm(event)">
+            <div class="form-group">
+              <label class="form-label" for="formName">Nombre completo</label>
+              <input id="formName" type="text" class="form-input" placeholder="Su nombre completo" required />
             </div>
-            <span class="wa-line-action">Enviar WhatsApp &rarr;</span>
-          </a>
-
-          <a href="https://wa.me/528261163940?text=Hola,%20solicito%20asesor%C3%ADa%20jur%C3%ADdica%20con%20la%20Licenciada." target="_blank" rel="noopener" class="wa-line-card">
-            <div>
-              <div class="wa-line-role">02 · WhatsApp Lic. Femenino</div>
-              <div class="wa-line-number">826 116 3940</div>
-              <div class="wa-line-desc">Asesoría jurídica directa y seguimiento personalizado.</div>
+            <div class="form-group">
+              <label class="form-label" for="formPhone">Teléfono o correo</label>
+              <input id="formPhone" type="text" class="form-input" placeholder="Cómo podemos contactarle" required />
             </div>
-            <span class="wa-line-action">Enviar WhatsApp &rarr;</span>
-          </a>
-
-          <a href="https://wa.me/525522604834?text=Hola,%20solicito%20asesor%C3%ADa%20jur%C3%ADdica%20con%20el%20Licenciado." target="_blank" rel="noopener" class="wa-line-card">
-            <div>
-              <div class="wa-line-role">03 · WhatsApp Lic. Masculino</div>
-              <div class="wa-line-number">55 2260 4834</div>
-              <div class="wa-line-desc">Atención directa, litigio y Guardia Penal 24/7.</div>
+            <div class="form-group">
+              <label class="form-label" for="formArea">Materia de interés</label>
+              <select id="formArea" class="form-select">
+                <option value="">Seleccionar materia</option>
+                <option value="Penal">Penal (Guardia 24/7)</option>
+                <option value="Fiscal">Fiscal</option>
+                <option value="Mercantil">Mercantil</option>
+                <option value="Familiar">Familiar</option>
+                <option value="Civil">Civil</option>
+                <option value="Laboral">Laboral</option>
+              </select>
             </div>
-            <span class="wa-line-action">Enviar WhatsApp &rarr;</span>
-          </a>
+            <div class="form-group">
+              <label class="form-label" for="formTarget">Línea de WhatsApp</label>
+              <select id="formTarget" class="form-select">
+                <option value="525616878494">WhatsApp Corporativo — 56 1687 8494</option>
+                <option value="528261163940">WhatsApp Lic. Femenino — 826 116 3940</option>
+                <option value="525522604834">WhatsApp Lic. Masculino — 55 2260 4834</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="formCase">Breve mensaje</label>
+              <textarea id="formCase" class="form-textarea" style="height: 84px;" placeholder="Cuéntanos brevemente tu caso..."></textarea>
+            </div>
+            <div class="form-group form-check-group">
+              <label class="form-check-label">
+                <input type="checkbox" id="formAccept" required />
+                <span>
+                  Acepto el <a href="aviso-de-privacidad.html" target="_blank">Aviso de Privacidad</a> y los <a href="terminos-y-condiciones.html" target="_blank">Términos y Condiciones</a>.
+                </span>
+              </label>
+            </div>
+            <button type="submit" class="form-submit">Enviar por WhatsApp &rarr;</button>
+          </form>
         </div>
       </div>
     </div>
@@ -541,7 +584,7 @@
       <div class="footer-grid">
         <div>
           <div class="footer-brand">
-            <img src="assets/logo_transparent.png" alt="GirTor &amp; Asociados" />
+            <img src="assets/logo_nav.png" alt="GirTor &amp; Asociados" loading="lazy" decoding="async" />
             <div>
               <div class="footer-name">GirTor &amp; Asociados</div>
               <div class="footer-sub">Despacho Jurídico S.C.</div>
@@ -623,6 +666,6 @@
     </button>
   </div>
 
-  <script src="js/main.js?v=12.0"></script>
+  <script src="js/main.js?v=17.0" defer></script>
 </body>
 </html>

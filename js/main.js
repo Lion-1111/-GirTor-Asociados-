@@ -30,7 +30,7 @@
     revealHero();
     setTimeout(() => {
       splash.style.display = 'none';
-    }, 1100);
+    }, 800);
   }
 
   // Solo omitir splash si el enlace apunta directamente a una sección inferior (no #hero)
@@ -43,9 +43,9 @@
   }
 
   if (sheen) {
-    setTimeout(() => { sheen.classList.add('sheen-go'); }, 3200);
+    setTimeout(() => { sheen.classList.add('sheen-go'); }, 2200);
   }
-  setTimeout(hideSplash, 5200);
+  setTimeout(hideSplash, 3300);
   splash.addEventListener('click', hideSplash);
 })();
 
@@ -181,6 +181,12 @@ function handleForm(e) {
   const targetPhone = document.getElementById('formTarget')?.value || '525616878494';
   const caso = document.getElementById('formCase')?.value.trim() || '';
 
+  const acceptBox = document.getElementById('formAccept');
+  if (acceptBox && !acceptBox.checked) {
+    acceptBox.focus();
+    return;
+  }
+
   const originalText = btn.textContent;
   btn.textContent = 'Generando solicitud…';
   btn.disabled = true;
@@ -204,15 +210,32 @@ function handleForm(e) {
 }
 window.handleForm = handleForm;
 
-/* ── Hero Carousel ── */
+/* ── Hero Carousel (Carga diferida de diapositivas 2-4 para apertura instantánea) ── */
 (function () {
   const slides = document.querySelectorAll('.hero-slide');
   if (slides.length < 2) return;
+
+  function hydrateDeferredSlides() {
+    slides.forEach((slide) => {
+      const img = slide.querySelector('.hero-slide-img[data-bg]');
+      if (img && !img.style.backgroundImage) {
+        img.style.backgroundImage = `url('${img.getAttribute('data-bg')}')`;
+        img.removeAttribute('data-bg');
+      }
+    });
+  }
+
+  if (document.readyState === 'complete') {
+    setTimeout(hydrateDeferredSlides, 600);
+  } else {
+    window.addEventListener('load', () => setTimeout(hydrateDeferredSlides, 600), { once: true });
+  }
 
   let currentIndex = 0;
   let isPaused = false;
 
   function updateSlide(index) {
+    hydrateDeferredSlides();
     currentIndex = (index + slides.length) % slides.length;
     slides.forEach((slide, i) => slide.classList.toggle('active', i === currentIndex));
   }
