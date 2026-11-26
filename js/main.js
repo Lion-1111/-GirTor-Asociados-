@@ -7,10 +7,12 @@
   const splash = document.getElementById('splash');
   const sheen = document.getElementById('logo-sheen');
   const waFloat = document.getElementById('wa-float');
+  const phoneFloat = document.getElementById('phone-float');
   const hero = document.getElementById('hero');
 
   function showWaButton() {
     if (waFloat) waFloat.classList.add('show');
+    if (phoneFloat) phoneFloat.classList.add('show');
   }
 
   function revealHero() {

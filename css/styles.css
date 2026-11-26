@@ -1923,18 +1923,20 @@ body.menu-open #wa-float,
 }
 
 .clean-map-card {
-  margin-top: 18px;
-  border: 1px solid var(--border-light);
-  border-radius: 4px;
+  margin-top: 24px;
+  border: 1.5px solid var(--gold-mid);
+  border-radius: 10px;
   overflow: hidden;
   background: var(--bg-soft);
+  box-shadow: 0 4px 32px rgba(0,0,0,0.38), 0 0 0 1px rgba(195,155,80,0.12);
 }
 
 .clean-map-card iframe {
   width: 100%;
-  height: 310px;
+  height: 280px;
   border: 0;
   display: block;
+  filter: grayscale(20%) contrast(1.05);
 }
 
 .clean-form-simple {
@@ -1963,7 +1965,7 @@ body.menu-open #wa-float,
   }
 
   .clean-map-card iframe {
-    height: 260px;
+    height: 220px;
   }
 
   .clean-form-simple {
@@ -3644,6 +3646,9 @@ body.menu-open #wa-float,
 /* =====================================================
    ░░░ FLOATING WHATSAPP (OCULTO DURANTE SPLASH) ░░░
 ===================================================== */
+
+/* Botón flotante de teléfono */
+
 #wa-float {
   position: fixed;
   bottom: 24px;
@@ -3711,6 +3716,22 @@ body.menu-open #wa-float,
   width: 26px;
   height: 26px;
   fill: var(--gold-mid);
+}
+
+/* Botón teléfono flotante — ícono stroke, no fill */
+.wa-float-btn--phone svg {
+  fill: none;
+  stroke: var(--gold-mid);
+  stroke-width: 2;
+}
+
+/* Fila con ambos botones side by side */
+.wa-float-btns-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-end;
 }
 
 .wa-float-label {
