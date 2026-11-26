@@ -150,27 +150,7 @@
   }
 })();
 
-/* ── Selector Flotante de 3 Líneas WhatsApp ── */
-(function () {
-  const waFloat = document.getElementById('wa-float');
-  if (!waFloat) return;
-  const triggerBtn = waFloat.querySelector('.wa-float-btn');
-  const triggerLabel = waFloat.querySelector('.wa-float-label');
-
-  function toggleWaMenu(e) {
-    if (e) e.preventDefault();
-    waFloat.classList.toggle('menu-active');
-  }
-
-  if (triggerBtn) triggerBtn.addEventListener('click', toggleWaMenu);
-  if (triggerLabel) triggerLabel.addEventListener('click', toggleWaMenu);
-
-  document.addEventListener('click', (e) => {
-    if (!waFloat.contains(e.target)) {
-      waFloat.classList.remove('menu-active');
-    }
-  });
-})();
+/* ── Botones flotantes: teléfono + WhatsApp directo (sin menú) ── */
 
 /* ── Formulario de Contacto -> Envío directo a la línea WhatsApp elegida ── */
 function handleForm(e) {

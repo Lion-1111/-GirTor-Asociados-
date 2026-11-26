@@ -3670,129 +3670,59 @@ body.menu-open #wa-float,
   pointer-events: auto;
 }
 
-.wa-float-label {
-  background: #141518;
-  border: 1px solid rgba(166, 141, 91, 0.45);
-  color: var(--gold-light);
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 700;
-  padding: 7px 15px;
-  border-radius: 20px;
-  white-space: nowrap;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
-  position: relative;
-}
-
-.wa-float-label::after {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  right: 22px;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 6px solid #141518;
-}
-
-.wa-float-btn {
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  background: #141518;
-  border: 1.5px solid rgba(166, 141, 91, 0.55);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
-  cursor: pointer;
-  transition: transform 0.25s ease;
-}
-
-.wa-float-btn:hover {
-  transform: scale(1.06);
-}
-
-.wa-float-btn svg {
-  width: 26px;
-  height: 26px;
-  fill: var(--gold-mid);
-}
-
-/* Botón teléfono flotante — ícono stroke, no fill */
-.wa-float-btn--phone svg {
-  fill: none;
-  stroke: var(--gold-mid);
-  stroke-width: 2;
-}
-
 /* Fila con ambos botones side by side */
 .wa-float-btns-row {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   justify-content: flex-end;
 }
 
-.wa-float-label {
+/* Botón base */
+.wa-float-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
   cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  text-decoration: none;
+  border: none;
 }
 
-.wa-float-menu {
-  display: none;
-  flex-direction: column;
-  width: 265px;
-  background: #141518;
-  border: 1px solid rgba(166, 141, 91, 0.45);
-  border-radius: 6px;
-  padding: 10px;
-  gap: 6px;
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.52);
-  margin-bottom: 4px;
+.wa-float-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
 }
 
-#wa-float.menu-active .wa-float-menu {
-  display: flex;
-  animation: drawerSubReveal 0.22s var(--ease) forwards;
+/* Botón teléfono — fondo oscuro, icono dorado stroke */
+.wa-float-btn--phone {
+  background: #1a1c20;
+  border: 1.5px solid rgba(166, 141, 91, 0.6);
 }
 
-#wa-float.menu-active .wa-float-label {
-  display: none;
+.wa-float-btn--phone svg {
+  fill: none;
+  stroke: var(--gold-mid);
+  stroke-width: 2;
+  width: 26px;
+  height: 26px;
 }
 
-.wa-float-menu-title {
-  font-family: var(--font-heading);
-  font-size: 9.5px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--gold-light);
-  padding: 2px 6px 6px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+/* Botón WhatsApp — verde oficial */
+.wa-float-btn--wa {
+  background: #25D366;
+  border: none;
 }
 
-.wa-float-option {
-  display: flex;
-  flex-direction: column;
-  padding: 8px 10px;
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid transparent;
-  transition: background 0.2s ease, border-color 0.2s ease;
-}
-
-.wa-float-option:hover {
-  background: rgba(166, 141, 91, 0.14);
-  border-color: rgba(166, 141, 91, 0.4);
-}
-
-.wa-float-opt-role {
-  font-family: var(--font-heading);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--gold-light);
+.wa-float-btn--wa svg {
+  fill: #ffffff;
+  width: 28px;
+  height: 28px;
 }
 
 @media (max-width: 640px) {
@@ -3806,22 +3736,13 @@ body.menu-open #wa-float,
     gap: 6px;
   }
 
-  .wa-float-label {
-    font-size: 11.5px;
-    padding: 6px 12px;
-  }
-
-  .wa-float-label::after {
-    right: 18px;
-  }
-
   .wa-float-btn {
-    width: 48px;
-    height: 48px;
+    width: 50px;
+    height: 50px;
   }
 
   .wa-float-btn svg {
-    width: 23px;
-    height: 23px;
+    width: 24px;
+    height: 24px;
   }
 }
