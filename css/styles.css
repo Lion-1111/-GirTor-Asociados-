@@ -3922,6 +3922,33 @@ body.menu-open #wa-float,
   pointer-events: auto;
 }
 
+/* Etiqueta flotante de Emergencia 24 horas */
+.wa-float-emergency {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: #670010;
+  border: 1px solid rgba(201, 168, 76, 0.45);
+  color: #f3e5ab;
+  font-family: var(--font-heading);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+  white-space: nowrap;
+}
+
+.wa-float-emergency:hover {
+  transform: translateY(-1px);
+  background: #4a000b;
+  border-color: rgba(201, 168, 76, 0.75);
+}
+
 /* Fila con ambos botones side by side */
 .wa-float-btns-row {
   display: flex;
@@ -3996,6 +4023,12 @@ body.menu-open #wa-float,
     bottom: 14px;
     right: 14px;
     gap: 6px;
+  }
+
+  .wa-float-emergency {
+    font-size: 9px;
+    padding: 4px 10px;
+    gap: 5px;
   }
 
   .wa-float-btn {
