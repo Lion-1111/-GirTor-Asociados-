@@ -3040,7 +3040,11 @@ body.menu-open #wa-float,
 .spw-subtitle {
   font-family: var(--font-heading);
   margin-top: 8px;
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
   font-size: clamp(9.5px, 1.25vw, 12px);
+  line-height: 1.65;
   text-transform: uppercase;
   letter-spacing: 0.2em;
   color: rgba(255, 255, 255, 0.88);
