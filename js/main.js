@@ -317,36 +317,29 @@ window.handleForm = handleForm;
     { name: 'Sala de Juntas', role: 'Santa Fe, Ciudad de México', src: 'assets/fto1.jpeg' },
     { name: 'Defensa Corporativa', role: 'Estrategia Jurídica', src: 'assets/fto.2.jpeg' },
     { name: 'Espacios de Análisis', role: 'Atención Personalizada', src: 'assets/fto3.jpeg' },
-    { name: 'Oficinas Corporativas', role: 'Santa Fe, Ciudad de México', src: 'assets/fto4.jpeg' },
     { name: 'Consultoría Especializada', role: 'Rigor Técnico', src: 'assets/fto5.jpeg' },
-    { name: 'Alcance Nacional', role: 'República Mexicana', src: 'assets/fto6.jpeg' }
+    { name: 'Alcance Nacional', role: 'República Mexicana', src: 'assets/fto6.jpeg' },
+    { name: 'Sede Corporativa', role: 'Park Plaza Santa Fe', src: 'assets/fto7.jpeg' },
+    { name: 'Área Operativa', role: 'Atención Jurídica', src: 'assets/fto9.jpeg' },
+    { name: 'Despacho Privado', role: 'Asesoría Confidencial', src: 'assets/fto10.jpeg' },
+    { name: 'Torre Corporativa', role: 'Lomas de Santa Fe', src: 'assets/fto8.jpeg' }
   ];
 
   const gridContainer = document.getElementById('spwGrid');
   if (!gridContainer) return;
 
   function getResponsiveColumns() {
-    const w = window.innerWidth;
-    if (w >= 1024) return 4;
-    if (w >= 640) return 3;
-    return 2;
+    return window.innerWidth >= 720 ? 3 : 2;
   }
 
   function buildLayout(count, cols) {
     const rows = [];
-    let i = 0;
-    let r = 0;
-    while (i < count) {
-      const row = new Array(cols).fill(-1);
-      const a = (r * 2 + (r % 2)) % cols;
-      row[a] = i++;
-      if (r % 3 === 0 && i < count) {
-        let b = (a + 2) % cols;
-        if (b === a) b = (a + 1) % cols;
-        row[b] = i++;
+    for (let i = 0; i < count; i += cols) {
+      const row = [];
+      for (let j = 0; j < cols && i + j < count; j++) {
+        row.push(i + j);
       }
       rows.push(row);
-      r++;
     }
     return rows;
   }
@@ -364,27 +357,24 @@ window.handleForm = handleForm;
     layout.forEach((rowIndices) => {
       const rowDiv = document.createElement('div');
       rowDiv.className = 'spw-row';
+      const isSingleWide = rowIndices.length === 1 && cols > 1;
 
       rowIndices.forEach((photoIdx, ci) => {
         const cellDiv = document.createElement('div');
-        cellDiv.className = 'spw-cell';
+        cellDiv.className = 'spw-cell' + (isSingleWide ? ' spw-cell--wide' : '');
 
-        if (photoIdx === -1) {
-          cellDiv.classList.add('spw-cell-empty');
-        } else {
-          const p = photos[photoIdx];
-          const origin = ci < cols / 2 ? 'right bottom' : 'left bottom';
+        const p = photos[photoIdx];
+        const origin = isSingleWide ? 'center center' : (ci < cols / 2 ? 'right bottom' : 'left bottom');
 
-          cellDiv.innerHTML = `
-            <div class="spw-item" style="transform-origin: ${origin}; transform: scale(0.8);">
-              <img src="${p.src}" alt="${p.name}" class="spw-img" loading="lazy" decoding="async" />
-              <div class="spw-caption">
-                <span class="spw-name">${p.name}</span>
-                <span class="spw-role">${p.role}</span>
-              </div>
+        cellDiv.innerHTML = `
+          <div class="spw-item" style="transform-origin: ${origin}; transform: scale(0.92);">
+            <img src="${p.src}" alt="${p.name}" class="spw-img" loading="lazy" decoding="async" />
+            <div class="spw-caption">
+              <span class="spw-name">${p.name}</span>
+              <span class="spw-role">${p.role}</span>
             </div>
-          `;
-        }
+          </div>
+        `;
         rowDiv.appendChild(cellDiv);
       });
 
@@ -420,8 +410,8 @@ window.handleForm = handleForm;
         gsap.timeline({
           scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true }
         })
-          .fromTo(el, { scale: 0.68, autoAlpha: 0.72 }, { scale: 1, autoAlpha: 1, ease: 'power2.out', duration: 0.5 })
-          .to(el, { scale: 0.68, autoAlpha: 0.72, ease: 'power2.in', duration: 0.5 });
+          .fromTo(el, { scale: 0.88, autoAlpha: 0.82 }, { scale: 1, autoAlpha: 1, ease: 'power2.out', duration: 0.5 })
+          .to(el, { scale: 0.88, autoAlpha: 0.82, ease: 'power2.in', duration: 0.5 });
       });
 
       window.addEventListener('load', () => ScrollTrigger.refresh(), { once: true });
@@ -438,7 +428,7 @@ window.handleForm = handleForm;
           const progress = center / vh;
           const dist = Math.abs(progress - 0.5) * 2;
           const factor = Math.max(0, Math.min(1, 1 - Math.pow(dist, 1.8)));
-          const scale = 0.68 + 0.32 * factor;
+          const scale = 0.88 + 0.12 * factor;
           el.style.transform = `scale(${scale.toFixed(3)})`;
         });
       }

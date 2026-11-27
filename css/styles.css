@@ -182,7 +182,7 @@ img {
   position: fixed;
   top: 74px;
   left: 0;
-  height: 2px;
+  height: 3px;
   width: 0%;
   background: linear-gradient(90deg, var(--crimson), var(--gold-mid), var(--gold-light));
   z-index: 810;
@@ -255,47 +255,46 @@ img {
   align-items: center;
   text-align: center;
   width: 100%;
-  margin-bottom: -26px;
+  margin-bottom: -22px;
   position: relative;
   z-index: 2;
   pointer-events: none;
 }
 
-.splash-brand-name-mask {
-  overflow: hidden;
-  padding: 4px 6px 2px;
+.splash-brand-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+  filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.75));
 }
 
-.splash-brand-name {
+.splash-brand-svg text {
   font-family: var(--font-heading);
-  font-size: clamp(1.05rem, 4.15vw, 1.92rem);
+  font-size: 37px;
   font-weight: 700;
-  line-height: 1.15;
-  white-space: nowrap;
-  letter-spacing: 0.04em;
-  background-image: linear-gradient(
-    110deg,
-    #ffffff 0%,
-    #ffffff 43%,
-    #fff4d2 48%,
-    #dfba6a 51%,
-    #ffffff 56%,
-    #ffffff 100%
-  );
-  background-size: 300% 100%;
-  background-position: 100% 0;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.75));
-  opacity: 0;
-  clip-path: inset(0 50% 0 50%);
-  transform: translateY(108%) scale(0.88);
-  transform-origin: center bottom;
+  letter-spacing: 1.4px;
+}
+
+.splash-svg-stroke {
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
+  stroke-linecap: round;
+  stroke-linejoin: round;
   animation:
-    splash-emerge-up 1.05s cubic-bezier(0.16, 1, 0.3, 1) 0.28s forwards,
-    splash-gold-shimmer 1.15s cubic-bezier(0.4, 0, 0.2, 1) 1.35s forwards;
+    splash-text-draw 1.3s cubic-bezier(0.65, 0, 0.35, 1) 0.08s forwards,
+    splash-stroke-settle 0.7s ease 1.4s forwards;
+}
+
+.splash-svg-fill {
+  opacity: 0;
+  animation: splash-text-fill 0.65s cubic-bezier(0.22, 1, 0.36, 1) 1.08s forwards;
+}
+
+.splash-svg-sheen {
+  opacity: 0;
+  clip-path: polygon(-25% 0, -5% 0, -15% 100%, -35% 100%);
+  animation: splash-text-sheen 1.05s cubic-bezier(0.4, 0, 0.2, 1) 1.68s forwards;
 }
 
 .splash-brand-subline {
@@ -304,7 +303,7 @@ img {
   justify-content: center;
   gap: 12px;
   width: min(82%, 380px);
-  margin-top: 6px;
+  margin-top: 2px;
 }
 
 .splash-brand-rule {
@@ -341,33 +340,41 @@ img {
   white-space: nowrap;
   opacity: 0;
   transform: translateY(-115%);
-  animation: splash-emerge-down 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.48s forwards;
+  animation: splash-emerge-down 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.75s forwards;
 }
 
-@keyframes splash-emerge-up {
+@keyframes splash-text-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes splash-stroke-settle {
+  to {
+    opacity: 0.18;
+  }
+}
+
+@keyframes splash-text-fill {
   0% {
     opacity: 0;
-    clip-path: inset(0 50% 0 50%);
-    transform: translateY(108%) scale(0.88);
-    letter-spacing: 0.14em;
-  }
-  45% {
-    opacity: 1;
   }
   100% {
     opacity: 1;
-    clip-path: inset(0 0% 0 0%);
-    transform: translateY(0%) scale(1);
-    letter-spacing: 0.04em;
   }
 }
 
-@keyframes splash-gold-shimmer {
+@keyframes splash-text-sheen {
   0% {
-    background-position: 100% 0;
+    opacity: 0.95;
+    clip-path: polygon(-25% 0, -5% 0, -15% 100%, -35% 100%);
+  }
+  85% {
+    opacity: 0.95;
   }
   100% {
-    background-position: 0% 0;
+    opacity: 0;
+    clip-path: polygon(115% 0, 135% 0, 125% 100%, 105% 100%);
   }
 }
 
@@ -397,12 +404,12 @@ img {
 
 @media (max-width: 520px) {
   .splash-brand-header {
-    margin-bottom: -14px;
+    margin-bottom: -12px;
   }
 
   .splash-brand-subline {
     gap: 8px;
-    margin-top: 4px;
+    margin-top: 2px;
   }
 }
 
@@ -696,6 +703,7 @@ img {
   align-items: center;
   gap: 7px;
   padding: 9px 18px;
+  background: var(--crimson);
   border: 1px solid var(--gold-mid);
   border-radius: 3px;
   font-family: var(--font-heading);
@@ -708,23 +716,23 @@ img {
 }
 
 .nav-cta:hover {
-  background: var(--crimson);
-  border-color: var(--gold-mid);
-  color: var(--gold-light);
+  background: var(--crimson-dark);
+  border-color: var(--gold-light);
+  color: #ffffff;
 }
 
 #nav.scrolled .nav-cta,
 #nav.nav-solid .nav-cta {
-  background: transparent;
+  background: var(--crimson);
   border-color: var(--gold-mid);
   color: var(--gold-light);
 }
 
 #nav.scrolled .nav-cta:hover,
 #nav.nav-solid .nav-cta:hover {
-  background: var(--crimson);
-  border-color: var(--gold-mid);
-  color: var(--gold-light);
+  background: var(--crimson-dark);
+  border-color: var(--gold-light);
+  color: #ffffff;
 }
 
 /* Botón Hamburguesa (Obsidiana + Oro Antiguo del Logo) */
@@ -1932,6 +1940,35 @@ body.menu-open #wa-float,
   color: var(--ink-muted);
 }
 
+.offices-presence-list {
+  list-style: none;
+  margin: 10px 0 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.offices-presence-list li {
+  position: relative;
+  padding-left: 16px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink-body);
+}
+
+.offices-presence-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--crimson);
+  font-weight: 700;
+}
+
+.offices-presence-list li strong {
+  color: var(--ink-strong);
+}
+
 .clean-wa-list {
   display: flex;
   flex-direction: column;
@@ -2162,7 +2199,7 @@ body.menu-open #wa-float,
 .pillar-teaser-card {
   background: var(--bg-soft);
   border: 1px solid var(--border-light);
-  border-left: 3px solid var(--gold-mid);
+  border-left: 3px solid var(--crimson);
   border-radius: 4px;
   padding: 18px 20px;
   transition: border-color 0.22s ease, transform 0.22s ease;
@@ -2270,12 +2307,12 @@ body.menu-open #wa-float,
   flex-shrink: 0;
   width: 28px;
   height: 28px;
-  color: var(--gold-dark);
+  color: var(--crimson);
 }
 
 .method-acc-num svg {
   display: block;
-  stroke: var(--gold-dark);
+  stroke: var(--crimson);
 }
 
 .method-acc-title {
@@ -2364,7 +2401,7 @@ body.menu-open #wa-float,
 .value-item-card {
   background: #ffffff;
   border: 1px solid var(--border-light);
-  border-left: 3px solid var(--gold-mid);
+  border-left: 3px solid var(--crimson);
   border-radius: 4px;
   padding: 20px 22px;
   transition: transform 0.22s ease, box-shadow 0.22s ease;
@@ -2418,6 +2455,7 @@ body.menu-open #wa-float,
 .partner-card {
   background: var(--bg-soft);
   border: 1px solid var(--border-light);
+  border-top: 3px solid var(--crimson);
   border-radius: 4px;
   overflow: hidden;
   display: flex;
@@ -2425,13 +2463,32 @@ body.menu-open #wa-float,
 }
 
 .partner-visual {
-  height: 108px;
+  height: 440px;
   background: linear-gradient(135deg, #141518 0%, #30030a 100%);
   border-bottom: 2px solid var(--gold-mid);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 16px;
+  overflow: hidden;
+}
+
+.partner-visual--photo {
+  padding: 0;
+  position: relative;
+}
+
+.partner-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+  display: block;
+  transition: transform 0.6s var(--ease);
+}
+
+.partner-card:hover .partner-photo {
+  transform: scale(1.03);
 }
 
 .partner-monogram {
@@ -2469,13 +2526,22 @@ body.menu-open #wa-float,
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--gold-dark);
+  color: var(--crimson);
 }
 
 @media (max-width: 860px) {
   .partners-grid {
     grid-template-columns: 1fr;
     gap: 22px;
+  }
+
+  .partner-visual {
+    height: 140px;
+  }
+
+  .partner-visual--photo {
+    height: auto;
+    aspect-ratio: 4 / 4.3;
   }
 }
 
@@ -2499,7 +2565,7 @@ body.menu-open #wa-float,
 .civil-subgroup-card {
   background: #ffffff;
   border: 1px solid var(--border-light);
-  border-top: 3px solid var(--gold-mid);
+  border-top: 3px solid var(--crimson);
   border-radius: 4px;
   padding: 26px 24px;
 }
@@ -2687,7 +2753,7 @@ body.menu-open #wa-float,
 }
 
 .ticker-bullet {
-  color: var(--gold-mid);
+  color: var(--crimson);
   font-size: 9px;
 }
 
@@ -2724,14 +2790,14 @@ body.menu-open #wa-float,
   align-items: center;
   gap: 8px;
   padding: 11px 22px;
-  border: 1px solid var(--ink-strong);
+  border: 1.5px solid var(--crimson);
   border-radius: 3px;
   font-family: var(--font-heading);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--ink-strong);
+  color: var(--crimson);
   transition: all 0.25s ease;
 }
 
@@ -2768,12 +2834,12 @@ body.menu-open #wa-float,
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--bg-soft);
-  border: 1px solid var(--gold-mid);
+  background: var(--crimson-soft);
+  border: 1px solid var(--crimson);
   font-family: var(--font-heading);
   font-size: 12px;
   font-weight: 700;
-  color: var(--gold-dark);
+  color: var(--crimson);
   margin-bottom: 14px;
 }
 
@@ -2910,8 +2976,12 @@ body.menu-open #wa-float,
 .spw-cell {
   aspect-ratio: 1 / 1;
   flex: 1;
-  padding: 14px;
+  padding: 8px;
   position: relative;
+}
+
+.spw-cell--wide {
+  aspect-ratio: 16 / 9;
 }
 
 .spw-cell-empty { visibility: hidden; pointer-events: none; }
@@ -2925,7 +2995,7 @@ body.menu-open #wa-float,
   border: 1px solid rgba(201, 168, 76, 0.28);
   will-change: transform;
   background: #17191d;
-  transform: scale(0.82);
+  transform: scale(0.92);
 }
 
 .spw-img {
@@ -2968,7 +3038,7 @@ body.menu-open #wa-float,
 }
 
 @media (max-width: 900px) {
-  .spw-cell { padding: 8px; }
+  .spw-cell { padding: 5px; }
   .spw-grid-wrap { margin-top: 20px; margin-bottom: 28px; }
   .spw-caption .spw-role { display: none; }
 }
@@ -2985,6 +3055,7 @@ body.menu-open #wa-float,
 .area-summary-card {
   background: #ffffff;
   border: 1px solid var(--border-light);
+  border-top: 3px solid var(--crimson);
   border-radius: 4px;
   padding: 28px 24px;
   display: flex;
@@ -2995,7 +3066,8 @@ body.menu-open #wa-float,
 
 .area-summary-card:hover {
   border-color: var(--gold-mid);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  border-top-color: var(--crimson);
+  box-shadow: 0 8px 24px rgba(103, 0, 16, 0.07);
   transform: translateY(-2px);
 }
 
@@ -3153,7 +3225,7 @@ body.menu-open #wa-float,
 .wa-line-card {
   background: #ffffff;
   border: 1px solid var(--border-light);
-  border-top: 3px solid var(--gold-mid);
+  border-top: 3px solid var(--crimson);
   border-radius: 4px;
   padding: 20px 20px 18px;
   display: flex;
@@ -3272,19 +3344,20 @@ body.menu-open #wa-float,
 .wa-line-row-btn {
   flex-shrink: 0;
   padding: 8px 14px;
-  background: var(--ink-strong);
-  color: #ffffff;
+  background: var(--crimson);
+  color: var(--gold-light);
   border-radius: 3px;
   font-family: var(--font-heading);
   font-size: 10.5px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  transition: background 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .wa-line-row-btn:hover {
-  background: var(--crimson);
+  background: var(--crimson-dark);
+  color: #ffffff;
 }
 
 .footer-phones {
@@ -3360,6 +3433,7 @@ body.menu-open #wa-float,
   margin: 34px auto 0;
   background: var(--bg-soft);
   border: 1px solid var(--border-light);
+  border-top: 3px solid var(--crimson);
   border-radius: 4px;
   padding: 36px 32px;
   text-align: center;
@@ -3482,7 +3556,7 @@ body.menu-open #wa-float,
 .triad-card {
   background: #ffffff;
   border: 1px solid var(--border-light);
-  border-top: 3px solid var(--gold-mid);
+  border-top: 3px solid var(--crimson);
   border-radius: 4px;
   padding: 32px 26px;
 }
@@ -3877,33 +3951,38 @@ body.menu-open #wa-float,
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
 }
 
-/* Botón teléfono — fondo oscuro, hover carmesí, icono dorado stroke */
+/* Botón teléfono — carmesí institucional */
 .wa-float-btn--phone {
-  background: #1a1c20;
-  border: 1.5px solid rgba(166, 141, 91, 0.6);
+  background: #670010;
+  border: 2px solid rgba(201,168,76,0.35);
 }
 
 .wa-float-btn--phone:hover {
-  background: var(--crimson);
-  border-color: var(--gold-light);
+  background: #4a000b;
+  border-color: rgba(201,168,76,0.65);
 }
 
 .wa-float-btn--phone svg {
   fill: none;
-  stroke: var(--gold-mid);
+  stroke: #c9a84c;
   stroke-width: 2;
   width: 26px;
   height: 26px;
 }
 
-/* Botón WhatsApp — verde oficial */
+/* Botón WhatsApp — obsidiana con icono dorado */
 .wa-float-btn--wa {
-  background: #25D366;
-  border: none;
+  background: #1a0a0a;
+  border: 2px solid rgba(201,168,76,0.35);
+}
+
+.wa-float-btn--wa:hover {
+  background: #2a1010;
+  border-color: rgba(201,168,76,0.65);
 }
 
 .wa-float-btn--wa svg {
-  fill: #ffffff;
+  fill: #c9a84c;
   width: 28px;
   height: 28px;
 }
