@@ -27,7 +27,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 
-  <link rel="stylesheet" href="css/styles.css?v=66.0" />
+  <link rel="stylesheet" href="css/styles.css?v=68.0" />
 </head>
 <body>
 
@@ -943,16 +943,8 @@
         </div>
       </div>
 
-      <!-- Ubicación, Mapa y Formulario integrados de manera ordenada -->
-      <div id="ubicacion" class="clean-bottom-grid reveal" style="margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--border-light);">
-        <div>
-          <span class="section-eyebrow">Sede Institucional</span>
-          <h2 class="section-title-clean" style="margin-bottom: 10px;">Ubicación</h2>
-          <p class="clean-info-sub" style="margin-bottom: 16px;">
-            Oficinas corporativas en <strong>Santa Fe, Ciudad de México</strong>.
-          </p>
-        </div>
-
+      <!-- Formulario de Atención Directa (Centrado; Ubicación y Mapa integrados en Cierre Institucional) -->
+      <div class="clean-form-centered reveal">
         <div class="clean-form-simple" style="background: #ffffff;">
           <span class="section-eyebrow">Atención Directa</span>
           <h3>Solicitar atención jurídica</h3>
@@ -973,11 +965,11 @@
               <label class="form-label" for="formArea">Materia de interés</label>
               <select id="formArea" class="form-select">
                 <option value="">Seleccionar materia</option>
-                <option value="Civil">Derecho Civil (Sucesiones, Contratos, Bienes, Arrendamiento)</option>
                 <option value="Penal">Derecho Penal (Guardia 24/7)</option>
+                <option value="Familiar">Derecho Familiar</option>
+                <option value="Civil">Derecho Civil (Sucesiones, Contratos, Bienes, Arrendamiento)</option>
                 <option value="Fiscal">Derecho Fiscal</option>
                 <option value="Mercantil">Derecho Mercantil</option>
-                <option value="Familiar">Derecho Familiar</option>
                 <option value="Laboral">Derecho Laboral</option>
               </select>
             </div>
@@ -1027,9 +1019,9 @@
           Por ello, cada asunto es analizado con seriedad, confidencialidad y rigor técnico, con el propósito de definir una estrategia jurídica clara, responsable y acorde con las circunstancias particulares del caso.
         </p>
 
-        <div class="closing-actions">
+        <div id="ubicacion" class="closing-actions">
           <!-- Sede -->
-          <div style="margin-bottom: 14px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;">
             <span class="section-eyebrow" style="margin-bottom: 0;">Sede Institucional</span>
             <a href="https://maps.google.com/?q=Av.+Javier+Barros+Sierra+540,+Lomas+de+Santa+Fe,+Alvaro+Obregon,+01210,+Ciudad+de+Mexico" target="_blank" rel="noopener" class="link-btn-clean">
               Abrir en Google Maps &rarr;
@@ -1144,7 +1136,7 @@
       </a>
     </div>
   </div>
-  <script src="js/main.js?v=66.0" defer></script>
+  <script src="js/main.js?v=68.0" defer></script>
 </body>
 </html>
 

@@ -1299,11 +1299,12 @@ body.menu-open #wa-float,
   font-size: 0.68rem;
   font-weight: 400;
   letter-spacing: 0.18em;
+  line-height: 1.5;
   text-transform: uppercase;
-  color: rgba(201,168,76,0.75);
-  border: 1px solid rgba(201,168,76,0.25);
-  border-radius: 20px;
-  padding: 5px 16px;
+  color: rgba(201,168,76,0.8);
+  border: none;
+  border-radius: 0;
+  padding: 0;
   background: transparent;
   margin-bottom: 4px;
   flex-basis: 100%;
@@ -2222,8 +2223,16 @@ body.menu-open #wa-float,
   align-items: start;
 }
 
+.clean-form-centered {
+  margin: 40px auto 0;
+  padding-top: 40px;
+  border-top: 1px solid var(--border-light);
+  max-width: 720px;
+}
+
 .clean-map-card {
-  margin-top: 24px;
+  width: 100%;
+  margin-top: 4px;
   border: 1.5px solid var(--gold-mid);
   border-radius: 10px;
   overflow: hidden;
@@ -2752,10 +2761,9 @@ body.menu-open #wa-float,
 .closing-actions {
   margin-top: 28px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   gap: 14px;
-  flex-wrap: wrap;
 }
 
 .closing-confidentiality {
